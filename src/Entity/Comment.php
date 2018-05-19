@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
 * Comment entity
@@ -35,18 +37,18 @@ class Comment
     private $trick;
 
     /**
-     * @return Comment constructor
+     * Comment constructor
      */
     public function __construct($text, $user, $trick)
     {
         $this->id = Uuid::uuid4();
-        $this->text;
-        $this->user;
-        $this->trick;
+        $this->text = $text;
+        $this->user = $user;
+        $this->trick = $trick;
     }
 
     /**
-    * @return id
+    * @return UuidInterface
     */
 	public function getId(): UuidInterface
 	{

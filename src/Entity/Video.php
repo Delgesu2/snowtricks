@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
 * Video entity
@@ -28,6 +30,14 @@ class Video
      * @var $trick_video
      */
 	private $trick_video;
+
+    /**
+     * Video constructor.
+     */
+    function __construct()
+    {
+        $this->id = Uuid::uuid4();
+    }
 
     /**
      * @return UuidInterface
@@ -60,14 +70,6 @@ class Video
     {
         return $this->trick_video;
     }
-
-    /**
-     * Video constructor.
-     */
-	function __construct()
-	{
-		$this->id = Uuid::uuid4();		
-	}
 
 	/**
     * Video update

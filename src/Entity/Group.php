@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
 * Snowtricks_group
@@ -25,7 +27,7 @@ class Group
 	private $trick;
 
     /**
-     * @return Group constructor
+     * Group constructor
      */
     public function __construct($name, $trick = null)
 	{
@@ -35,7 +37,7 @@ class Group
 	}
 
 	/**
-    * @return id
+    * @return UuidInterface
     */
 	public function getId(): UuidInterface
 	{

@@ -9,10 +9,14 @@
 namespace App\DataFixtures;
 
 use App\Entity\Comment;
+use App\DataFixtures\UserFixtures;
+use App\DataFixtures\TrickFixtures;
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class CommentFixtures extends Fixture
+class CommentFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * (@inheritdoc)
@@ -20,16 +24,24 @@ class CommentFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // COMMENT
-        $comment1 = new Comment('commentaire super interessant', $user1, $backflip);
+        $comment1 = new Comment('commentaire super interessant', $this->getReference('john'), $this->getReference('backflip'));
         $manager->persist($comment1);
 
         $comment2 = new Comment('Ce trick est fortement déconseillé au cas d\'hernie discale.',
-            $user1, $fifty);
+            $this->getReference('polo'), $this->getReference('fifty'));
         $manager->persist($comment2);
 
-        $comment3 = new Comment('Acrobatique, mortel et dangereux !', $user2, $frontflip);
+        $comment3 = new Comment('Acrobatique, mortel et dangereux !', $this->getReference('mouloud'), $this->getReference('frontflip'));
         $manager->persist($comment3);
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return array(
+            UserFixtures::class,
+            TrickFixtures::class
+        );
     }
 }
