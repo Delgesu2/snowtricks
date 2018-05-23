@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -33,6 +34,12 @@ class Trick
     private $trick_group;
 
     /**
+     * @var Comment
+     *
+     */
+    private $comment;
+
+    /**
     * @var Photo
     */
     private $photo;
@@ -60,16 +67,25 @@ class Trick
     /**
      * Trick constructor
      */
-    public function __construct($trick_name, $description, $trick_group, $trick_user,
-                                $photo = null, $video = null)
-    {
+    public function __construct(
+        $trick_name,
+        $description,
+        $trick_group,
+        $trick_user,
+        $photo = null,
+        $video = null,
+        $comment = null
+    ) {
         $this->id = Uuid::uuid4();
+        $this->trick_name = $trick_name;
         $this->description = $description;
         $this->trick_group = $trick_group;
-        $this->photo = $photo;
-        $this->video = $video;
         $this->trick_user = $trick_user;
+        $this->photo = new ArrayCollection();
+        $this->video = new ArrayCollection();
+        $this->comment = $comment;
         $this->datecreate = time();
+        $this->addPhoto($photo ?? array());
     }
 
     /**
@@ -102,6 +118,14 @@ class Trick
     public function getTrick_group()
     {
         return $this->trick_group;
+    }
+
+    /**
+     * @return Comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 
     /**
@@ -150,5 +174,26 @@ class Trick
     public function update()
     {
 
+    }
+
+    /**
+     * Get random photo for 1 trick (homepage)
+     */
+    public function getRandPhoto()
+    {
+       array_rand((array)$this->photo, 1);
+    }
+
+    /**
+     * Add photo
+     */
+    public function addPhoto(array $photos)
+    {
+        foreach ($photos as $photo) {
+            if (\count($photos) <= 0) { break; }
+
+            $this->photo[] = $photo;
+            $photo->setTrickPhoto($this);
+        }
     }
 }

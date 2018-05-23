@@ -10,24 +10,35 @@
     </id>
     <field name="trick_name" type="string" length="60" nullable="false" unique="true" />
     <field name="description" type="string" length="800"/>
+
     <many-to-one field="trick_group" target-entity="App\Entity\Group" inversed-by="trick">
         <cascade>
             <cascade-persist />
         </cascade>
     </many-to-one>
+
+      <one-to-many field="comment" target-entity="App\Entity\Comment" mapped-by="trick" >
+          <cascade>
+              <cascade-persist />
+          </cascade>
+      </one-to-many>
+
     <one-to-many field="photo" target-entity="App\Entity\Photo" mapped-by="trick_photo">
         <cascade>
             <cascade-all />
         </cascade>
     </one-to-many>
+
     <one-to-many field="video" target-entity="App\Entity\Video" mapped-by="trick_video">
         <cascade>
             <cascade-all />
         </cascade>
     </one-to-many>
+
     <many-to-one field="trick_user" target-entity="App\Entity\User" inversed-by="trick">
     </many-to-one>
-    <field name="datecreate" type="date" />
-    <field name="dateupdate" type="date" />
+
+    <field name="datecreate" type="integer" />
+    <field name="dateupdate" type="integer" nullable="true" />
   </entity>
 </doctrine-mapping>

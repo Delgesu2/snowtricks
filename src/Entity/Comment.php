@@ -42,6 +42,7 @@ class Comment
     public function __construct($text, $user, $trick)
     {
         $this->id = Uuid::uuid4();
+        $this->date = time();
         $this->text = $text;
         $this->user = $user;
         $this->trick = $trick;

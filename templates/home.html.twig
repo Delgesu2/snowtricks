@@ -42,15 +42,15 @@
 
         <div class="tile is-ancestor" id="row">
 
-            {% for photo in row %}
+            {% for trick in row %}
 
                 <div class="tile is-parent is-2">
                     <div class="tile is-child box">
                         <figure class="image is-3by2">
-                            <img src="{{ asset(photo.path) }}" alt="{{ photo.alt }}"
-                            title="{{ photo.title }}">
+                            <img src="{{ asset(trick.getRandPhoto.path) }}" alt="{{ trick.getRandPhoto.alt }}"
+                            title="{{ trick.getRandPhoto.title }}">
                         </figure>
-                        <p>{{ photo.title}}</p>
+                        <p>{{ trick.trick_name|capitalize}}</p>
                         <a href="/del">
                                 <span class="icon">
                                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>

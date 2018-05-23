@@ -95,4 +95,12 @@ class Photo
 	{
 
 	}
+
+    /**
+     * @param Trick $trick_photo
+     */
+    public function setTrickPhoto(Trick $trick_photo): void
+    {
+        $this->trick_photo = $trick_photo;
+    }
 }

@@ -8,11 +8,11 @@
 	  	<generator strategy="CUSTOM" />
 	  	<custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
 	</id>
-	<field name="date" type="date" nullable="false" />
+	<field name="date" type="integer" nullable="false" />
 	<field name="text" type="text" nullable="false" />
 	<many-to-one field="user" target-entity="App\Entity\User" inversed-by="comment">
 	</many-to-one>
-	<one-to-one field="trick" target-entity="App\Entity\Trick">
-	</one-to-one>
+	<many-to-one field="trick" target-entity="App\Entity\Trick" inversed-by="comment">
+	</many-to-one>
   </entity>
 </doctrine-mapping>
