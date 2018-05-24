@@ -181,7 +181,7 @@ class Trick
      */
     public function getRandPhoto()
     {
-       array_rand((array)$this->photo, 1);
+        return array_rand((array)$this->photo, 1);
     }
 
     /**

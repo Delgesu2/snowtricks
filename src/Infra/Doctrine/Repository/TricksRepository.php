@@ -28,4 +28,10 @@ class TricksRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    public function getOneTrick()
+    {
+        return $this->createQueryBuilder('oneTrik')
+                    ;
+    }
 }

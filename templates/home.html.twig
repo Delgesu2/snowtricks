@@ -47,8 +47,10 @@
                 <div class="tile is-parent is-2">
                     <div class="tile is-child box">
                         <figure class="image is-3by2">
-                            <img src="{{ asset(trick.getRandPhoto.path) }}" alt="{{ trick.getRandPhoto.alt }}"
-                            title="{{ trick.getRandPhoto.title }}">
+
+                            {{ dump(trick.randphoto) }}
+                            <img src="{{ asset(trick.randphoto.path) }}" alt="{{ trick.randphoto.alt }}"
+                            title="{{ trick.randphoto.title }}">
                         </figure>
                         <p>{{ trick.trick_name|capitalize}}</p>
                         <a href="/del">
