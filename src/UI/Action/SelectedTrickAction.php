@@ -7,9 +7,8 @@ use App\UI\Responder\SelectedTrickResponder;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route(name="trick", path="/trick/{slug}")
+ * @Route(name="selected_trick", path="/trick/{slug}", requirements={"slug"="[a-zA-Z0-9-]+"})
  */
-
 class SelectedTrickAction
 {
     private $repository;
@@ -19,9 +18,9 @@ class SelectedTrickAction
         $this->repository = $repository;
     }
 
-    public function __invoke(SelectedTrickResponder $responder)
+    public function __invoke(SelectedTrickResponder $responder, $id)
     {
-        $tricks=$this->repository->getAllTricks();
-        return $responder($tricks);
+        $trick=$this->repository->getOneTrick($id);
+        return $responder($trick);
     }
 }

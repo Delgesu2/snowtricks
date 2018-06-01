@@ -83,6 +83,26 @@ class PhotoFixtures extends Fixture
         $this->addReference('photo13', $photo13);
         $manager->persist($photo13);
 
+        $photo14 = new Photo('indy', 'images/tricks/indy.jpg', 'indy');
+        $this->addReference('photo14', $photo14);
+        $manager->persist($photo14);
+
+        $photo15 = new Photo('indy2', 'images/tricks/indy2.jpg', 'indy2');
+        $this->addReference('photo15', $photo15);
+        $manager->persist($photo15);
+
+        $photo16 = new Photo('mute', 'images/tricks/mute.jpg', 'mute');
+        $this->addReference('photo16', $photo16);
+        $manager->persist($photo16);
+
+        $photo17 = new Photo('mute2', 'images/tricks/mute2.jpg', 'mute2');
+        $this->addReference('photo17', $photo17);
+        $manager->persist($photo17);
+
+        $photo18 = new Photo('mute3', 'images/tricks/mute3.jpg', 'mute3');
+        $this->addReference('photo18', $photo18);
+        $manager->persist($photo18);
+
             $manager->flush();
     }
 }

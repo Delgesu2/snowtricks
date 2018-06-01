@@ -45,7 +45,7 @@ class Group
 	}
 
 	/**
-    * @return title
+    * @return string  // changé de 'title'
     */
 	public function getName()
 	{

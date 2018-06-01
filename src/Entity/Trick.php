@@ -19,6 +19,11 @@ class Trick
     private $id;
 
     /**
+     * @var string
+     */
+    private $slug;
+
+    /**
     * @var string
     */
     private $trick_name;
@@ -78,6 +83,7 @@ class Trick
     ) {
         $this->id = Uuid::uuid4();
         $this->trick_name = $trick_name;
+        $this->slug = $trick_name;
         $this->description = $description;
         $this->trick_group = $trick_group;
         $this->trick_user = $trick_user;
@@ -93,13 +99,21 @@ class Trick
     */
     public function getId(): UuidInterface
     {
-        $this->id = Uuid::uuid4();
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug() :string
+    {
+        return $this->slug;
     }
 
     /**
     * @return string
     */
-    public function getTrick_name()
+    public function getTrick_name() :string
     {
         return $this->trick_name;
     }
@@ -115,7 +129,7 @@ class Trick
     /**
     * @return string
     */
-    public function getTrick_group()
+    public function getTrick_group() :string
     {
         return $this->trick_group;
     }
@@ -181,7 +195,11 @@ class Trick
      */
     public function getRandPhoto()
     {
-        return array_rand((array)$this->photo, 1);
+        if (empty($this->photo->toArray())) {
+            return;
+        }
+
+        return $this->photo->toArray()[array_rand($this->photo->toArray())];
     }
 
     /**

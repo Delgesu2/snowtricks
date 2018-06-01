@@ -29,9 +29,12 @@ class TricksRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
-    public function getOneTrick()
+    public function getOneTrick($slug)
     {
-        return $this->createQueryBuilder('oneTrik')
-                    ;
+        return $this->createQueryBuilder('oneTrick')
+            ->where('oneTrick.slug = :slug')
+            ->setParameter('slug', $slug)
+                    ->getQuery()
+                    ->getOneOrNullResult();
     }
 }

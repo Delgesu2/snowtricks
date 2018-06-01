@@ -4,4 +4,19 @@
 
 {%  block body %}
 
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    {{ trick.title|capitalize }}
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <img src="{{ asset(trick.photo ?? '') }}" alt="{{ trick.photo ?? '' }}"
+         title="{{ trick.photo }}">
+
+
+
 {% endblock %}

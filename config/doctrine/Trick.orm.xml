@@ -10,6 +10,7 @@
     </id>
     <field name="trick_name" type="string" length="60" nullable="false" unique="true" />
     <field name="description" type="string" length="800"/>
+      <field name="slug" type="string" length="35"/>
 
     <many-to-one field="trick_group" target-entity="App\Entity\Group" inversed-by="trick">
         <cascade>

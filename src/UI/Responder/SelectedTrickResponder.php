@@ -14,11 +14,11 @@ class SelectedTrickResponder
         $this->twig = $twig;
     }
 
-    public function __invoke($tricks)
+    public function __invoke($trick)
     {
         return new Response(
             $this->twig->render('selected_trick.html.twig', [
-                'tricks' => $tricks
+                'oneTrick' => $trick
             ])
         );
     }

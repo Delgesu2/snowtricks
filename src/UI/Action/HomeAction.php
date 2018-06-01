@@ -20,7 +20,8 @@ class HomeAction
 
     public function __invoke(HomeResponder $responder)
     {
-        $tricks=$this->repository->getAllTricks();
+        $tricks = $this->repository->getAllTricks();
+
 	    return $responder($tricks);
 	}
 }
