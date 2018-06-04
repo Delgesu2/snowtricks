@@ -36,7 +36,7 @@
         </div>
     </section>
 
-    <div class="container" id="container">
+    <section class="section" id="container">
 
         {%  for row in tricks|batch(6) %}
 
@@ -45,14 +45,15 @@
             {% for trick in row %}
 
                 <div class="tile is-parent is-2">
-                    <a href="{{ path('selected_trick', {'slug':trick.slug}) }}">
-                        <div class="tile is-child box">
+                    <div class="tile is-child box">
+                        <a href="{{ path('selected_trick', {'slug':trick.slug}) }}">
                         <figure class="image is-3by2">
                            <img src="{{ asset(trick.getRandPhoto.path ?? '') }}" alt="{{ trick.getRandPhoto.alt ?? '' }}"
                             title="{{ trick.getRandPhoto.title ?? ''}}">
                         </figure>
 
                         <p>{{ trick.trick_name|capitalize}}</p>
+                        </a>
                         <a href="/update">
                                 <span class="icon">
                                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>
@@ -64,7 +65,6 @@
                                 </span>
                         </a>
                     </div>
-                    </a>
                 </div>
 
             {% endfor %}
@@ -73,7 +73,7 @@
 
         {% else %}
 
-            <section class="hero">
+            <container class="hero">
                 <div class="hero-body">
                     <div class="container has-text-centered">
                         <h1 class="title">
@@ -81,7 +81,7 @@
                         </h1>
                     </div>
                 </div>
-            </section>
+            </container>
 
         {% endfor %}
 
@@ -89,7 +89,7 @@
             <a href="#container"> <i class="fas fa-3x fa-arrow-circle-up"></i> </a>
         </span>
 
-    </div>
+    </section>
 
         <div class="columns is-mobile">
             <div class="column is-2 is-offset-half">

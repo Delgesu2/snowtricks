@@ -4,19 +4,99 @@
 
 {%  block body %}
 
-    <section class="hero">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    {{ trick.title|capitalize }}
-                </h1>
-            </div>
+    <div class="columns is-mobile">
+        <div class="column is-10 is-offset-1">
+
+            <!-- Trick name, front image and icons -->
+            <section>
+                <div class="hero">
+                    <div class="hero-body">
+                        <div class="container has-text-centered">
+                            <h1 class="title">
+                                {{ oneTrick.trick_name|capitalize }}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container has-text-right">
+                    <a href="/update">
+                                        <span class="icon icon-one-trick">
+                                            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                                        </span>
+                    </a>
+                    <a href="/del">
+                                        <span class="icon icon-one-trick">
+                                            <i class="fas fa-trash" aria-hidden="true"></i>
+                                        </span>
+                    </a>
+                </div>
+
+                <figure class="image is-5by3">
+                <img src="{{ asset(oneTrick.getRandPhoto.path ?? '') }}" alt="{{ oneTrick.getRandPhoto.alt ?? '' }}"
+                     title="{{ oneTrick.getRandPhoto.title ?? '' }}">
+                </figure>
+            </section>
+            <!-- End trick name and image -->
+
+            <!-- Photos and videos -->
+            <section>
+                <div class="columns is-hidden-mobile">
+
+                    <div class="column is-6"> <!-- Photos -->
+                        <div class="tile is-ancestor">
+
+                            {% for row in oneTrick.photo|batch(3) %}
+                                {% for photo in row %}
+                                    <div class="tile is-parent is-4">
+                                        <div class="tile is-child box">
+                                            <figure class="image is-3by2">
+                                                <img src="{{ asset(photo.path ?? '') }}" alt="{{ photo.alt ?? '' }}"
+                                                     title="{{ photo.title ?? ''}}">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                    <div class="column is-6"> <!-- Videos -->
+                        <div class="tile is-ancestor">
+
+                            {% for row in oneTrick.video|batch(3) %}
+                                {% for video in row %}
+                                    <div class="tile is-parent is-4">
+                                        <div class="tile is-child box">
+                                                <iframe width="150" height="100" src="{{ asset(video.path ?? '') }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+            <!-- End photos and videos -->
+
+            <!-- Description -->
+            <section>
+                <div class="container has-text-centered">
+               {{ oneTrick.description }}
+                </div>
+                {{ oneTrick.trick_group.name }} {{ oneTrick.datecreate }} {{ oneTrick.dateupdate }}
+            </section>
+            <!-- Enddescription -->
+
+            <section>
+                {% for comment in oneTrick.comment %}
+                {{ comment.text }} {{ comment.user.name }}
+                {% endfor %}
+            </section>
         </div>
-    </section>
-
-    <img src="{{ asset(trick.photo ?? '') }}" alt="{{ trick.photo ?? '' }}"
-         title="{{ trick.photo }}">
-
-
+    </div>
 
 {% endblock %}

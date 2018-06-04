@@ -47,7 +47,7 @@ class Group
 	/**
     * @return string  // changé de 'title'
     */
-	public function getName()
+	public function getName() :string
 	{
 		return $this->name;
 	}

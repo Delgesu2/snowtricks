@@ -1,3 +1,4 @@
+/* For javascript */
 .visually-hidden {
     position: absolute;
     overflow: hidden;
@@ -6,6 +7,7 @@
     margin: -1px; padding: 0; border: 0;
 }
 
+/* Scroll buttons */
 #scrollDown {
     position: absolute;
     top: 190px;
@@ -14,7 +16,9 @@
     transition: 0.3s;
 }
 
-#scrollDown:hover {opacity: 1}
+#scrollDown:hover {
+    opacity: 1
+}
 
 #scrollUp {
     position: absolute;

@@ -27,7 +27,15 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
                 [
                     $this->getReference('photo1'),
                     $this->getReference('photo2'),
-                    $this->getReference('photo3')
+                    $this->getReference('photo3'),
+                    $this->getReference('photo4')
+                ],
+
+                [
+                    $this->getReference('video1'),
+                    $this->getReference('video2'),
+                    $this->getReference('video3'),
+                    $this->getReference('video4')
                 ]
             );
                 $this->addReference('backflip', $backflip);
@@ -138,7 +146,8 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         return array(
             PhotoFixtures::class,
             UserFixtures::class,
-            PhotoFixtures::class
+            PhotoFixtures::class,
+            VideoFixtures::class
         );
     }
 }

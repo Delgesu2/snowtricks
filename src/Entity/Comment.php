@@ -17,12 +17,12 @@ class Comment
 	private $id;
 
 	/**
-	* @var date
+	* @var \DateTime
 	*/
 	private $date;
 
     /**
-    * @var text
+    * @var string
     */
     private $text;
 
@@ -57,7 +57,7 @@ class Comment
 	}
 
 	/**
-    * @return date
+    * @return \DateTime
     */
 	public function getDate()
 	{
@@ -65,7 +65,7 @@ class Comment
 	}
 
 	/**
-    * @return text
+    * @return string
     */
 	public function getText()
 	{

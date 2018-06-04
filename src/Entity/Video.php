@@ -34,9 +34,12 @@ class Video
     /**
      * Video constructor.
      */
-    function __construct()
+    function __construct($title, $path, $trick_video = null)
     {
         $this->id = Uuid::uuid4();
+        $this->title = $title;
+        $this->path = $path;
+        $this->trick_video = $trick_video;
     }
 
     /**
@@ -66,7 +69,7 @@ class Video
     /**
      * @return mixed
      */
-    public function getTrickVideo()
+    public function getTrickVideo(): ?Trick
     {
         return $this->trick_video;
     }
@@ -78,5 +81,12 @@ class Video
 	{
 
 	}
-	
+
+    /**
+     * @param Trick $trick_video
+     */
+    public function setTrickVideo(Trick $trick_video): void
+    {
+        $this->trick_video = $trick_video;
+    }
 }

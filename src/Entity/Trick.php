@@ -89,9 +89,10 @@ class Trick
         $this->trick_user = $trick_user;
         $this->photo = new ArrayCollection();
         $this->video = new ArrayCollection();
-        $this->comment = $comment;
+        $this->comment = new ArrayCollection();
         $this->datecreate = time();
         $this->addPhoto($photo ?? array());
+        $this->addVideo($video ?? array());
     }
 
     /**
@@ -129,7 +130,7 @@ class Trick
     /**
     * @return string
     */
-    public function getTrick_group() :string
+    public function getTrick_group()
     {
         return $this->trick_group;
     }
@@ -212,6 +213,19 @@ class Trick
 
             $this->photo[] = $photo;
             $photo->setTrickPhoto($this);
+        }
+    }
+
+    /**
+     * Add video
+     */
+    public function addVideo(array $videos)
+    {
+        foreach ($videos as $video) {
+            if (\count($videos) <= 0) { break; }
+
+            $this->video[] = $video;
+            $video->setTrickVideo($this);
         }
     }
 }

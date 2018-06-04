@@ -18,9 +18,9 @@ class SelectedTrickAction
         $this->repository = $repository;
     }
 
-    public function __invoke(SelectedTrickResponder $responder, $id)
+    public function __invoke(SelectedTrickResponder $responder, $slug)
     {
-        $trick=$this->repository->getOneTrick($id);
+        $trick=$this->repository->getOneTrick($slug);
         return $responder($trick);
     }
 }

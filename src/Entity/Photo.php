@@ -44,8 +44,8 @@ class Photo
         $this->id = Uuid::uuid4();
         $this->title = $title;
         $this->path = $path;
-        $this->trick_photo = $trick_photo;
         $this->alt = $alt;
+        $this->trick_photo = $trick_photo;
     }
 
     /**
