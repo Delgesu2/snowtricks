@@ -83,7 +83,7 @@ class Trick
     ) {
         $this->id = Uuid::uuid4();
         $this->trick_name = $trick_name;
-        $this->slug = $trick_name;
+        $this->slug = $this->createSlug($trick_name);
         $this->description = $description;
         $this->trick_group = $trick_group;
         $this->trick_user = $trick_user;
@@ -109,6 +109,15 @@ class Trick
     public function getSlug() :string
     {
         return $this->slug;
+    }
+
+    /**
+     * @param $trick_name
+     * @return mixed|null|string|string[]
+     */
+    private function createSlug($trick_name)
+    {
+        return $slug = mb_strtolower(strtr($trick_name, ' ', '-'), 'UTF-8');
     }
 
     /**
@@ -172,15 +181,28 @@ class Trick
     */
     public function getDatecreate()
     {
-        return $this->datecreate = time();
+        return $this->datecreate = date('d/m/y H\hi\m\i\n', $this->datecreate);
     }
 
     /**
     * @return DateTime
-    */
+
     public function getDateupdate()
     {
-        return $this->dateupdate = time();
+        $newDate = \DateTime::createFromFormat('d/m/y H\hi\m\i\n', $this->dateupdate);
+        return $this->dateupdate = $newDate;
+    }
+*/
+
+    /**
+     * {@inheritdoc}
+     */
+
+    public function getDateupdate()
+    {
+        return $this->dateupdate = date('d/m/y H\hi\m\i\n', $this->dateupdate);
+
+        // return \DateTime::createFromFormat('d/m/y H\hi\m\i\n', (string) $this->dateupdate);
     }
 
     /**

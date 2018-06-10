@@ -24,7 +24,7 @@ class Video
 	/**
     * @var string
     */
-	private $path;
+	private $url;
 
     /**
      * @var $trick_video
@@ -34,11 +34,11 @@ class Video
     /**
      * Video constructor.
      */
-    function __construct($title, $path, $trick_video = null)
+    function __construct($title, $url, $trick_video = null)
     {
         $this->id = Uuid::uuid4();
         $this->title = $title;
-        $this->path = $path;
+        $this->url = $url;
         $this->trick_video = $trick_video;
     }
 
@@ -61,9 +61,9 @@ class Video
     /**
      * @return string
      */
-	public function getPath()
+	public function getUrl()
 	{
-		return $this->path;
+		return $this->url;
 	}
 
     /**

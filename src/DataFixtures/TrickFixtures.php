@@ -105,7 +105,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
                 $manager->persist($mute);
             //
 
-                $indy = new Trick('indy', 'saisie de la carre frontside de la planche, entre les deux pieds, avec la main arrière',
+                $indy = new Trick('Indy 6', 'saisie de la carre frontside de la planche, entre les deux pieds, avec la main arrière',
                     $this->getReference('grab'),
                     $this->getReference('john'),
                 [
@@ -134,10 +134,9 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             //
 
             $manager->persist($trick);
-        }
-         **/
-            $manager->flush();
+        } **/
 
+            $manager->flush();
         }
 
 

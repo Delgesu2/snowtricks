@@ -9,7 +9,7 @@
 
             <!-- Trick name, front image and icons -->
             <section>
-                <div class="hero">
+                <div class="hero is-info">
                     <div class="hero-body">
                         <div class="container has-text-centered">
                             <h1 class="title">
@@ -32,21 +32,24 @@
                     </a>
                 </div>
 
+                {%  set image = oneTrick.getRandPhoto() %}
                 <figure class="image is-5by3">
-                <img src="{{ asset(oneTrick.getRandPhoto.path ?? '') }}" alt="{{ oneTrick.getRandPhoto.alt ?? '' }}"
-                     title="{{ oneTrick.getRandPhoto.title ?? '' }}">
+                <img src="{{ asset(image.path ?? '') }}" alt="{{ image.alt ?? '' }}"
+                     title="{{ image.title ?? '' }}">
                 </figure>
             </section>
-            <!-- End trick name and image -->
+            <!-- End trick name, image and icons -->
 
             <!-- Photos and videos -->
             <section>
+                <!-- Responsive "See medias" button -->
+                <div class="button is-info is-hidden-tablet is-flex-mobile">Voir médias</div>
+
                 <div class="columns is-hidden-mobile">
 
                     <div class="column is-6"> <!-- Photos -->
-                        <div class="tile is-ancestor">
-
-                            {% for row in oneTrick.photo|batch(3) %}
+                        {% for row in oneTrick.photo|batch(3) %}
+                            <div class="tile is-ancestor">
                                 {% for photo in row %}
                                     <div class="tile is-parent is-4">
                                         <div class="tile is-child box">
@@ -57,46 +60,123 @@
                                         </div>
                                     </div>
                                 {% endfor %}
-                            {% endfor %}
-
-                        </div>
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="column is-6"> <!-- Videos -->
-                        <div class="tile is-ancestor">
-
-                            {% for row in oneTrick.video|batch(3) %}
+                        {% for row in oneTrick.video|batch(3) %}
+                            <div class="tile is-ancestor">
                                 {% for video in row %}
                                     <div class="tile is-parent is-4">
                                         <div class="tile is-child box">
-                                                <iframe width="150" height="100" src="{{ asset(video.path ?? '') }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            <iframe width="150" height="100" src="{{ video.url ?? '' }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 {% endfor %}
-                            {% endfor %}
-                        </div>
-
+                            </div>
+                        {% endfor %}
                     </div>
 
                 </div>
             </section>
             <!-- End photos and videos -->
 
-            <!-- Description -->
+            <!-- Description and tags -->
             <section>
-                <div class="container has-text-centered">
+                <div class="container">
                {{ oneTrick.description }}
                 </div>
-                {{ oneTrick.trick_group.name }} {{ oneTrick.datecreate }} {{ oneTrick.dateupdate }}
-            </section>
-            <!-- Enddescription -->
+                <div class="field is-grouped is-grouped-multiline">
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Groupe:</span>
+                            <span class="tag is-warning">{{ oneTrick.trick_group.name }}</span>
+                        </div>
+                    </div>
 
-            <section>
-                {% for comment in oneTrick.comment %}
-                {{ comment.text }} {{ comment.user.name }}
-                {% endfor %}
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Date de création:</span>
+                            <span class="tag is-info">{{ oneTrick.datecreate }}</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Date de modification:</span>
+                            <span class="tag is-info">{{ oneTrick.dateupdate }}</span>
+                        </div>
+                    </div>
+
+                </div>
             </section>
+            <!-- End description -->
+
+            <!-- Comments -->
+            <section class="hero is-info">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            Espace de discussion
+                        </h1>
+                        <h2 class="subtitle">
+                            Laisse ton commentaire à l'aide du formulaire
+                        </h2>
+                    </div>
+                </div>
+            </section>
+
+            <article class="media">
+                {% for comment in oneTrick.comment %}
+                <figure class="media-left">
+                    <p class="image is-64x64">
+                        <img src="https://bulma.io/images/placeholders/128x128.png">
+                    </p>
+                </figure>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong>{{ comment.user.name }}</strong>
+                            <br>
+                            {{ comment.text }}                            <br>
+                            <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+                <!--<button class="button" aria-haspopup="true" aria-controls="modal"><span>Bouton</span></button> -->
+            </article>
+            <article class="media">
+                <figure class="media-left">
+                    <p class="image is-64x64">
+                        <img src="https://bulma.io/images/placeholders/128x128.png">
+                    </p>
+                </figure>
+                <div class="media-content">
+                    <div class="field">
+                        <p class="control">
+                            <textarea class="textarea" placeholder="Ajoute ton commentaire"></textarea>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button class="button">Envoyer</button>
+                        </p>
+                    </div>
+                </div>
+            </article>
+
         </div>
     </div>
-
+<!--
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <p class="image is-4by3">
+                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="">
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div> -->
 {% endblock %}

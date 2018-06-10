@@ -28,3 +28,11 @@
 }
 
 #scrollUp:hover {opacity: 1}
+
+.columns:not(:last-child) {
+    margin-bottom: calc(1.5rem - .75rem);
+}
+
+section {
+    margin: 8px;
+}
