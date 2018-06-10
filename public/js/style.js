@@ -30,9 +30,9 @@ loadMoreBtn.addEventListener('click', function(){
 
 });
 
-
 var modal = document.querySelector('.modal');
 modal.addEventListener('click', function(event) {
     event.stopPropagation();
     modal.classList.toggle('is-active');
 });
+

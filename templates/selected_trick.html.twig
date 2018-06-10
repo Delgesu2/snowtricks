@@ -41,9 +41,9 @@
             <!-- End trick name, image and icons -->
 
             <!-- Photos and videos -->
-            <section>
+            <section id="medias">
                 <!-- Responsive "See medias" button -->
-                <div class="button is-info is-hidden-tablet is-flex-mobile">Voir médias</div>
+                <div class="button is-info is-hidden-tablet is-flex-mobile" id="show-medias">Voir médias</div>
 
                 <div class="columns is-hidden-mobile">
 
@@ -55,7 +55,7 @@
                                         <div class="tile is-child box">
                                             <figure class="image is-3by2">
                                                 <img src="{{ asset(photo.path ?? '') }}" alt="{{ photo.alt ?? '' }}"
-                                                     title="{{ photo.title ?? ''}}">
+                                                     title="{{ photo.title ?? ''}}" class='img-zoomable'>
                                             </figure>
                                         </div>
                                     </div>
@@ -70,7 +70,8 @@
                                 {% for video in row %}
                                     <div class="tile is-parent is-4">
                                         <div class="tile is-child box">
-                                            <iframe width="150" height="100" src="{{ video.url ?? '' }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            <iframe width="150" height="100" src="{{ video.url ?? '' }}" frameborder="0"
+                                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -169,14 +170,14 @@
 
         </div>
     </div>
-<!--
-    <div class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-            <p class="image is-4by3">
-                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="">
-            </p>
-        </div>
-        <button class="modal-close is-large" aria-label="close"></button>
-    </div> -->
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/zooming/build/zooming.min.js">
+    </script>
+    <script>
+        new Zooming().listen('.img-zoomable')
+    </script>
 {% endblock %}

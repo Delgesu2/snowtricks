@@ -3,20 +3,19 @@
  * Created by PhpStorm.
  * User: ronsard
  * Date: 10/06/18
- * Time: 16:51
+ * Time: 21:06
  */
 
 namespace App\UI\Action;
 
 use App\Infra\Doctrine\Repository\TricksRepository;
-use App\UI\Responder\HomeResponder;
-use App\UI\Responder\TricksListResponder;
+use App\UI\Responder\CreateResponder;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
-* @Route(name="trickslist", path="/list")
-*/
-class TricksListAction
+ * @Route(name="create", path="/create")
+ */
+class CreateAction
 {
     private $repository;
 
@@ -25,10 +24,8 @@ class TricksListAction
         $this->repository = $repository;
     }
 
-    public function __invoke(TricksListResponder $responder)
+    public function __invoke(CreateResponder $responder)
     {
-        $tricks = $this->repository->getAllTricks();
 
-        return $responder($tricks);
     }
 }
