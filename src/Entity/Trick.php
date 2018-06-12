@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\TrickInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
 * Trick entity
 */
-class Trick
+class Trick implements TrickInterface
 {
     /**
     * @var \Ramsey\Uuid\UuidInterface
@@ -67,7 +68,7 @@ class Trick
     /**
     * @var DateTime
     */
-    private $dateupdate;
+    private $dateupdate = null;
 
     /**
      * Trick constructor
@@ -117,7 +118,7 @@ class Trick
      */
     private function createSlug($trick_name)
     {
-        return $slug = mb_strtolower(strtr($trick_name, ' ', '-'), 'UTF-8');
+        return mb_strtolower(strtr($trick_name, ' ', '-'), 'UTF-8');
     }
 
     /**
@@ -185,32 +186,11 @@ class Trick
     }
 
     /**
-    * @return DateTime
-
-    public function getDateupdate()
-    {
-        $newDate = \DateTime::createFromFormat('d/m/y H\hi\m\i\n', $this->dateupdate);
-        return $this->dateupdate = $newDate;
-    }
-*/
-
-    /**
      * {@inheritdoc}
      */
-
-    public function getDateupdate()
+    public function getDateUpdate() :?\DateTime
     {
-        return $this->dateupdate = date('d/m/y H\hi\m\i\n', $this->dateupdate);
-
-        // return \DateTime::createFromFormat('d/m/y H\hi\m\i\n', (string) $this->dateupdate);
-    }
-
-    /**
-    * Trick update
-    */
-    public function update()
-    {
-
+        return \DateTime::createFromFormat('U', (string) $this->dateupdate) ?: null;
     }
 
     /**

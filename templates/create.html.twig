@@ -1,7 +1,121 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Snowtricks - Accueil{% endblock %}
+{% block title %}Snowtricks - Créer une nouvelle figure{% endblock %}
 
 {%  block body %}
+
+    <div class="columns is-mobile">
+        <div class="column is-10 is-offset-1">
+
+            <div class="hero is-info">
+                <div class="hero-body">
+                    <div class="container has-text-centered">
+                        <h1 class="title">
+                            Ajoute ton trick à la liste
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <section>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                <label class="label">Nom de la figure</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Description</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <textarea class="textarea" placeholder="Détaille la figure"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Groupe</label>
+                </div>
+                <div class="field-body">
+                    <div class="field is-narrow">
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select>
+
+                                    {% for group in groups %}
+                                    <option>{{ group.name }}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Nouveau groupe ?">
+                            <p class="help is-info">Si le groupe ne figure pas dans la liste</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+
+            <section>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Photo(s)</label>
+                </div>
+                <div class="field-body">
+                    <div class="control">
+                        <div class="file">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="resume">
+                                <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                    Choisir un fichier
+                                  </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Vidéo(s)</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" placeholder="https://">
+                            <p class="help is-info">Ecrire l'URL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+
+            <div class="control">
+                <button class="button is-primary">Envoyer</button>
+            </div>
+
+        </div>
+    </div>
 
 {% endblock %}

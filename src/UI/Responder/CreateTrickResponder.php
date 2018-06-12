@@ -11,7 +11,7 @@ namespace App\UI\Responder;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class CreateResponder
+class CreateTrickResponder
 {
     private $twig;
 
@@ -20,10 +20,12 @@ class CreateResponder
         $this->twig = $twig;
     }
 
-    public function __invoke()
+    public function __invoke($groups)
     {
         return new Response(
-            $this->twig->render('create.html.twig')
+            $this->twig->render('create.html.twig', [
+                'groups'=> $groups
+            ])
         );
     }
 }

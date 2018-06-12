@@ -103,12 +103,14 @@
                         </div>
                     </div>
 
+                    {% if oneTrick.dateUpdate is not null %}
                     <div class="control">
                         <div class="tags has-addons">
                             <span class="tag is-dark">Date de modification:</span>
-                            <span class="tag is-info">{{ oneTrick.dateupdate }}</span>
+                            <span class="tag is-info">{{ oneTrick.dateUpdate ?? '' }}</span>
                         </div>
                     </div>
+                    {% endif %}
 
                 </div>
             </section>
