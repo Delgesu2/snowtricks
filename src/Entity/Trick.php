@@ -63,7 +63,7 @@ class Trick implements TrickInterface
     /**
     * @var DateTime
     */
-    private $datecreate;
+    private $datecreate = null;
 
     /**
     * @var DateTime
@@ -178,11 +178,11 @@ class Trick implements TrickInterface
     }
 
     /**
-    * @return DateTime
-    */
-    public function getDatecreate()
+     * {@inheritdoc}
+     */
+    public function getDateCreate() :?\DateTime
     {
-        return $this->datecreate = date('d/m/y H\hi\m\i\n', $this->datecreate);
+        return \DateTime::createFromFormat('U', (string)$this->datecreate) ?: null;
     }
 
     /**

@@ -14,6 +14,10 @@ interface TrickInterface
     /**
      * @return \DateTime|null
      */
-    public function getDateUpdate() :?\DateTime;
+    public function getDateCreate() :?\DateTime;
 
+    /**
+     * @return \DateTime|null
+     */
+    public function getDateUpdate() :?\DateTime;
 }

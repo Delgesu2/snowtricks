@@ -2,27 +2,55 @@
 
 namespace App\UI\Action;
 
-use App\Infra\Doctrine\Repository\GroupsRepository;
-use App\Infra\Doctrine\Repository\TricksRepository;
+use App\UI\Action\Interfaces\CreateTrickActionInterface;
+use App\Helper\FileUploaderHelper;
+use App\Form\Type\CreateTrickType;
 use App\UI\Responder\CreateTrickResponder;
+use App\UI\Responder\Interfaces\CreateTrickResponderInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(name="create", path="/create")
  */
-class CreateTrickAction
+class CreateTrickAction implements CreateTrickActionInterface
 {
-    private $repository;
+    /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
 
-    public function __construct(GroupsRepository $repository)
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * @var FileUploaderHelper
+     */
+    private $fileUploaderHelper;
+
+    /**
+     * CreateTrickAction constructor.
+     * @param FormFactoryInterface $formFactory
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param FileUploaderHelper $fileUploaderHelper
+     */
+    public function __construct(FormFactoryInterface $formFactory, EventDispatcherInterface $eventDispatcher, FileUploaderHelper $fileUploaderHelper)
     {
-        $this->repository = $repository;
+        $this->formFactory = $formFactory;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->fileUploaderHelper = $fileUploaderHelper;
     }
 
-    public function __invoke(CreateTrickResponder $responder)
+    public function __invoke(Request $request, CreateTrickResponderInterface $responder)
     {
-        $groups = $this->repository->getAllGroups();
+        $createTrickType = $this->formFactory->create(CreateTrickType::class)
+                                      ->handleRequest($request);
 
-        return $responder($groups);
+        return $responder($createTrickType);
     }
 }

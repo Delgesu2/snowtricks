@@ -8,10 +8,12 @@
 
 namespace App\UI\Responder;
 
+use App\UI\Responder\Interfaces\CreateTrickResponderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class CreateTrickResponder
+class CreateTrickResponder implements CreateTrickResponderInterface
 {
     private $twig;
 
@@ -20,11 +22,11 @@ class CreateTrickResponder
         $this->twig = $twig;
     }
 
-    public function __invoke($groups)
+    public function __invoke(FormInterface $createTrickType)
     {
         return new Response(
-            $this->twig->render('create.html.twig', [
-                'groups'=> $groups
+            $this->twig->render('createTrick.html.twig', [
+                'form' => $createTrickType->createView()
             ])
         );
     }
