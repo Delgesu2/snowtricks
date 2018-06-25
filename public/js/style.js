@@ -1,3 +1,5 @@
+/* Show more tricks landing page script */
+
 // cache vars
 
 var parent = document.querySelector('#container'),
@@ -5,7 +7,6 @@ var parent = document.querySelector('#container'),
     loadMoreBtn =  document.querySelector('#load-more-tricks'),
     maxItems = 1,
     hiddenClass = "visually-hidden";
-
 
 
 [].forEach.call(items, function(item, idx){
@@ -36,3 +37,17 @@ modal.addEventListener('click', function(event) {
     modal.classList.toggle('is-active');
 });
 
+/* Load more images */
+function newField() {
+    var obj = document.getElementById('loadMoreFiles');
+    var field = obj.cloneNod(true);
+    inputs = field.getElementById('input');
+    for (var i =0; i < inputs.length; ++i) inputs[i].value=5;
+    document.getElementById('photosForm').appendChild('loadMoreFiles');
+}
+
+/* Load more videos */
+function newVideo() {
+    var field = document.createElement('.newVid');
+    document.body.insertBefore(field);
+}

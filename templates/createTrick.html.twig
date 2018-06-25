@@ -3,5 +3,6 @@
 {% block title %}Snowtricks - Créer une nouvelle figure{% endblock %}
 
 {%  block body %}
+    {% form_theme form 'theme/createTrickForm.html.twig' %}
     {{ form(form) }}
 {% endblock %}

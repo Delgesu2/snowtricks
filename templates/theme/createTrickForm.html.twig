@@ -1,8 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Snowtricks - Créer une nouvelle figure{% endblock %}
-
-{%  block body %}
+{% block form %}
 
     <div class="columns is-mobile">
         <div class="column is-10 is-offset-1">
@@ -17,53 +13,49 @@
                 </div>
             </div>
 
-            <section>
+            {{ form_start(form) }}
+            <section>  <!-- Trick name -->
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                <label class="label">Nom de la figure</label>
+                {{ form_label(form.title, 'Nom de la figure') }}
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" type="text">
+                            {{ form_widget(form.title) }}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="field is-horizontal">
+            <div class="field is-horizontal">  <!-- Trick description -->
                 <div class="field-label is-normal">
-                    <label class="label">Description</label>
+                    {{ form_label(form.description, 'Description') }}
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <textarea class="textarea" placeholder="Détaille la figure"></textarea>
+                             {{ form_widget(form.description, {'attr': {'placeholder': 'Détaille la figure'} }) }}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="field is-horizontal">
+            <div class="field is-horizontal">   <!-- Trick group -->
                 <div class="field-label is-normal">
-                    <label class="label">Groupe</label>
+                    {{ form_label(form.group, 'Groupe') }}
                 </div>
                 <div class="field-body">
                     <div class="field is-narrow">
                         <div class="control">
                             <div class="select is-fullwidth">
-                                <select>
-
-                                    {% for group in groups %}
-                                    <option>{{ group.name }}</option>
-                                    {% endfor %}
-
-                                </select>
+                                {{ form_widget(form.group) }}
                             </div>
                         </div>
                     </div>
                     <div class="field">
                         <div class="control">
+                            {{ form_widget(form.group) }}
                             <input class="input" type="text" placeholder="Nouveau groupe ?">
                             <p class="help is-info">Si le groupe ne figure pas dans la liste</p>
                         </div>
@@ -72,16 +64,16 @@
             </div>
             </section>
 
-            <section>
-            <div class="field is-horizontal">
+            <section>     <!-- Pictures -->
+            <div class="field is-horizontal" id="photosForm">
                 <div class="field-label is-normal">
-                    <label class="label">Photo(s)</label>
+                    {{ form_label(form.picture, 'Image(s)') }}
                 </div>
-                <div class="field-body">
+                <div class="field-body" id="loadMoreFiles">
                     <div class="control">
                         <div class="file">
                             <label class="file-label">
-                                <input class="file-input" type="file" name="resume">
+                                {{ form_widget(form.picture) }}
                                 <span class="file-cta">
                                   <span class="file-icon">
                                     <i class="fas fa-upload"></i>
@@ -93,29 +85,36 @@
                             </label>
                         </div>
                     </div>
+                    <span class="icon is-medium"><i class="far fa-plus-square" onclick="newField()" id="input"></i></span>
                 </div>
             </div>
 
-            <div class="field is-horizontal">
+            <div class="field is-horizontal">   <!-- Videos -->
                 <div class="field-label is-normal">
-                    <label class="label">Vidéo(s)</label>
+                    <label class="label">{{ form_label(form, "Lien(s) vidéo(s)") }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
-                        <div class="control">
-                            <input class="input" type="text" placeholder="https://">
+                        <div class="control" id="newVid">
+                            {{ form_widget(form.video, {'attr' : {'placeholder': 'https://'} }) }}
                             <p class="help is-info">Ecrire l'URL</p>
                         </div>
                     </div>
                 </div>
+                <span class="icon is-medium"><i class="far fa-plus-square" onclick="newVideo()"></i></span>
             </div>
             </section>
 
-            <div class="control">
-                <button class="button is-primary">Envoyer</button>
+            <div class="control">   <!-- Submit -->
+                <button type="submit" class="button is-primary">Envoyer</button>
             </div>
 
         </div>
     </div>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
 
 {% endblock %}
