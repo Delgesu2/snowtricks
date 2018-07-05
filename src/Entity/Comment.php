@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\CommentInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -9,7 +10,7 @@ use Ramsey\Uuid\UuidInterface;
 /**
 * Comment entity
 */
-class Comment
+class Comment implements CommentInterface
 {
 	/**
     * @var \Ramsey\Uuid\UuidInterface
@@ -59,7 +60,7 @@ class Comment
 	/**
     * @return \DateTime
     */
-	public function getDate()
+	public function getDate() :?\DateTime
 	{
 		return $this->date;
 	}
@@ -67,7 +68,7 @@ class Comment
 	/**
     * @return string
     */
-	public function getText()
+	public function getText() :string
 	{
 		return $this->text;
 	}

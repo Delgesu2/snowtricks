@@ -9,7 +9,32 @@
 namespace App\Entity\Interfaces;
 
 
+use Ramsey\Uuid\UuidInterface;
+
 interface PhotoInterface
 {
+    /**
+     * @return UuidInterface
+     */
+    public function getId() :UuidInterface;
 
+    /**
+     * @return string
+     */
+    public function getTitle() :string;
+
+    /**
+     * @return string
+     */
+    public function getPath() :string;
+
+    /**
+     * @return mixed
+     */
+    public function getTrickPhoto();
+
+    /**
+     * @return string
+     */
+    public function getAlt() :string;
 }

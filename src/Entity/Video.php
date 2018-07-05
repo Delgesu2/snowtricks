@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\VideoInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -9,7 +10,7 @@ use Ramsey\Uuid\UuidInterface;
 /**
 * Video entity
 */
-class Video
+class Video implements VideoInterface
 {
 	/**
     * @var \Ramsey\Uuid\UuidInterface
@@ -53,7 +54,7 @@ class Video
     /**
      * @return string
      */
-	public function getTitle()
+	public function getTitle() :string
 	{
 		return $this->title;
 	}
@@ -61,7 +62,7 @@ class Video
     /**
      * @return string
      */
-	public function getUrl()
+	public function getUrl() :string
 	{
 		return $this->url;
 	}

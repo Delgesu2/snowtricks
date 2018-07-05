@@ -9,7 +9,33 @@
 namespace App\Entity\Interfaces;
 
 
+use Ramsey\Uuid\UuidInterface;
+
 interface CommentInterface
 {
+    /**
+     * @return UuidInterface
+     */
+    public function getId() :UuidInterface;
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDate() :?\DateTime;
+
+    /**
+     * @return string
+     */
+    public function getText() :string;
+
+    /**
+     * @return mixed
+     */
+    public function getUser();
+
+    /**
+     * @return mixed
+     */
+    public function getTrick();
 
 }

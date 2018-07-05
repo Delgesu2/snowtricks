@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\PhotoInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -9,7 +10,7 @@ use Ramsey\Uuid\UuidInterface;
 /**
 * Photo entity
 */
-class Photo
+class Photo implements PhotoInterface
 {
 	/**
     * @var \Ramsey\Uuid\UuidInterface
@@ -49,7 +50,7 @@ class Photo
     }
 
     /**
-     * @return UuidInterface
+     * @return \Ramsey\Uuid\UuidInterface
      */
 	public function getId(): UuidInterface
 	{
@@ -59,7 +60,7 @@ class Photo
     /**
      * @return string
      */
-	public function getTitle()
+	public function getTitle() :string
 	{
 		return $this->title;
 	}
@@ -67,7 +68,7 @@ class Photo
     /**
      * @return string
      */
-	public function getPath()
+	public function getPath() :string
 	{
 		return $this->path;
 	}
@@ -83,7 +84,7 @@ class Photo
     /**
      * @return string
      */
-    public function getAlt()
+    public function getAlt() :string
     {
         return $this->alt;
     }

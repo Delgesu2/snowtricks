@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -9,7 +10,7 @@ use Ramsey\Uuid\UuidInterface;
 /**
 * Snowtricks_user entity
 */
-class User
+class User implements UserInterface
 {
     /**
     * @var \Ramsey\Uuid\UuidInterface
@@ -27,17 +28,17 @@ class User
 	private $photo;
 
 	/**
-    * @var nick
+    * @var string
     */
 	private $nick;
 
 	/**
-    * @var password
+    * @var string
     */
 	private $password;
 
 	/**
-    * @var email
+    * @var string
     */
 	private $email;
 
@@ -85,10 +86,10 @@ class User
 		return $this->id;
 	}
 
-	/**
-    * @return name
-    */
-	public function getName()
+    /**
+     * @return string
+     */
+	public function getName() :string
 	{
 		return $this->name;
 	}
@@ -102,25 +103,25 @@ class User
 	}
 
 	/**
-    * @return nick
+    * @return string
     */
-	public function getNick()
+	public function getNick() :string
 	{
 		return $this->nick;
 	}
 
 	/**
-    * @return photo
+    * @return string
     */
-	public function getPassword()
+	public function getPassword() :string
 	{
-		return $this->photo;
+		return $this->password;
 	}
 
 	/**
-    * @return email
+    * @return string
     */
-	public function getEmail()
+	public function getEmail() :string
 	{
 		return $this->email;
 	}
@@ -135,25 +136,25 @@ class User
 
 
     /**
-     * @return comment
+     * @return string
      */
-    public function getComment()
+    public function getComment() :string
     {
         return $this->comment;
     }
 
 	/**
-    * @return status
+    * @return boolean
     */
-	public function getStatus()
+	public function getStatus() :bool
 	{
 		return $this->status;
 	}
 
 	/**
-    * @return role
+    * @return string
     */
-	public function getRole()
+	public function getRole() :string
 	{
 		return $this->role;
 	}

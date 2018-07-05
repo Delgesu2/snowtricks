@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\GroupInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -9,7 +10,7 @@ use Ramsey\Uuid\UuidInterface;
 /**
 * Snowtricks_group
 */
-class Group
+class Group implements GroupInterface
 {
 	/**
     * @var \Ramsey\Uuid\UuidInterface
@@ -55,7 +56,7 @@ class Group
     /**
      * @return string
      */
-    public function getTrick()
+    public function getTrick() :string
     {
         return $this->trick;
     }

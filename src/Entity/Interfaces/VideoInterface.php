@@ -9,7 +9,28 @@
 namespace App\Entity\Interfaces;
 
 
+use App\Entity\Trick;
+use Ramsey\Uuid\UuidInterface;
+
 interface VideoInterface
 {
+    /**
+     * @return UuidInterface
+     */
+    public function getId() :UuidInterface;
 
+    /**
+     * @return string
+     */
+    public function getTitle() :string;
+
+    /**
+     * @return string
+     */
+    public function getUrl() :string;
+
+    /**
+     * @return Trick|null
+     */
+    public function getTrickVideo() :?Trick;
 }

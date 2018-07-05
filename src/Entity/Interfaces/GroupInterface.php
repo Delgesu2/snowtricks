@@ -9,7 +9,22 @@
 namespace App\Entity\Interfaces;
 
 
+use Ramsey\Uuid\UuidInterface;
+
 interface GroupInterface
 {
+    /**
+     * @return UuidInterface
+     */
+    public function getId() :UuidInterface;
 
+    /**
+     * @return string
+     */
+    public function getName() :string;
+
+    /**
+     * @return string
+     */
+    public function getTrick() :string;
 }
