@@ -1,3 +1,5 @@
+
+
 {% block form %}
 
     <div class="columns is-mobile">
@@ -53,26 +55,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="field">
+                   <!-- <div class="field">
                         <div class="control">
-                            {{ form_widget(form.group) }}
+                            form_widget(form.group) }}
                             <input class="input" type="text" placeholder="Nouveau groupe ?">
                             <p class="help is-info">Si le groupe ne figure pas dans la liste</p>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             </section>
 
             <section>     <!-- Pictures -->
-            <div class="field is-horizontal" id="photosForm">
+            <div class="field is-horizontal">
                 <div class="field-label is-normal">
                     {{ form_label(form.picture, 'Image(s)') }}
                 </div>
-                <div class="field-body" id="loadMoreFiles">
+                <div class="field-body">
                     <div class="control">
                         <div class="file">
-                            <label class="file-label">
+                            <label class="file-label" oninput="showFiles()">
                                 {{ form_widget(form.picture) }}
                                 <span class="file-cta">
                                   <span class="file-icon">
@@ -83,20 +85,25 @@
                                   </span>
                                 </span>
                             </label>
+                            <div id="loadedFiles"></div>
                         </div>
                     </div>
-                    <span class="icon is-medium"><i class="far fa-plus-square" onclick="newField()" id="input"></i></span>
                 </div>
             </div>
 
             <div class="field is-horizontal">   <!-- Videos -->
                 <div class="field-label is-normal">
-                    <label class="label">{{ form_label(form, "Lien(s) vidéo(s)") }}</label>
+                    <label class="label">{{ form_label(form.video, "Lien(s) vidéo(s)") }}</label>
                 </div>
+
+
                 <div class="field-body">
                     <div class="field">
-                        <div class="control" id="newVid">
-                            {{ form_widget(form.video, {'attr' : {'placeholder': 'https://'} }) }}
+                        <div class="control">
+                            <ul data-prototype="{{ form_widget(form.video.vars.prototype,
+                                {'attr' : {'placeholder': 'https://'} })|e('html_attr') }}" id="collection">
+                            </ul>
+                            {{ form_widget(form.video) }}
                             <p class="help is-info">Ecrire l'URL</p>
                         </div>
                     </div>
@@ -116,5 +123,5 @@
 {% endblock %}
 
 {% block javascripts %}
-
 {% endblock %}
+

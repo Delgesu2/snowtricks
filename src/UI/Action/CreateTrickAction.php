@@ -2,6 +2,7 @@
 
 namespace App\UI\Action;
 
+use App\Form\Handler\CreateTrickHandler;
 use App\UI\Action\Interfaces\CreateTrickActionInterface;
 use App\Helper\FileUploaderHelper;
 use App\Form\Type\CreateTrickType;
@@ -34,22 +35,32 @@ class CreateTrickAction implements CreateTrickActionInterface
     private $fileUploaderHelper;
 
     /**
+     * @var CreateTrickHandler
+     */
+    private $createTrickHandler;
+
+    /**
      * CreateTrickAction constructor.
      * @param FormFactoryInterface $formFactory
      * @param EventDispatcherInterface $eventDispatcher
      * @param FileUploaderHelper $fileUploaderHelper
      */
-    public function __construct(FormFactoryInterface $formFactory, EventDispatcherInterface $eventDispatcher, FileUploaderHelper $fileUploaderHelper)
+    public function __construct(FormFactoryInterface $formFactory, EventDispatcherInterface $eventDispatcher,
+                                FileUploaderHelper $fileUploaderHelper, CreateTrickHandler $createTrickHandler)
     {
         $this->formFactory = $formFactory;
         $this->eventDispatcher = $eventDispatcher;
         $this->fileUploaderHelper = $fileUploaderHelper;
+        $this->createTrickHandler = $createTrickHandler;
     }
 
     public function __invoke(Request $request, CreateTrickResponderInterface $responder)
     {
         $createTrickType = $this->formFactory->create(CreateTrickType::class)
                                       ->handleRequest($request);
+        if ($this->createTrickHandler->handle($createTrickType)) {
+
+        }
 
         return $responder($createTrickType);
     }

@@ -37,17 +37,61 @@ modal.addEventListener('click', function(event) {
     modal.classList.toggle('is-active');
 });
 
-/* Load more images */
-function newField() {
-    var obj = document.getElementById('loadMoreFiles');
-    var field = obj.cloneNod(true);
-    inputs = field.getElementById('input');
-    for (var i =0; i < inputs.length; ++i) inputs[i].value=5;
-    document.getElementById('photosForm').appendChild('loadMoreFiles');
+/* Show loaded images in HTML */
+function showFiles() {
+    var files = document.getElementById('create_trick_picture').files;
+
+    for (var i=0; i<files.length; i++) {
+        var content=document.createTextNode(files[i].name);
+        var side=document.getElementById("loadedFiles");
+        side.appendChild(content);
+        }
 }
 
 /* Load more videos */
-function newVideo() {
-    var field = document.createElement('.newVid');
-    document.body.insertBefore(field);
-}
+
+// "add a field" icon
+
+    var oSpan = document.createElement("SPAN");
+    var oElem = document.createElement("I");
+
+    oSpan.className = "icon is-medium";
+    oElem.className = "far fa-plus-square";
+
+    newField = oSpan.appendChild(oElem);
+
+    /** ALTERNATIF
+     var html='<span class="icon is-medium"><i class="far fa-plus-square"></i></span>\n';
+     var li=document.createElement('li');
+     var newField = li.insertAdjacentHTML("beforeend", html);
+     **/
+
+// get the ul that holds the collection
+    var collectionHolder = document.getElementById('collection');
+
+// add "add a field" to the ul
+    collectionHolder.appendChild(newField);
+
+// new index is current form input when inserting new item
+    collectionHolder.data('index', collectionHolder.find(':input').length);
+
+// add new video form field
+    var faplus = document.getElementsByClassName('.fa-plus-square');
+    faplus.addEventListener("click", addField());
+
+    function addField(collectionHolder, li) {
+        //get data-prototype
+        var prototype = collectionHolder.data('prototype');
+        // get new index
+        var index = collectionHolder.data('index');
+
+        var newForm = prototype;
+
+        newForm = newForm.replace(/__name__/g, index);
+
+        collectionHolder.data('index', index + 1);
+
+        var newFormLi = li.appendChild(newForm);
+        newFormLi.insertBefore(newFormLi);
+    }
+

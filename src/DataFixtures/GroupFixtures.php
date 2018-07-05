@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Group;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\Tests\Compiler\G;
 
 class GroupFixtures extends Fixture
 {
@@ -29,6 +30,22 @@ class GroupFixtures extends Fixture
             $rotation = new Group('rotation');
             $this->addReference('rotation', $rotation);
             $manager->persist($rotation);
+
+            $stall = new Group('stall');
+            $this->addReference('stall', $stall);
+            $manager->persist($stall);
+
+            $spin = new Group('spin');
+            $this->addReference('spin', $spin);
+            $manager->persist($spin);
+
+            $tweak = new Group('tweak');
+            $this->addReference('tweak', $tweak);
+            $manager->persist($tweak);
+
+            $straight = new Group('straight');
+            $this->addReference('straight', $straight);
+            $manager->persist($straight);
 
             $manager->flush();
     }

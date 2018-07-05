@@ -132,7 +132,7 @@ class Trick implements TrickInterface
     /**
     * @return string
     */
-    public function getDescription()
+    public function getDescription() :string
     {
         return $this->description;
     }
@@ -140,7 +140,7 @@ class Trick implements TrickInterface
     /**
     * @return string
     */
-    public function getTrick_group()
+    public function getTrick_group() :string
     {
         return $this->trick_group;
     }
@@ -148,7 +148,7 @@ class Trick implements TrickInterface
     /**
      * @return Comment
      */
-    public function getComment()
+    public function getComment() :string
     {
         return $this->comment;
     }
@@ -172,7 +172,7 @@ class Trick implements TrickInterface
     /**
     * @return string
     */
-    public function getTrick_user()
+    public function getTrick_user() :string
     {
         return $this->trick_user;
     }

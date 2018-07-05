@@ -8,6 +8,7 @@
 
 namespace App\Form\Type;
 
+use App\Domain\DTO\NewTrickDTO;
 use App\Entity\Group;
 use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -18,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -58,13 +60,25 @@ class CreateTrickType extends AbstractType
 
              ->add('video', CollectionType::class, [
                  'attr' => ['class' => 'input'],
-                 'entry_type' => TextType::class
+                 'entry_type' => TextType::class,
+                 'allow_add' => true
              ])
          ;
      }
 
      public function configureOptions(OptionsResolver $resolver)
      {
-
+         $resolver->setDefaults([
+             'data_class' => NewTrickDTO::class,
+             'empty_data' => function(FormInterface $form) {
+                return new NewTrickDTO(
+                    $form->get('title')->getData(),
+                    $form->get('description')->getData(),
+                    $form->get('group')->getData(),
+                    $form->get('picture')->getData(),
+                    $form->get('video')->getData()
+                );
+             }
+         ]);
      }
 }
