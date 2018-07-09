@@ -41,13 +41,14 @@ class NewTrickDTO
     public function __construct(
         $trick_name,
         $description,
+        $trick_group,
         array $photo,
         array $video
     )
     {
         $this->trick_name = $trick_name;
         $this->description = $description;
-        $this->trick_name = $trick_name;
+        $this->trick_group = $trick_group;
         $this->photo = $photo;
         $this->video = $video;
     }
