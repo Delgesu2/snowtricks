@@ -8,9 +8,11 @@
 
 namespace App\Domain\DTO;
 
+use App\Domain\DTO\Interfaces\NewTrickDTOInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class NewTrickDTO
+class NewTrickDTO implements NewTrickDTOInterface
 {
     /**
      * @var string

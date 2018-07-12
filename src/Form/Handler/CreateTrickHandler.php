@@ -8,36 +8,48 @@
 
 namespace App\Form\Handler;
 
+use App\Form\Handler\Interfaces\CreateTrickHandlerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-USE Symfony\Component\HttpFoundation\Session\Session;
 use App\Entity\Trick;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-$session = new Session();
-$session->start();
-
-class CreateTrickHandler
+class CreateTrickHandler implements CreateTrickHandlerInterface
 {
-    public function handle(FormInterface $form, UploadedFile $load) :bool
-    {
-        $trick = new Trick();
+    private $pictDir;
+    private $uploaderHelper;
+    private $session;
+    private $request;
 
+    public function __construct(string $pictDir, SessionInterface $session, Request $request)
+    {
+        $this->pictDir = $pictDir;
+        $this->session = $session;
+        $this->request = $request;
+        $this->uploaderHelper = $uploaderHelper;
+    }
+
+    public function flash($request){
+        $this->$request->addFlash(
+            'Nouveau trick enregistré. Bravo ! Retour à la page d\'accueil'
+        );
+    }
+
+    public function handle(FormInterface $form) :bool
+    {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $file = $trick->getPhoto();
+            foreach ($form->getData()->photo as $photo) {
+                $filename = $this->generateUniqueFileName() . '.' . $photo->guessExtension();
 
-            $filename = $this->generateUniqueFileName().'.'.$load->guessExtension();
-
-            // move file to /tricks directory
-            $load->move(
-                $this->getParameter('%kernel.root_dir%/public/images/tricks'),
-                $filename
-            );
-
+                // move file to /tricks directory
+                $photo->move(
+                    $this->pictDir,$filename
+                );
+            }
             // succes flash message
-            $session->getFlashBag()->add(
-                'Nouveau trick enregistré. Bravo ! Retour à la page d\'accueil'
-            );
+          $this->flash($this->request);
             return true;
         }
             return false;

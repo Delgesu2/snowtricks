@@ -73,7 +73,11 @@ function showFiles() {
     collectionHolder.appendChild(newField);
 
 // new index is current form input when inserting new item
-    collectionHolder.data('index', collectionHolder.find(':input').length);
+
+ let index = collectionHolder.querySelector('input').length;
+ console.log(index);
+    collectionHolder.getAttribute('index');
+
 
 // add new video form field
     var faplus = document.getElementsByClassName('.fa-plus-square');

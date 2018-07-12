@@ -14,6 +14,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @Route(name="create", path="/create")
@@ -55,26 +56,23 @@ class CreateTrickAction implements CreateTrickActionInterface
         FormFactoryInterface $formFactory,
         EventDispatcherInterface $eventDispatcher,
         FileUploaderHelper $fileUploaderHelper,
-        CreateTrickHandler $createTrickHandler,
-        UploadedFile $load
+        CreateTrickHandler $createTrickHandler
         )
     {
         $this->formFactory = $formFactory;
         $this->eventDispatcher = $eventDispatcher;
         $this->fileUploaderHelper = $fileUploaderHelper;
         $this->createTrickHandler = $createTrickHandler;
-        $this->load = $load;
     }
 
-
-
-    public function __invoke(Request $request, CreateTrickResponderInterface $responder)
+    public function __invoke(Request $request, CreateTrickResponderInterface $responder, UrlGeneratorInterface $urlGenerator)
     {
         $createTrickType = $this->formFactory->create(CreateTrickType::class)
                                       ->handleRequest($request);
-        if ($this->createTrickHandler->handle($createTrickType, $load)) {
+        if ($this->createTrickHandler->handle($createTrickType)) {
             // redirects to the "homepage" route
-            return new RedirectResponse('/');
+            $urlGenerator->generate('home');
+           // return new RedirectResponse('/');
         }
 
         return $responder($createTrickType);

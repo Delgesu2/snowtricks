@@ -71,11 +71,6 @@ class Trick implements TrickInterface
     private $dateupdate = null;
 
     /**
-     * @var photo file
-     */
-    private $file;
-
-    /**
      * Trick constructor
      */
     public function __construct(
