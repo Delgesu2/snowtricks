@@ -32,4 +32,12 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
                     ->getQuery()
                     ->getOneOrNullResult();
     }
+
+    public function createTrick($trick, ManagerRegistry $registry)  // Pourquoi rappeler ManagerRegistry alors qu'il est dans le constructeur ?)
+    {
+        $entityManager = $registry->getManager();
+        $entityManager->persist($trick);
+        $entityManager->flush();
+    }
+
 }

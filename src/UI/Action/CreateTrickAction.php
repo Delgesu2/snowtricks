@@ -65,7 +65,11 @@ class CreateTrickAction implements CreateTrickActionInterface
         $this->createTrickHandler = $createTrickHandler;
     }
 
-    public function __invoke(Request $request, CreateTrickResponderInterface $responder, UrlGeneratorInterface $urlGenerator)
+    public function __invoke(
+        Request $request,
+        CreateTrickResponderInterface $responder,
+        UrlGeneratorInterface $urlGenerator
+    )
     {
         $createTrickType = $this->formFactory->create(CreateTrickType::class)
                                       ->handleRequest($request);

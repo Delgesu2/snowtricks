@@ -26,7 +26,7 @@ class FileUploaderHelper
     public function __construct(string $imageFolder)
     {
         $this->imageFolder = $imageFolder;
-    }*/
+    }
 
     /**
      * @return string
