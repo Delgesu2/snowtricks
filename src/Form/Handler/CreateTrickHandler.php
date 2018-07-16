@@ -92,16 +92,16 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
 
                 // create new photo
                 $photo = new Photo($title, $path, $alt);
-
-                // persist in BDD
-                $repository = new TricksRepository($registry);  // pas sûr de $registry
-                $repository->createTrick($trick, $this->registry);  // ??
+                //  ???????????????????
 
                 // move file to /tricks directory
                 $file->move(
                     $this->pictDir,
                     $filename
                 );
+
+                $repository = new TricksRepository($registry);
+                $repository->createTrick($trick, $this->registry);
             }
 
             // succes flash message

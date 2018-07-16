@@ -1,0 +1,26 @@
+App\Entity\Trick:
+    properties:
+        trick_name:
+            - NotBlank: ~
+        description:
+            - NotBlank: ~
+            - Length:
+                min: 15
+                max: 800
+                minMessage: 'La description doit contenir au moins 15 caractères.'
+                maxMessage: 'La description ne doit pas faire plus de 800 caractères.'
+        photo:
+            - Image:
+                allowLandscape: true
+                allowPortrait: false
+                allowSquare: true
+                maxSize: 2M
+                maxSizeMessage: 'Le fichier est trop grand. Taille maximale:
+                {{ limit }} {{ suffix }}.'
+                mimeType: [image/png, image/tiff, image/jpeg]
+                mimeTypeMessage: 'Charger une image dans un des formats suivants: png, tiff ou jpeg'
+        video:
+            -Regex:
+                pattern: '#^https://www.youtube.com/|^https://www.dailymotion.com#'
+
+
