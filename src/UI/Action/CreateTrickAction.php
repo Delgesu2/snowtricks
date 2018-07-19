@@ -74,11 +74,11 @@ class CreateTrickAction implements CreateTrickActionInterface
         $createTrickType = $this->formFactory->create(CreateTrickType::class)
                                       ->handleRequest($request);
         if ($this->createTrickHandler->handle($createTrickType)) {
-            // redirects to the "homepage" route
-            $urlGenerator->generate('home');
-           // return new RedirectResponse('/');
+
+            return $responder(true);
+
         }
 
-        return $responder($createTrickType);
+        return $responder(false, $createTrickType);
     }
 }

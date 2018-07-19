@@ -8,16 +8,15 @@
 
 namespace App\Form\Handler;
 
-use App\Entity\Photo;
-use App\Entity\Trick;
+use App\Domain\Factory\TrickFactory;
 use App\Infra\Doctrine\Repository\TricksRepository;
+use App\Entity\Trick;
 use App\Form\Handler\Interfaces\CreateTrickHandlerInterface;
 use App\Helper\FileUploaderHelper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Doctrine\Common\Persistence\ManagerRegistry;
 
 class CreateTrickHandler implements CreateTrickHandlerInterface
 {
@@ -25,7 +24,8 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
     private $fileUploaderHelper;
     private $session;
     private $request;
-    private $registry;
+    private $trickFactory;
+    private $trickRepository;
 
     /**
      * CreateTrickHandler constructor.
@@ -35,17 +35,18 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
      * @param FileUploaderHelper $fileUploaderHelper
      */
     public function __construct(
-        string $pictDir,
         SessionInterface $session,
         Request $request,
         FileUploaderHelper $fileUploaderHelper,
-        ManagerRegistry $registry
+        TrickFactory $trickFactory,
+        TricksRepository $trickRepository
     ) {
-        $this->pictDir = $pictDir;
-        $this->session = $session;
-        $this->request = $request;
+
+        $this->session            = $session;
+        $this->request            = $request;
         $this->fileUploaderHelper = $fileUploaderHelper;
-        $this->registry = $registry;
+        $this->trickFactory       = $trickFactory;
+        $this->trickRepository    = $trickRepository;
     }
 
     /**
@@ -67,41 +68,22 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
      * @return bool
      */
     public function handle(
-        FormInterface $form,
-        UploadedFile $file,
-        GenerateFilename $generateFilename,
-        Trick $trick,
-        Photo $photo
+        FormInterface $form
     ) :bool {
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $trick = $this->trickFactory->create($form->getData());
+
             foreach ($form->getData()->photo as $photo) {
 
-                // create filename for database
-                $filename = $generateFilename->generateUniqueFilename() . '.' . $file->guessExtension();
-
-                // set $title
-                $title = $trick->getTrick_name();
-
-                // set $alt
-                $alt = $title;
-
-                // add $filename and public folder to get $path
-                $path = 'images/tricks/' . $filename;
-
-                // create new photo
+                // create new photo         dans PhotoFactory
                 $photo = new Photo($title, $path, $alt);
                 //  ???????????????????
 
-                // move file to /tricks directory
-                $file->move(
-                    $this->pictDir,
-                    $filename
-                );
 
-                $repository = new TricksRepository($registry);
-                $repository->createTrick($trick, $this->registry);
+
+                $this->trickRepository->save($trick);
             }
 
             // succes flash message

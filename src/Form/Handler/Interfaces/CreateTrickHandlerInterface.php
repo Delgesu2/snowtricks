@@ -8,7 +8,7 @@
 
 namespace App\Form\Handler\Interfaces;
 
-
+use App\Domain\Factory\TrickFactory;
 use App\Entity\Photo;
 use App\Form\Handler\GenerateFilename;
 use App\Helper\FileUploaderHelper;
@@ -33,7 +33,8 @@ interface CreateTrickHandlerInterface
         SessionInterface $session,
         Request $request,
         FileUploaderHelper $fileUploaderHelper,
-        ManagerRegistry $registry
+        ManagerRegistry $registry,
+        TrickFactory $trickFactory
     );
 
     /**

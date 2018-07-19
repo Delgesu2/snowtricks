@@ -2,6 +2,7 @@
 
 namespace App\Infra\Doctrine\Repository;
 
+use App\Entity\Interfaces\TrickInterface;
 use App\Entity\Trick;
 use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -24,6 +25,11 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
                     ->getResult();
     }
 
+    /**
+     * @param $slug
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getOneTrick($slug)
     {
         return $this->createQueryBuilder('oneTrick')
@@ -33,11 +39,13 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
                     ->getOneOrNullResult();
     }
 
-    public function createTrick($trick, ManagerRegistry $registry)  // Pourquoi rappeler ManagerRegistry alors qu'il est dans le constructeur ?)
+    /**
+     * @param TrickInterface $trick
+     * @return mixed|void
+     */
+    public function save(TrickInterface $trick)
     {
-        $entityManager = $registry->getManager();
-        $entityManager->persist($trick);
-        $entityManager->flush();
+        $this->_em->persist($trick);
+        $this->_em->flush();
     }
-
 }

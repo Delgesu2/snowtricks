@@ -9,6 +9,7 @@
 namespace App\Infra\Doctrine\Repository\Interfaces;
 
 
+use App\Entity\Interfaces\TrickInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 interface TricksRepositoryInterface
@@ -26,4 +27,10 @@ interface TricksRepositoryInterface
      * @return mixed
      */
     public function getOneTrick($slug);
+
+    /**
+     * @param TrickInterface $trick
+     * @return mixed
+     */
+    public function save(TrickInterface $trick);
 }
