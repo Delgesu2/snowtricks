@@ -9,10 +9,9 @@
 namespace App\Form\Handler\Interfaces;
 
 use App\Domain\Factory\TrickFactory;
-use App\Entity\Photo;
 use App\Form\Handler\GenerateFilename;
 use App\Helper\FileUploaderHelper;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use App\Infra\Doctrine\Repository\TricksRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,31 +28,32 @@ interface CreateTrickHandlerInterface
      * @param FileUploaderHelper $fileUploaderHelper
      */
     public function __construct(
-        string $pictDir,
         SessionInterface $session,
         Request $request,
         FileUploaderHelper $fileUploaderHelper,
-        ManagerRegistry $registry,
-        TrickFactory $trickFactory
+        TrickFactory $trickFactory,
+        TricksRepository $tricksRepository
+
     );
+
+    /**
+     * @param FormInterface $form
+     * @param FileUploaderHelper $fileUploaderHelper
+     * @param GenerateFilename $generateFilename
+     * @param UploadedFile $file
+     * @return bool
+     */
+    public function handle(
+        FormInterface $form,
+        FileUploaderHelper $fileUploaderHelper,
+        GenerateFilename $generateFilename,
+        UploadedFile $file
+    ) :bool ;
 
     /**
      * @param $request
      * @return mixed|void
      */
     public function flash($request);
-
-    /**
-     * @param FormInterface $form
-     * @param UploadedFile $file
-     * @param GenerateFilename $generateFilename
-     * @return bool
-     */
-    public function handle(
-        FormInterface $form,
-        UploadedFile $file,
-        GenerateFilename $generateFilename,
-        Trick $trick,
-        Photo $photo
-    ) :bool ;
 }
+

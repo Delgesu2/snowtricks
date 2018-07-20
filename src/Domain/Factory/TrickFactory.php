@@ -9,9 +9,10 @@
 namespace App\Domain\Factory;
 
 use App\Domain\DTO\Interfaces\NewTrickDTOInterface;
+use App\Domain\Factory\Interfaces\TrickFactoryInterface;
 use App\Entity\Trick;
 
-class TrickFactory
+class TrickFactory implements TrickFactoryInterface
 {
     /**
      * @param NewTrickDTOInterface $newTrickDTO

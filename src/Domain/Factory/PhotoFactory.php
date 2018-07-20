@@ -9,10 +9,11 @@
 namespace App\Domain\Factory;
 
 use App\Domain\DTO\Interfaces\NewPhotoDTOInterface;
+use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Entity\Photo;
 
 
-class PhotoFactory
+class PhotoFactory implements PhotoFactoryInterface
 {
     /**
      * @param NewPhotoDTOInterface $newPhotoDTO

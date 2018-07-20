@@ -10,17 +10,15 @@ namespace App\Form\Handler;
 
 use App\Domain\Factory\TrickFactory;
 use App\Infra\Doctrine\Repository\TricksRepository;
-use App\Entity\Trick;
 use App\Form\Handler\Interfaces\CreateTrickHandlerInterface;
 use App\Helper\FileUploaderHelper;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CreateTrickHandler implements CreateTrickHandlerInterface
 {
-    private $pictDir;
     private $fileUploaderHelper;
     private $session;
     private $request;
@@ -29,10 +27,11 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
 
     /**
      * CreateTrickHandler constructor.
-     * @param string $pictDir
      * @param SessionInterface $session
      * @param Request $request
      * @param FileUploaderHelper $fileUploaderHelper
+     * @param TrickFactory $trickFactory
+     * @param TricksRepository $trickRepository
      */
     public function __construct(
         SessionInterface $session,
@@ -62,13 +61,14 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
 
     /**
      * @param FormInterface $form
-     * @param UploadedFile $file
      * @param GenerateFilename $generateFilename
-     * @param Trick $trick
      * @return bool
      */
     public function handle(
-        FormInterface $form
+        FormInterface $form,
+        FileUploaderHelper $fileUploaderHelper,
+        GenerateFilename $generateFilename,
+        UploadedFile $file
     ) :bool {
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,13 +77,10 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
 
             foreach ($form->getData()->photo as $photo) {
 
-                // create new photo         dans PhotoFactory
-                $photo = new Photo($title, $path, $alt);
-                //  ???????????????????
-
-
-
                 $this->trickRepository->save($trick);
+
+                $fileUploaderHelper->pictHandler($generateFilename, $file);
+
             }
 
             // succes flash message

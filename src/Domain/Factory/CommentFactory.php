@@ -9,9 +9,10 @@
 namespace App\Domain\Factory;
 
 use App\Domain\DTO\Interfaces\NewCommentDTOInterface;
+use App\Domain\Factory\Interfaces\CommentFactoryInterface;
 use App\Entity\Comment;
 
-class CommentFactory
+class CommentFactory implements CommentFactoryInterface
 {
     /**
      * @param NewCommentDTOInterface $commentDTO
@@ -20,7 +21,9 @@ class CommentFactory
     public function create(NewCommentDTOInterface $commentDTO)
     {
         return new Comment(
-            $commentDTO->text
+            $commentDTO->text,
+            $commentDTO->user,
+            $commentDTO->trick
         );
     }
 }

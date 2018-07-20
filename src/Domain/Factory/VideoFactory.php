@@ -9,9 +9,10 @@
 namespace App\Domain\Factory;
 
 use App\Domain\DTO\Interfaces\NewVideoDTOInterface;
+use App\Domain\Factory\Interfaces\VideoFactoryInterface;
 use App\Entity\Video;
 
-class VideoFactory
+class VideoFactory implements VideoFactoryInterface
 {
     /**
      * @param NewVideoDTOInterface $newVideoDTO
