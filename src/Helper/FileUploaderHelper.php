@@ -53,32 +53,20 @@ class FileUploaderHelper
         $this->pictDir = $pictDir;
     }
 
-    public function pictHandler(GenerateFilename $generateFilename, UploadedFile $file)
+    public function fileUploader(GenerateFilename $generateFilename, UploadedFile $file)
     {
         // create filename for database
         $filename = $generateFilename->generateUniqueFilename() . '.' . $file->guessExtension();
-
-        // set $filename
-        $title = $filename;
-
-        // set $alt
-        $alt = $title;
-
-        // add $filename and public folder to get $path
-        $path = $this->pictDir . $filename;
 
         // move file to /tricks directory (à appeler dans la boucle du handler)
         $file->move(
             $this->pictDir,
             $filename
         );
-    }
 
-    /**
-     * @return string
-     */
-    public function getImageFolder(): string
-    {
-        return $this->imageFolder;
+        return [
+            'filename' => $filename,
+            'pictDir'  => $this->pictDir
+        ];
     }
 }

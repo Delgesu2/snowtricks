@@ -8,14 +8,13 @@
 
 namespace App\Domain\Factory\Interfaces;
 
-
-use App\Domain\DTO\Interfaces\NewPhotoDTOInterface;
-
 interface PhotoFactoryInterface
 {
     /**
-     * @param NewPhotoDTOInterface $newPhotoDTO
+     * @param $title
+     * @param $path
+     * @param $alt
      * @return mixed
      */
-    public function create(NewPhotoDTOInterface $newPhotoDTO);
+    public function create($title, $path, $alt);
 }

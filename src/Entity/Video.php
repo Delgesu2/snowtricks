@@ -20,11 +20,6 @@ class Video implements VideoInterface
 	/**
     * @var string
     */
-	private $title;
-
-	/**
-    * @var string
-    */
 	private $url;
 
     /**
@@ -35,10 +30,9 @@ class Video implements VideoInterface
     /**
      * Video constructor.
      */
-    function __construct($title, $url, $trick_video = null)
+    function __construct($url, $trick_video = null)
     {
         $this->id = Uuid::uuid4();
-        $this->title = $title;
         $this->url = $url;
         $this->trick_video = $trick_video;
     }
@@ -49,14 +43,6 @@ class Video implements VideoInterface
 	public function getId(): UuidInterface
 	{
 		return $this->id;
-	}
-
-    /**
-     * @return string
-     */
-	public function getTitle() :string
-	{
-		return $this->title;
 	}
 
     /**

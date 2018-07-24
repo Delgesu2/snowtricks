@@ -37,6 +37,7 @@ modal.addEventListener('click', function(event) {
     modal.classList.toggle('is-active');
 });
 
+
 /* Show loaded images in HTML */
 function showFiles() {
     var files = document.getElementById('create_trick_picture').files;
@@ -48,6 +49,7 @@ function showFiles() {
         }
 }
 
+
 /* Load more videos */
 
 // "add a field" icon
@@ -58,44 +60,52 @@ function showFiles() {
     oSpan.className = "icon is-medium";
     oElem.className = "far fa-plus-square";
 
-    newField = oSpan.appendChild(oElem);
+    plusIcon = oSpan.appendChild(oElem);
 
     /** ALTERNATIF
      var html='<span class="icon is-medium"><i class="far fa-plus-square"></i></span>\n';
      var li=document.createElement('li');
-     var newField = li.insertAdjacentHTML("beforeend", html);
+     var plusIcon = li.insertAdjacentHTML("beforeend", html);
      **/
 
 // get the ul that holds the collection
     var collectionHolder = document.getElementById('collection');
 
 // add "add a field" to the ul
-    collectionHolder.appendChild(newField);
+    collectionHolder.appendChild(plusIcon);
 
-// new index is current form input when inserting new item
+// new index = current form input when inserting new item
 
  let index = collectionHolder.querySelector('input').length;
- console.log(index);
-    collectionHolder.getAttribute('index');
+    collectionHolder.getAttribute('data-index');
 
 
 // add new video form field
-    var faplus = document.getElementsByClassName('.fa-plus-square');
-    faplus.addEventListener("click", addField());
+    plusIcon.addEventListener("click", addField());
 
-    function addField(collectionHolder, li) {
+    function addField(collectionHolder, li) {  // définir 'li'
         //get data-prototype
-        var prototype = collectionHolder.data('prototype');
+        //var prototype = collectionHolder.data('prototype');
+        var prototype = collectionHolder.getAttribute('prototype');
         // get new index
-        var index = collectionHolder.data('index');
+        //var index = collectionHolder.data('index');
+        var index = collectionHolder.getAttribute('data-index');
 
         var newForm = prototype;
 
+        /**
         newForm = newForm.replace(/__name__/g, index);
+         Mais non, parce que j'ai mis 'label' => false dans CreateTrickType
+         **/
 
-        collectionHolder.data('index', index + 1);
+        // increase index
+        //collectionHolder.data('index', index + 1);
+        var oldIndex = collectionHolder.getAttribute('index').selectedIndex;
+        var newIndex = oldIndex + 1;  // ??
 
+        // Display the form
         var newFormLi = li.appendChild(newForm);
-        newFormLi.insertBefore(newFormLi);
+        plusIcon.insertBefore(newFormLi);
+
     }
 

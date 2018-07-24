@@ -8,7 +8,6 @@
 	  	<generator strategy="CUSTOM" />
 	  	<custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
 	</id>
-	<field name="title" type="string" length="60" nullable="true" />
 	<field name="url" type="string" length="100" />
     <many-to-one field="trick_video" target-entity="App\Entity\Trick" inversed-by="video">
 	</many-to-one>

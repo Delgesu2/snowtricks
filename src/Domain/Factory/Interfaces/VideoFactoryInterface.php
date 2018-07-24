@@ -8,13 +8,11 @@
 
 namespace App\Domain\Factory\Interfaces;
 
-use App\Domain\DTO\Interfaces\NewVideoDTOInterface;
-
 interface VideoFactoryInterface
 {
     /**
-     * @param NewVideoDTOInterface $newVideoDTO
+     * @param $url
      * @return mixed
      */
-    public function create(NewVideoDTOInterface $newVideoDTO);
+    public function create($url);
 }

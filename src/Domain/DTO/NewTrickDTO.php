@@ -24,12 +24,12 @@ class NewTrickDTO implements NewTrickDTOInterface
     public $trick_group;
 
     /**
-     * @var ArrayCollection
+     * @var array
      */
     public $photo;
 
     /**
-     * @var ArrayCollection
+     * @var array
      */
     public $video;
 

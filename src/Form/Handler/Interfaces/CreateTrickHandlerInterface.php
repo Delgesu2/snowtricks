@@ -8,6 +8,8 @@
 
 namespace App\Form\Handler\Interfaces;
 
+use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
+use App\Domain\Factory\Interfaces\VideoFactoryInterface;
 use App\Domain\Factory\TrickFactory;
 use App\Form\Handler\GenerateFilename;
 use App\Helper\FileUploaderHelper;
@@ -20,20 +22,25 @@ use App\Entity\Trick;
 
 interface CreateTrickHandlerInterface
 {
+
     /**
      * CreateTrickHandlerInterface constructor.
-     * @param string $pictDir
      * @param SessionInterface $session
      * @param Request $request
      * @param FileUploaderHelper $fileUploaderHelper
+     * @param PhotoFactoryInterface $photoFactory
+     * @param TrickFactory $trickFactory
+     * @param TricksRepository $tricksRepository
+     * @param VideoFactoryInterface $videoFactory
      */
     public function __construct(
         SessionInterface $session,
         Request $request,
         FileUploaderHelper $fileUploaderHelper,
+        PhotoFactoryInterface $photoFactory,
         TrickFactory $trickFactory,
-        TricksRepository $tricksRepository
-
+        TricksRepository $tricksRepository,
+        VideoFactoryInterface $videoFactory
     );
 
     /**

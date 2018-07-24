@@ -22,11 +22,6 @@ interface VideoInterface
     /**
      * @return string
      */
-    public function getTitle() :string;
-
-    /**
-     * @return string
-     */
     public function getUrl() :string;
 
     /**

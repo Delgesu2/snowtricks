@@ -63,7 +63,8 @@ class CreateTrickType extends AbstractType
              ->add('video', CollectionType::class, [
                  'attr' => ['class' => 'input'],
                  'entry_type' => TextType::class,
-                 'allow_add' => true
+                 'allow_add' => true,
+                 'label' => false
              ])
          ;
      }

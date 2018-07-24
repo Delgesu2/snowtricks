@@ -16,15 +16,17 @@ use App\Entity\Photo;
 class PhotoFactory implements PhotoFactoryInterface
 {
     /**
-     * @param NewPhotoDTOInterface $newPhotoDTO
-     * @return Photo
+     * @param $title
+     * @param $path
+     * @param $alt
+     * @return Photo|mixed
      */
-    public function create(NewPhotoDTOInterface $newPhotoDTO)
+    public function create($title, $path, $alt)
     {
         return new Photo(
-            $newPhotoDTO->title,
-            $newPhotoDTO->path,
-            $newPhotoDTO->alt
+            $title,
+            $path,
+            $alt
         );
     }
 }

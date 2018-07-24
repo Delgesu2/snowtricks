@@ -14,15 +14,15 @@ use App\Entity\Video;
 
 class VideoFactory implements VideoFactoryInterface
 {
+
     /**
-     * @param NewVideoDTOInterface $newVideoDTO
-     * @return Video
+     * @param $url
+     * @return Video|mixed
      */
-    public function create(NewVideoDTOInterface $newVideoDTO)
+    public function create($url)
     {
         return new Video(
-            $newVideoDTO->title,
-            $newVideoDTO->url
+            $url
         );
     }
 }

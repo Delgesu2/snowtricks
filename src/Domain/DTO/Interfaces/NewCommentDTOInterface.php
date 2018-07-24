@@ -8,7 +8,6 @@
 
 namespace App\Domain\DTO\Interfaces;
 
-
 interface NewCommentDTOInterface
 {
     /**
