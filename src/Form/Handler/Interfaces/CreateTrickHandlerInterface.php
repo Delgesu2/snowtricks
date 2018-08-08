@@ -17,6 +17,7 @@ use App\Helper\FileUploaderHelper;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 interface CreateTrickHandlerInterface
 {
@@ -47,6 +48,6 @@ interface CreateTrickHandlerInterface
      *
      * @return bool
      */
-    public function handle(FormInterface $form) :bool ;
+    public function handle(FormInterface $form, ValidatorInterface $validator) :bool ;
 }
 

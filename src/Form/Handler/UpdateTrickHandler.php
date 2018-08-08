@@ -15,12 +15,12 @@ use App\Infra\Doctrine\Repository\TricksRepository;
 use App\Helper\FileUploaderHelper;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateTrickHandler
 {
     private $fileUploaderHelper;
     private $session;
-    private $requestStack;
 
     /**
      * @var TricksRepository
@@ -63,7 +63,7 @@ class UpdateTrickHandler
     /**
      * {@inheritdoc}
      */
-    public function handle(FormInterface $form, TrickInterface $trick) :bool
+    public function handle(FormInterface $form, TrickInterface $trick, ValidatorInterface $validator) :bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -87,9 +87,14 @@ class UpdateTrickHandler
                 $form->getData()->video
                 );
 
-            $this->trickRepository->save($trick);
+            $constraints = $validator->validate($trick);
 
-            $this->session->getFlashBag()->add('success', 'Trick enregistré');
+            if ($constraints==true) {
+
+                $this->trickRepository->save($trick);
+
+                $this->session->getFlashBag()->add('success', 'Trick modifié avec succès');
+            }
 
             return true;
         }

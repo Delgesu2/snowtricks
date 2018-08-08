@@ -17,6 +17,7 @@ use App\Helper\FileUploaderHelper;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CreateTrickHandler implements CreateTrickHandlerInterface
 {
@@ -68,7 +69,7 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(FormInterface $form) :bool
+    public function handle(FormInterface $form, ValidatorInterface $validator) :bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -85,9 +86,14 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
                 $videos[] = $this->videoFactory->create($video);
             }
 
-            $this->trickRepository->save($trick);
+            $constraints = $validator->validate($trick);
 
-            $this->session->getFlashBag()->add('success', 'Trick enregistré');
+            if ($constraints==true) {
+
+                $this->trickRepository->save($trick);
+
+                $this->session->getFlashBag()->add('success', 'Trick enregistré');
+            }
 
             return true;
         }
