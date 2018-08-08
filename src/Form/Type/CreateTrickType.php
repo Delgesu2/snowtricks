@@ -18,8 +18,6 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -64,7 +62,7 @@ class CreateTrickType extends AbstractType
                  'attr' => ['class' => 'input'],
                  'entry_type' => TextType::class,
                  'allow_add' => true,
-                 'label' => false
+                 'allow_delete' => true
              ])
          ;
      }

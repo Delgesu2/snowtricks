@@ -8,18 +8,32 @@
 
 namespace App\UI\Responder;
 
+use App\UI\Responder\Interfaces\TricksListResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class TricksListResponder
+final class TricksListResponder implements TricksListResponderInterface
 {
     private $twig;
 
+    /**
+     * TricksListResponder constructor.
+     * @param Environment $twig
+     */
     public function __construct(Environment $twig)
     {
         $this->twig = $twig;
     }
 
+    /**
+     * @param $tricks
+     *
+     * @return Response
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($tricks)
     {
         return new Response(

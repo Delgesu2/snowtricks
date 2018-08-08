@@ -2,15 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: ronsard
- * Date: 19/07/18
- * Time: 18:39
+ * Date: 07/08/18
+ * Time: 19:52
  */
 
 namespace App\Domain\DTO;
 
-use App\Domain\DTO\Interfaces\NewVideoDTOInterface;
+use App\Domain\DTO\Interfaces\UpdateVideoDTOInterface;
 
-class NewVideoDTO implements NewVideoDTOInterface
+class UpdateVideoDTO implements UpdateVideoDTOInterface
 {
     /**
      * @var string
@@ -22,6 +22,6 @@ class NewVideoDTO implements NewVideoDTOInterface
      */
     public function __construct($url)
     {
-        $this->url   = $url;
+        $this->url = $url;
     }
 }

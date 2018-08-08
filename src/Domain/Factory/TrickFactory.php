@@ -15,7 +15,8 @@ use App\Entity\Trick;
 class TrickFactory implements TrickFactoryInterface
 {
     /**
-     * @param NewTrickDTOInterface $newTrickDTO
+     * @param NewTrickDTOInterface $newTrickDTO.
+     *
      * @return Trick
      */
     public function create(NewTrickDTOInterface $newTrickDTO)

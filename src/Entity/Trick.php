@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\CommentInterface;
+use App\Entity\Interfaces\GroupInterface;
 use App\Entity\Interfaces\TrickInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -40,8 +42,7 @@ class Trick implements TrickInterface
     private $trick_group;
 
     /**
-     * @var Comment
-     *
+     * @var CommentInterface[]
      */
     private $comment;
 
@@ -138,17 +139,17 @@ class Trick implements TrickInterface
     }
 
     /**
-    * @return string
-    */
-    public function getTrick_group() :string
+     * {@inheritdoc}
+     */
+    public function getTrick_group() :GroupInterface
     {
         return $this->trick_group;
     }
 
     /**
-     * @return Comment
+     * {@inheritdoc}
      */
-    public function getComment() :string
+    public function getComment() :\ArrayAccess
     {
         return $this->comment;
     }
@@ -229,5 +230,23 @@ class Trick implements TrickInterface
             $this->video[] = $video;
             $video->setTrickVideo($this);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function update(
+        $name,
+        $description,
+        $group,
+        $photo,
+        $video
+    )
+    {
+        $this->trick_name = $name;
+        $this->description = $description;
+        $this->group = $group;
+        $this->photo = $photo;
+        $this->video = $video;
     }
 }

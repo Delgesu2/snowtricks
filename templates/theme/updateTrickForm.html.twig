@@ -1,0 +1,124 @@
+
+{% block form %}
+
+    <div class="columns is-mobile">
+        <div class="column is-10 is-offset-1">
+
+            <div class="hero is-info">
+                <div class="hero-body">
+                    <div class="container has-text-centered">
+                        <h1 class="title">
+                            Modification d'un trick
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            {{ form_start(form) }}
+            <section>  <!-- Trick name -->
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        {{ form_label(form.trick_name, 'Nom de la figure') }}
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ form_widget(form.trick_name) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">  <!-- Trick description -->
+                    <div class="field-label is-normal">
+                        {{ form_label(form.description, 'Description') }}
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ form_widget(form.description, {'attr': {'placeholder': 'Détaille la figure'} }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">   <!-- Trick group -->
+                    <div class="field-label is-normal">
+                        {{ form_label(form.trick_group, 'Groupe') }}
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-narrow">
+                            <div class="control">
+                                <div class="select is-fullwidth">
+                                    {{ form_widget(form.trick_group) }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section>     <!-- Pictures -->
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        {{ form_label(form.photo, 'Image(s)') }}
+                    </div>
+                    <div class="field-body">
+                        <div class="control">
+                            <div class="file">
+                                <label class="file-label" oninput="showFiles()">
+                                    {{ form_widget(form.photo) }}
+                                    <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                    Choisir un ou des fichier(s)
+                                  </span>
+                                </span>
+                                </label>
+                                <output id="loadedFiles"></output>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">   <!-- Videos -->
+                    <div class="field-label is-normal">
+                        <label class="label">{{ form_label(form.video, "Lien(s) vidéo(s)") }}</label>
+                    </div>
+
+                    <div class="field-body" id="url-field">
+                        <div class="field">
+                            <div class="control">
+                                <div data-prototype="{{ form_widget(form.video.vars.prototype,
+                                    {'attr' : {'placeholder': 'https://'} })|e('html_attr') }}" data-index="{{ form.video|length }}" id="collection">
+                                </div>
+                                {{ form_widget(form.video) }}
+                                <p class="help is-info">Ecrire l'URL</p>
+                            </div>
+                        </div>
+                        <div id="buttons">
+                            <span class="icon is-medium" id="btnNewVideo"><i class="far fa-plus-square" onclick="newVideo()"></i></span>
+                            <span class="icon is-medium" id="btnDelVideo"><i class="far fa-minus-square" onclick="removeField()"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <div class="control">   <!-- Submit -->
+                <button type="submit" class="button is-primary">Envoyer</button>
+            </div>
+
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+

@@ -1,5 +1,4 @@
 
-
 {% block form %}
 
     <div class="columns is-mobile">
@@ -79,7 +78,7 @@
                                   </span>
                                 </span>
                             </label>
-                            <div id="loadedFiles"></div>
+                            <output id="loadedFiles"></output>
                         </div>
                     </div>
                 </div>
@@ -90,20 +89,24 @@
                     <label class="label">{{ form_label(form.video, "Lien(s) vidéo(s)") }}</label>
                 </div>
 
-
-                <div class="field-body">
+                <div class="field-body" id="url-field">
                     <div class="field">
                         <div class="control">
-                            <ul data-prototype="{{ form_widget(form.video.vars.prototype,
-                                {'attr' : {'placeholder': 'https://'} })|e('html_attr') }}" id="collection">
-                            </ul>
+                            <div data-prototype="{{ form_widget(form.video.vars.prototype,
+                                {'attr' : {'placeholder': 'https://'} })|e('html_attr') }}" data-index="{{ form.video|length }}" id="collection">
+                            </div>
                             {{ form_widget(form.video) }}
                             <p class="help is-info">Ecrire l'URL</p>
                         </div>
                     </div>
+                    <div id="buttons">
+                        <span class="icon is-medium" id="btnNewVideo"><i class="far fa-plus-square" onclick="newVideo()"></i></span>
+                        <span class="icon is-medium" id="btnDelVideo"><i class="far fa-minus-square" onclick="removeField()"></i></span>
+                    </div>
                 </div>
-                <!-- <span class="icon is-medium"><i class="far fa-plus-square" onclick="newVideo()"></i></span> -->
+
             </div>
+
             </section>
 
             <div class="control">   <!-- Submit -->

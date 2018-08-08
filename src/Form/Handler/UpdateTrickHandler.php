@@ -10,26 +10,27 @@ namespace App\Form\Handler;
 
 use App\Domain\Factory\Interfaces\VideoFactoryInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
-use App\Domain\Factory\TrickFactory;
+use App\Entity\Interfaces\TrickInterface;
 use App\Infra\Doctrine\Repository\TricksRepository;
-use App\Form\Handler\Interfaces\CreateTrickHandlerInterface;
 use App\Helper\FileUploaderHelper;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class CreateTrickHandler implements CreateTrickHandlerInterface
+class UpdateTrickHandler
 {
     private $fileUploaderHelper;
     private $session;
     private $requestStack;
 
     /**
+     * @var TricksRepository
+     */
+    private $trickRepository;
+
+    /**
      * @var PhotoFactoryInterface
      */
     private $photoFactory;
-    private $trickFactory;
-    private $trickRepository;
 
     /**
      * @var VideoFactoryInterface
@@ -37,30 +38,24 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
     private $videoFactory;
 
     /**
-     * CreateTrickHandler constructor.
+     * UpdateTrickHandler constructor.
      * @param SessionInterface $session
-     * @param RequestStack $requestStack
      * @param FileUploaderHelper $fileUploaderHelper
      * @param PhotoFactoryInterface $photoFactory
-     * @param TrickFactory $trickFactory
-     * @param TricksRepository $trickRepository
      * @param VideoFactoryInterface $videoFactory
+     * @param TricksRepository $trickRepository
      */
     public function __construct(
         SessionInterface $session,
-        RequestStack $requestStack,
         FileUploaderHelper $fileUploaderHelper,
         PhotoFactoryInterface $photoFactory,
-        TrickFactory $trickFactory,
-        TricksRepository $trickRepository,
-        VideoFactoryInterface $videoFactory
+        VideoFactoryInterface $videoFactory,
+        TricksRepository $trickRepository
     ) {
 
         $this->session            = $session;
-        $this->requestStack       = $requestStack;
         $this->fileUploaderHelper = $fileUploaderHelper;
         $this->photoFactory       = $photoFactory;
-        $this->trickFactory       = $trickFactory;
         $this->trickRepository    = $trickRepository;
         $this->videoFactory       = $videoFactory;
     }
@@ -68,11 +63,10 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(FormInterface $form) :bool
+    public function handle(FormInterface $form, TrickInterface $trick) :bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $trick = $this->trickFactory->create($form->getData());
             $pictures = [];
             $videos = [];
 
@@ -84,6 +78,14 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
             foreach ($form->getData()->video as $video) {
                 $videos[] = $this->videoFactory->create($video);
             }
+
+            $trick->update(
+                $form->getData()->trick_name,
+                $form->getData()->description,
+                $form->getData()->trick_group,
+                $form->getData()->photo,
+                $form->getData()->video
+                );
 
             $this->trickRepository->save($trick);
 

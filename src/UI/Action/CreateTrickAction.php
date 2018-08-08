@@ -6,15 +6,12 @@ use App\Form\Handler\CreateTrickHandler;
 use App\UI\Action\Interfaces\CreateTrickActionInterface;
 use App\Helper\FileUploaderHelper;
 use App\Form\Type\CreateTrickType;
-use App\UI\Responder\CreateTrickResponder;
 use App\UI\Responder\Interfaces\CreateTrickResponderInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+//use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @Route(name="create", path="/create")
@@ -42,11 +39,6 @@ class CreateTrickAction implements CreateTrickActionInterface
     private $createTrickHandler;
 
     /**
-     * @var UploadedFile
-     */
-    private  $load;
-
-    /**
      * CreateTrickAction constructor.
      * @param FormFactoryInterface      $formFactory
      * @param EventDispatcherInterface  $eventDispatcher
@@ -67,12 +59,13 @@ class CreateTrickAction implements CreateTrickActionInterface
 
     public function __invoke(
         Request $request,
-        CreateTrickResponderInterface $responder,
-        UrlGeneratorInterface $urlGenerator
+        CreateTrickResponderInterface $responder
+        //UrlGeneratorInterface $urlGenerator
     )
     {
         $createTrickType = $this->formFactory->create(CreateTrickType::class)
-                                      ->handleRequest($request);
+                                ->handleRequest($request);
+
         if ($this->createTrickHandler->handle($createTrickType)) {
 
             return $responder(true);

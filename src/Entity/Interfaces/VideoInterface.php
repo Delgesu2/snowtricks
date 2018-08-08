@@ -28,4 +28,11 @@ interface VideoInterface
      * @return Trick|null
      */
     public function getTrickVideo() :?Trick;
+
+    /**
+     * @param $url
+     *
+     * @return mixed
+     */
+    public function update($url);
 }

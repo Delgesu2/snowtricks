@@ -39,6 +39,11 @@ class Photo implements PhotoInterface
 
     /**
      * Photo constructor.
+     *
+     * @param $title
+     * @param $path
+     * @param $alt
+     * @param null $trick_photo
      */
     public function __construct($title, $path, $alt, $trick_photo = null)
     {
@@ -90,11 +95,17 @@ class Photo implements PhotoInterface
     }
 
     /**
-    * Photo update
+    * {@inheritdoc}
     */
-	public function update()
+	public function update(
+	    $title,
+        $path,
+        $alt
+    )
 	{
-
+        $this->title = $title;
+        $this->path  = $path;
+        $this->alt   = $alt;
 	}
 
     /**

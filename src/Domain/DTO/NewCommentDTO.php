@@ -6,7 +6,9 @@
  * Time: 19:57
  */
 
-namespace App\Domain\DTO\Interfaces;
+namespace App\Domain\DTO;
+
+use App\Domain\DTO\Interfaces\NewCommentDTOInterface;
 
 class NewCommentDTO implements NewCommentDTOInterface
 {

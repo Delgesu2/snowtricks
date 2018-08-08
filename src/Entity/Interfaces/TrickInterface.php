@@ -38,14 +38,15 @@ interface TrickInterface
     public function getDescription() :string;
 
     /**
-     * @return string
+     * @return GroupInterface
+     *
      */
-    public function getTrick_group() :string;
+    public function getTrick_group() :GroupInterface;
 
     /**
-     * @return string
+     * @return CommentInterface[]
      */
-    public function getComment() :string;
+    public function getComment() :\ArrayAccess;
 
     /**
      * @return mixed
@@ -61,4 +62,22 @@ interface TrickInterface
      * @return string
      */
     public function getTrick_user() :string;
+
+    /**
+     * @param $name
+     * @param $description
+     * @param $group
+     * @param $photo
+     * @param $video
+     *
+     * @return mixed
+     */
+    public function update(
+        $name,
+        $description,
+        $group,
+        $photo,
+        $video
+    );
 }
+

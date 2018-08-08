@@ -37,4 +37,13 @@ interface PhotoInterface
      * @return string
      */
     public function getAlt() :string;
+
+    /**
+     * @param $title
+     * @param $path
+     * @param $alt
+     *
+     * @return mixed
+     */
+    public function update($title, $path, $alt);
 }

@@ -15,11 +15,16 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class CreateTrickResponder implements CreateTrickResponderInterface
+final class CreateTrickResponder implements CreateTrickResponderInterface
 {
     private $twig;
     private $urlGenerator;
 
+    /**
+     * CreateTrickResponder constructor.
+     * @param Environment $twig
+     * @param UrlGeneratorInterface $urlGenerator
+     */
     public function __construct(
         Environment $twig,
         UrlGeneratorInterface $urlGenerator
@@ -28,7 +33,17 @@ class CreateTrickResponder implements CreateTrickResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke($redirect = false, FormInterface $createTrickType = null)
+    /**
+     * @param bool $redirect
+     * @param FormInterface|null $createTrickType
+     *
+     * @return Response
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function __invoke($redirect = false, FormInterface $createTrickType = null) :Response
     {
         $redirect
             ? $response = new RedirectResponse($this->urlGenerator->generate('home')) // redirects to homepage

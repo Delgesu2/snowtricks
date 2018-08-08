@@ -46,7 +46,7 @@ class Group implements GroupInterface
 	}
 
 	/**
-    * @return string  // changé de 'title'
+    * @return string
     */
 	public function getName() :string
 	{

@@ -29,6 +29,9 @@ class Video implements VideoInterface
 
     /**
      * Video constructor.
+     *
+     * @param $url
+     * @param null $trick_video
      */
     function __construct($url, $trick_video = null)
     {
@@ -62,11 +65,11 @@ class Video implements VideoInterface
     }
 
 	/**
-    * Video update
+    * {@inheritdoc}
     */
-	public function update()
+	public function update($url)
 	{
-
+        $this->url = $url;
 	}
 
     /**

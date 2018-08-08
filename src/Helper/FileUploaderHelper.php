@@ -10,53 +10,33 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
-use App\Form\Handler\GenerateFilename;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 
 class FileUploaderHelper
 {
     /**
      * @var string
      */
-    private $imageFolder;
-
-    /**
-     * @var GenerateFilename
-     */
-    private $generateFilename;
-
-    /**
-     * @var string
-     */
-    private $file;
-
-    /**
-     * @var string
-     */
     private $pictDir;
 
     /**
-     * FileUploaderHelper constructor.
-     * @param string $imageFolder
+     * FileUploaderHelper constructor
+     * @param UploadedFile     $file
+     * @param string           $pictDir
      */
     public function __construct(
-        string $imageFolder,
-        GenerateFilename $generateFilename,
-        UploadedFile $file,
+        //UploadedFile $file,
         string $pictDir
     )
     {
-        $this->imageFolder = $imageFolder;
-        $this->generateFilename = $generateFilename;
-        $this->file = $file;
+       // $this->file = $file;
         $this->pictDir = $pictDir;
     }
 
-    public function fileUploader(GenerateFilename $generateFilename, UploadedFile $file)
+    public function upload(UploadedFile $file)
     {
         // create filename for database
-        $filename = $generateFilename->generateUniqueFilename() . '.' . $file->guessExtension();
+        $filename = md5(uniqid()) . '.' . $file->guessExtension();
 
         // move file to /tricks directory (à appeler dans la boucle du handler)
         $file->move(
