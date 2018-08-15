@@ -55,14 +55,16 @@ class CreateTrickType extends AbstractType
              ->add('photo',FileType::class, [
                  'label_attr' => ['class' => 'label'],
                  'attr' => ['class' => 'file-input'],
-                 'multiple' => true
+                 'multiple' => true,
+                 'required' => false
              ])
 
              ->add('video', CollectionType::class, [
                  'attr' => ['class' => 'input'],
                  'entry_type' => TextType::class,
                  'allow_add' => true,
-                 'allow_delete' => true
+                 'allow_delete' => true,
+                 'required' => false
              ])
          ;
      }

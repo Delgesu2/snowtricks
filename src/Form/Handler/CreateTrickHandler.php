@@ -38,6 +38,11 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
     private $videoFactory;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      * CreateTrickHandler constructor.
      * @param SessionInterface $session
      * @param RequestStack $requestStack
@@ -54,7 +59,8 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
         PhotoFactoryInterface $photoFactory,
         TrickFactory $trickFactory,
         TricksRepository $trickRepository,
-        VideoFactoryInterface $videoFactory
+        VideoFactoryInterface $videoFactory,
+        ValidatorInterface $validator
     ) {
 
         $this->session            = $session;
@@ -64,12 +70,13 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
         $this->trickFactory       = $trickFactory;
         $this->trickRepository    = $trickRepository;
         $this->videoFactory       = $videoFactory;
+        $this->validator          = $validator;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function handle(FormInterface $form, ValidatorInterface $validator) :bool
+    public function handle(FormInterface $form) :bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -86,14 +93,15 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
                 $videos[] = $this->videoFactory->create($video);
             }
 
-            $constraints = $validator->validate($trick);
+            $constraints = $this->validator->validate($trick,[],['Trick']);
 
-            if ($constraints==true) {
-
-                $this->trickRepository->save($trick);
-
-                $this->session->getFlashBag()->add('success', 'Trick enregistré');
+            if (\count($constraints) > 0) {
+                return false;
             }
+
+            $this->trickRepository->save($trick);
+
+            $this->session->getFlashBag()->add('success', 'Trick enregistré');
 
             return true;
         }

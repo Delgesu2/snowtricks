@@ -26,8 +26,8 @@ class DTOBuilder
             $trick->getTrick_name(),
             $trick->getDescription(),
             $trick->getTrick_group(),
-            $trick->getPhoto(),
-            $trick->getVideo()
+            $trick->getPhoto()->toArray(),
+            $trick->getVideo()->toArray()
         );
     }
 

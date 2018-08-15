@@ -9,10 +9,11 @@
 namespace App\UI\Responder;
 
 
+use App\UI\Responder\Interfaces\UpdateTrickResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class UpdateTrickResponder
+class UpdateTrickResponder implements UpdateTrickResponderInterface
 {
     private $twig;
 
@@ -21,11 +22,11 @@ class UpdateTrickResponder
         $this->twig = $twig;
     }
 
-    public function __invoke($trick)
+    public function __invoke($form)
     {
         return new Response(
             $this->twig->render('updateTrick.html.twig', [
-                'oneTrick' => $trick
+                'form' => $form->createView()
             ])
         );
     }

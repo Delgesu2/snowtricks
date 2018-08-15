@@ -17,8 +17,8 @@ App\Entity\Trick:
                 maxSize: 2M
                 maxSizeMessage: 'Le fichier est trop grand. Taille maximale:
                 {{ limit }} {{ suffix }}.'
-                mimeType: [image/png, image/tiff, image/jpeg]
-                mimeTypeMessage: 'Charger une image dans un des formats suivants: png, tiff ou jpeg'
+                mimeTypes: [image/png, image/tiff, image/jpeg]
+                mimeTypesMessage: 'Charger une image dans un des formats suivants: png, tiff ou jpeg'
         video:
             -Regex:
                 pattern: '#^https://www.youtube.com/|^https://www.dailymotion.com#'

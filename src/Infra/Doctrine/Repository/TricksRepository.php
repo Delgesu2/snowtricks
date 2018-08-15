@@ -48,4 +48,15 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
         $this->_em->persist($trick);
         $this->_em->flush();
     }
+
+    public function deleteTrick($slug)
+    {
+        $trick = $this->createQueryBuilder('trick')
+            ->where('trick.slug = :slug')
+            ->setParameter('slug', $slug)
+                ->getQuery()
+                ->getOneOrNullResult();
+        $this->_em->remove($trick);
+        $this->_em->flush();
+    }
 }

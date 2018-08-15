@@ -11,13 +11,14 @@ namespace App\Form\Handler;
 use App\Domain\Factory\Interfaces\VideoFactoryInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Entity\Interfaces\TrickInterface;
+use App\Form\Handler\Interfaces\UpdateTrickHandlerInterface;
 use App\Infra\Doctrine\Repository\TricksRepository;
 use App\Helper\FileUploaderHelper;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class UpdateTrickHandler
+class UpdateTrickHandler implements UpdateTrickHandlerInterface
 {
     private $fileUploaderHelper;
     private $session;
@@ -38,19 +39,21 @@ class UpdateTrickHandler
     private $videoFactory;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      * UpdateTrickHandler constructor.
-     * @param SessionInterface $session
-     * @param FileUploaderHelper $fileUploaderHelper
-     * @param PhotoFactoryInterface $photoFactory
-     * @param VideoFactoryInterface $videoFactory
-     * @param TricksRepository $trickRepository
+     * {@inheritdoc}
      */
     public function __construct(
-        SessionInterface $session,
-        FileUploaderHelper $fileUploaderHelper,
-        PhotoFactoryInterface $photoFactory,
-        VideoFactoryInterface $videoFactory,
-        TricksRepository $trickRepository
+        SessionInterface        $session,
+        FileUploaderHelper      $fileUploaderHelper,
+        PhotoFactoryInterface   $photoFactory,
+        VideoFactoryInterface   $videoFactory,
+        TricksRepository        $trickRepository,
+        ValidatorInterface      $validator
     ) {
 
         $this->session            = $session;
@@ -58,12 +61,16 @@ class UpdateTrickHandler
         $this->photoFactory       = $photoFactory;
         $this->trickRepository    = $trickRepository;
         $this->videoFactory       = $videoFactory;
+        $this->validator          = $validator;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function handle(FormInterface $form, TrickInterface $trick, ValidatorInterface $validator) :bool
+    public function handle(
+        FormInterface $form,
+        TrickInterface $trick
+    ) :bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -87,14 +94,15 @@ class UpdateTrickHandler
                 $form->getData()->video
                 );
 
-            $constraints = $validator->validate($trick);
+            $constraints = $this->validator->validate($trick, null, array('Trick'));
 
-            if ($constraints==true) {
-
-                $this->trickRepository->save($trick);
-
-                $this->session->getFlashBag()->add('success', 'Trick modifié avec succès');
+            if (\count($constraints) > 0) {
+                return false;
             }
+
+            $this->trickRepository->save($trick);
+
+            $this->session->getFlashBag()->add('success', 'Trick modifié avec succès');
 
             return true;
         }

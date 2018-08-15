@@ -9,7 +9,6 @@
 namespace App\Form\Type;
 
 use App\Domain\DTO\Interfaces\UpdateTrickDTOInterface;
-use App\Domain\DTO\NewTrickDTO;
 use App\Entity\Group;
 use App\Entity\Trick;
 use function Sodium\add;
@@ -20,7 +19,6 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 

@@ -24,7 +24,6 @@ interface CreateTrickHandlerInterface
 
     /**
      * CreateTrickHandlerInterface constructor.
-     *
      * @param SessionInterface $session
      * @param RequestStack $requestStack
      * @param FileUploaderHelper $fileUploaderHelper
@@ -32,6 +31,7 @@ interface CreateTrickHandlerInterface
      * @param TrickFactory $trickFactory
      * @param TricksRepository $tricksRepository
      * @param VideoFactoryInterface $videoFactory
+     * @param ValidatorInterface $validator
      */
     public function __construct(
         SessionInterface $session,
@@ -40,7 +40,8 @@ interface CreateTrickHandlerInterface
         PhotoFactoryInterface $photoFactory,
         TrickFactory $trickFactory,
         TricksRepository $tricksRepository,
-        VideoFactoryInterface $videoFactory
+        VideoFactoryInterface $videoFactory,
+        ValidatorInterface $validator
     );
 
     /**
@@ -48,6 +49,6 @@ interface CreateTrickHandlerInterface
      *
      * @return bool
      */
-    public function handle(FormInterface $form, ValidatorInterface $validator) :bool ;
+    public function handle(FormInterface $form) :bool ;
 }
 
