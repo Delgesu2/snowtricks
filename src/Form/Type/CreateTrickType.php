@@ -29,8 +29,8 @@ class CreateTrickType extends AbstractType
      {
          $builder
              ->add('trick_name', TextType::class, [   //title
-                 'label_attr' => ['class' => 'label'],
-                 'attr' => ['class' => 'input']
+                 'label_attr'   => ['class' => 'label'],
+                 'attr'         => ['class' => 'input']
              ])
 
              ->add('description',TextareaType::class, [
@@ -41,12 +41,12 @@ class CreateTrickType extends AbstractType
                      ])
                  ],
                  'label_attr' => ['class' => 'label'],
-                 'attr' => ['class' => 'textarea']
+                 'attr'       => ['class' => 'textarea']
              ])
 
              ->add('trick_group', EntityType::class, [
-                 'class' => Group::class,
-                 'label_attr' => ['class' => 'label'],
+                 'class'        => Group::class,
+                 'label_attr'   => ['class' => 'label'],
                  'choice_label' => 'name',
 
                  'allow_extra_fields' => true
@@ -54,17 +54,19 @@ class CreateTrickType extends AbstractType
 
              ->add('photo',FileType::class, [
                  'label_attr' => ['class' => 'label'],
-                 'attr' => ['class' => 'file-input'],
-                 'multiple' => true,
-                 'required' => false
+                 'attr'       => ['class' => 'file-input'],
+                 'multiple'   => true,
+                 'required'   => false
              ])
 
              ->add('video', CollectionType::class, [
-                 'attr' => ['class' => 'input'],
-                 'entry_type' => TextType::class,
-                 'allow_add' => true,
+                 'attr'         => ['class' => 'input'],
+                 'label_attr'   => ['class' => 'label'],
+                 'entry_type'   => TextType::class,
+                 'allow_add'    => true,
                  'allow_delete' => true,
-                 'required' => false
+                 'prototype'    => true,
+                 'required'     => false
              ])
          ;
      }

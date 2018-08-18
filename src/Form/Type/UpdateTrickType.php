@@ -8,6 +8,7 @@
 
 namespace App\Form\Type;
 
+use App\Helper\DataTransformer;
 use App\Domain\DTO\Interfaces\UpdateTrickDTOInterface;
 use App\Entity\Group;
 use App\Entity\Trick;
@@ -24,46 +25,62 @@ use Symfony\Component\Validator\Constraints\Length;
 
 class UpdateTrickType extends AbstractType
 {
+    private $transformer;
+
+    public function __construct(DataTransformer $transformer)
+    {
+        $this->transformer = $transformer;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('trick_name', TextType::class, [
-                'label_attr' => ['class' => 'label'],
-                'attr' => ['class' => 'input']
+                'label_attr'    => ['class' => 'label'],
+                'attr'          => ['class' => 'input']
             ])
 
             ->add('description',TextareaType::class, [
-                'constraints' => [
+                'constraints'   => [
                     new Length([
                         'min' => 10,
                         'max' => 800
                     ])
                 ],
-                'label_attr' => ['class' => 'label'],
-                'attr' => ['class' => 'textarea']
+                'label_attr'    => ['class' => 'label'],
+                'attr'          => ['class' => 'textarea']
             ])
 
             ->add('trick_group', EntityType::class, [
-                'class' => Group::class,
-                'label_attr' => ['class' => 'label'],
-                'choice_label' => 'name',
+                'class'         => Group::class,
+                'label_attr'    => ['class' => 'label'],
+                'choice_label'  => 'name',
 
                 'allow_extra_fields' => true
             ])
 
             ->add('photo',FileType::class, [
-                'label_attr' => ['class' => 'label'],
-                'attr' => ['class' => 'file-input'],
-                'multiple' => true
+                'label_attr'    => ['class' => 'label'],
+                'attr'          => ['class' => 'file-input'],
+                'multiple'      => true
             ])
 
             ->add('video', CollectionType::class, [
                 'attr' => ['class' => 'input'],
-                'entry_type' => TextType::class,
-                'allow_add' => true,
-                'allow_delete' => true
+                'label_attr'        => ['class' => 'label'],
+                'entry_type'        => TextType::class,
+                'allow_add'         => true,
+                'allow_delete'      => true,
+                'prototype'         => true,
+                'required'          => false,
+                'invalid_message'   => 'Pas de lien vidéo'
             ])
+
         ;
+
+        $builder->get('video')
+            ->addModelTransformer($this->transformer);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

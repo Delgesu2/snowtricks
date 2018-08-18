@@ -87,7 +87,7 @@ class UpdateTrickAction
                             ->handleRequest($request);
 
         if ($this->updateTrickHandler->handle($updateTrickType, $trick)){
-            //redirection page d'accueil
+            return $responder(true);
         }
          return $responder($updateTrickType);
     }
