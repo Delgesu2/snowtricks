@@ -10,7 +10,6 @@ namespace App\Form\Type;
 
 use App\Domain\DTO\NewTrickDTO;
 use App\Entity\Group;
-use App\Entity\Trick;
 use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -25,7 +24,10 @@ use Symfony\Component\Validator\Constraints\Length;
 
 class CreateTrickType extends AbstractType
 {
-     public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * @inheritdoc
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
      {
          $builder
              ->add('trick_name', TextType::class, [   //title
@@ -71,6 +73,9 @@ class CreateTrickType extends AbstractType
          ;
      }
 
+    /**
+     * @inheritdoc
+     */
      public function configureOptions(OptionsResolver $resolver)
      {
          $resolver->setDefaults([

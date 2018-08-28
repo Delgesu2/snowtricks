@@ -104,10 +104,10 @@
                     {'attr' : {'placeholder': 'https://'} })|e('html_attr') }}" data-index="{{ form.video|length }}" id="collection">
                 </div>
                 {{ form_widget(form.video) }}
+
                 <div id="buttons">
-                    <button type="button" id="btnNewVideo" class="icon far fa-plus-square"></button>
-                    <input type="button" class="icon far fa-minus-square" onclick="removeField()">
-                   <!-- <span class="icon is-medium" id="btnDelVideo"><i class="far fa-minus-square" onclick="removeField()"></i></span> -->
+                    <button type="button" id="btnNewVideo"><i class="icon far fa-plus-square"></i></button>
+                    <button type="button" id="btnDelVideo"><i class="icon far fa-minus-square"></i></button>
                 </div>
 
 
@@ -125,5 +125,5 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script defer src="{{ asset('/js/formtrick.js')  }}"></script>
 {% endblock %}
-

@@ -38,3 +38,8 @@
 section {
     margin: 8px;
 }
+
+ /* + and - buttons */
+#btnNewVideo, #btnDelVideo {
+    background-color: white;
+}

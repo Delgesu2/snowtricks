@@ -13,7 +13,7 @@ use App\UI\Responder\Interfaces\UpdateTrickResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class UpdateTrickResponder implements UpdateTrickResponderInterface
+final class UpdateTrickResponder implements UpdateTrickResponderInterface
 {
     private $twig;
 

@@ -24,9 +24,10 @@
           </cascade>
       </one-to-many>
 
-    <one-to-many field="photo" target-entity="App\Entity\Photo" mapped-by="trick_photo">
+    <one-to-many field="photo" target-entity="App\Entity\Photo" mapped-by="trick_photo" orphan-removal="true">
         <cascade>
-            <cascade-all />
+            <cascade-persist/>
+            <cascade-remove />
         </cascade>
     </one-to-many>
 

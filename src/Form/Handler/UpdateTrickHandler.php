@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class UpdateTrickHandler implements UpdateTrickHandlerInterface
+final class UpdateTrickHandler implements UpdateTrickHandlerInterface
 {
     private $fileUploaderHelper;
     private $session;

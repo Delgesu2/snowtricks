@@ -12,6 +12,7 @@ namespace App\Form\Handler\Interfaces;
 use App\Domain\Factory\Interfaces\VideoFactoryInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Factory\TrickFactory;
+use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
 use App\Infra\Doctrine\Repository\TricksRepository;
 use App\Helper\FileUploaderHelper;
 use Symfony\Component\Form\FormInterface;
@@ -29,7 +30,7 @@ interface CreateTrickHandlerInterface
      * @param FileUploaderHelper $fileUploaderHelper
      * @param PhotoFactoryInterface $photoFactory
      * @param TrickFactory $trickFactory
-     * @param TricksRepository $tricksRepository
+     * @param TricksRepositoryInterface $tricksRepository
      * @param VideoFactoryInterface $videoFactory
      * @param ValidatorInterface $validator
      */
@@ -39,7 +40,7 @@ interface CreateTrickHandlerInterface
         FileUploaderHelper $fileUploaderHelper,
         PhotoFactoryInterface $photoFactory,
         TrickFactory $trickFactory,
-        TricksRepository $tricksRepository,
+        TricksRepositoryInterface $tricksRepository,
         VideoFactoryInterface $videoFactory,
         ValidatorInterface $validator
     );

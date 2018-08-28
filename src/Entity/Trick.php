@@ -78,10 +78,7 @@ class Trick implements TrickInterface
         $trick_name,
         $description,
         $trick_group,
-        $trick_user,
-        $photo = null,
-        $video = null,
-        $comment = null
+        $trick_user
     ) {
         $this->id = Uuid::uuid4();
         $this->trick_name = $trick_name;
@@ -93,8 +90,6 @@ class Trick implements TrickInterface
         $this->video = new ArrayCollection();
         $this->comment = new ArrayCollection();
         $this->datecreate = time();
-        $this->addPhoto($photo ?? array());
-        $this->addVideo($video ?? array());
     }
 
     /**

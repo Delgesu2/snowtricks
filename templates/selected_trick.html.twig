@@ -100,7 +100,7 @@
                     <div class="control">
                         <div class="tags has-addons">
                             <span class="tag is-dark">Date de création:</span>
-                            <span class="tag is-info">{{ oneTrick.datecreate|date("d/m/y H\\hi\\m\\i\\n")}}</span>
+                            <span class="tag is-info">{{ oneTrick.datecreate|date("d/m/y à H\\hi\\m\\i\\n")}}</span>
                         </div>
                     </div>
                     {% endif %}
@@ -145,12 +145,13 @@
                             <strong>{{ comment.user.name }}</strong>
                             <br>
                             {{ comment.text }}                            <br>
-                            <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+                            <!-- <small><a>Like</a> · <a>Reply</a> · 3 hrs</small> -->
+                            <span class="tag is-light">{{ comment.date|date("\\L\\e d/m/y à H\\hi\\m\\i\\n") }}</span>
                         </p>
                     </div>
                 </div>
                 {% endfor %}
-                <!--<button class="button" aria-haspopup="true" aria-controls="modal"><span>Bouton</span></button> -->
+
             </article>
             <article class="media">
                 <figure class="media-left">
@@ -166,7 +167,7 @@
                     </div>
                     <div class="field">
                         <p class="control">
-                            <button class="button" >Envoyer</button>
+                            <button type="submit" class="button" >Envoyer</button>
                         </p>
                     </div>
                 </div>

@@ -27,11 +27,17 @@ class UpdateTrickType extends AbstractType
 {
     private $transformer;
 
+    /**
+     * @inheritdoc
+     */
     public function __construct(DataTransformer $transformer)
     {
         $this->transformer = $transformer;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

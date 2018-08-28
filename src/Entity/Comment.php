@@ -28,7 +28,7 @@ class Comment implements CommentInterface
     private $text;
 
     /**
-    * @var user
+    * @var User
     */
     private $user;
      
@@ -62,7 +62,7 @@ class Comment implements CommentInterface
     */
 	public function getDate() :?\DateTime
 	{
-		return $this->date;
+		return \DateTime::createFromFormat('U', (string) $this->date) ?: null;
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Comment implements CommentInterface
 	}
 
 	/**
-    * @return user
+    * @return User
     */
 	public function getUser()
 	{

@@ -11,7 +11,7 @@ namespace App\Form\Handler;
 use App\Domain\Factory\Interfaces\VideoFactoryInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Factory\TrickFactory;
-use App\Infra\Doctrine\Repository\TricksRepository;
+use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
 use App\Form\Handler\Interfaces\CreateTrickHandlerInterface;
 use App\Helper\FileUploaderHelper;
 use Symfony\Component\Form\FormInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class CreateTrickHandler implements CreateTrickHandlerInterface
+final class CreateTrickHandler implements CreateTrickHandlerInterface
 {
     private $fileUploaderHelper;
     private $session;
@@ -30,7 +30,7 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
      */
     private $photoFactory;
     private $trickFactory;
-    private $trickRepository;
+    private $tricksRepository;
 
     /**
      * @var VideoFactoryInterface
@@ -43,14 +43,7 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
     private $validator;
 
     /**
-     * CreateTrickHandler constructor.
-     * @param SessionInterface $session
-     * @param RequestStack $requestStack
-     * @param FileUploaderHelper $fileUploaderHelper
-     * @param PhotoFactoryInterface $photoFactory
-     * @param TrickFactory $trickFactory
-     * @param TricksRepository $trickRepository
-     * @param VideoFactoryInterface $videoFactory
+     * @inheritdoc
      */
     public function __construct(
         SessionInterface $session,
@@ -58,7 +51,7 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
         FileUploaderHelper $fileUploaderHelper,
         PhotoFactoryInterface $photoFactory,
         TrickFactory $trickFactory,
-        TricksRepository $trickRepository,
+        TricksRepositoryInterface $tricksRepository,
         VideoFactoryInterface $videoFactory,
         ValidatorInterface $validator
     ) {
@@ -68,7 +61,7 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
         $this->fileUploaderHelper = $fileUploaderHelper;
         $this->photoFactory       = $photoFactory;
         $this->trickFactory       = $trickFactory;
-        $this->trickRepository    = $trickRepository;
+        $this->tricksRepository    = $tricksRepository;
         $this->videoFactory       = $videoFactory;
         $this->validator          = $validator;
     }
@@ -92,6 +85,9 @@ class CreateTrickHandler implements CreateTrickHandlerInterface
             foreach ($form->getData()->video as $video) {
                 $videos[] = $this->videoFactory->create($video);
             }
+
+            $trick->addPhoto($pictures);
+            $trick->addVideo($videos);
 
             $constraints = $this->validator->validate($trick,[],['Trick']);
 

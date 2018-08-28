@@ -22,6 +22,7 @@ interface UpdateTrickHandlerInterface
 {
     /**
      * UpdateTrickHandlerInterface constructor.
+     *
      * @param SessionInterface      $session
      * @param FileUploaderHelper    $fileUploaderHelper
      * @param PhotoFactoryInterface $photoFactory
@@ -41,6 +42,7 @@ interface UpdateTrickHandlerInterface
     /**
      * @param FormInterface  $form
      * @param TrickInterface $trick
+     *
      * @return bool
      */
     public function handle(

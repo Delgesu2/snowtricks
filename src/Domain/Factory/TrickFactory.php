@@ -24,9 +24,7 @@ class TrickFactory implements TrickFactoryInterface
         return new Trick(
             $newTrickDTO->trick_name,
             $newTrickDTO->description,
-            $newTrickDTO->trick_group,
-            $newTrickDTO->photo,
-            $newTrickDTO->video
+            $newTrickDTO->trick_group
             );
     }
 }

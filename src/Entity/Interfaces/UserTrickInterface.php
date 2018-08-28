@@ -11,7 +11,7 @@ namespace App\Entity\Interfaces;
 
 use Ramsey\Uuid\UuidInterface;
 
-interface UserInterface
+interface UserTrickInterface
 {
     /**
      * @return UuidInterface

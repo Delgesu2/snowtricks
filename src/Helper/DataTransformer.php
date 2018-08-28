@@ -17,7 +17,7 @@ class DataTransformer implements DataTransformerInterface
 {
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager, VideoInterface $video)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
         $this->video = $video;

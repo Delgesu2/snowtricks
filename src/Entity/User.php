@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Interfaces\UserInterface;
+use App\Entity\Interfaces\UserTrickInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -10,7 +10,7 @@ use Ramsey\Uuid\UuidInterface;
 /**
 * Snowtricks_user entity
 */
-class User implements UserInterface
+class User implements UserTrickInterface
 {
     /**
     * @var \Ramsey\Uuid\UuidInterface
@@ -65,7 +65,17 @@ class User implements UserInterface
     /**
      * User constructor
      */
-    public function __construct($name, $nick, $password, $email, $status, $role, $photo = null, $trick = null, $comment = null)
+    public function __construct(
+        $name,
+        $nick,
+        $password,
+        $email,
+        $status,
+        $role,
+        $photo = null,
+        $trick = null,
+        $comment = null
+    )
     {
         $this->id = Uuid::uuid4();
         $this->name = $name;
