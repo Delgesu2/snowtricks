@@ -21,12 +21,12 @@
 
                 <div class="container has-text-right">
                     <a href="{{ path('update_trick', {'slug':oneTrick.slug}) }}">
-                                        <span class="icon icon-one-trick">
+                                        <span class="icon">
                                             <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                                         </span>
                     </a>
                     <a href="{{ path('delete_trick', {'slug':oneTrick.slug}) }}">
-                                        <span class="icon icon-one-trick">
+                                        <span class="icon">
                                             <i class="fas fa-trash" aria-hidden="true"></i>
                                         </span>
                     </a>
@@ -144,13 +144,19 @@
                         <p>
                             <strong>{{ comment.user.name }}</strong>
                             <br>
-                            {{ comment.text }}                            <br>
-                            <!-- <small><a>Like</a> · <a>Reply</a> · 3 hrs</small> -->
+                            {{ comment.text }}
+                            <br>
                             <span class="tag is-light">{{ comment.date|date("\\L\\e d/m/y à H\\hi\\m\\i\\n") }}</span>
                         </p>
                     </div>
                 </div>
                 {% endfor %}
+
+                <a href="{{ path('delcom', {'slug':comment.slug}) }}">
+                    <span class="icon">
+                        <i class="fas fa-trash redfont" aria-hidden="true"></i>
+                    </span>
+                </a>
 
             </article>
             <article class="media">

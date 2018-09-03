@@ -3,7 +3,11 @@
 {% block title %}Snowtricks - Inscription{% endblock %}
 
 {% block body %}
-    {% form_theme form 'theme/user_registrationForm.html.twig' %}
+    {% form_theme form 'security/theme/user_registrationForm.html.twig' %}
     {{ form(form) }}
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script defer src="{{ asset('js/registration.js')  }}"></script>
+{% endblock %}

@@ -21,9 +21,7 @@ final class CreateTrickResponder implements CreateTrickResponderInterface
     private $urlGenerator;
 
     /**
-     * CreateTrickResponder constructor.
-     * @param Environment $twig
-     * @param UrlGeneratorInterface $urlGenerator
+     * @inheritdoc
      */
     public function __construct(
         Environment $twig,
@@ -34,23 +32,19 @@ final class CreateTrickResponder implements CreateTrickResponderInterface
     }
 
     /**
-     * @param bool $redirect
-     * @param FormInterface|null $createTrickType
-     *
-     * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @inheritdoc
      */
-    public function __invoke($redirect = false, FormInterface $createTrickType = null) :Response
-    {
+    public function __invoke(
+        $redirect = false,
+        FormInterface $createTrickType = null
+    ) :Response {
         $redirect
             ? $response = new RedirectResponse($this->urlGenerator->generate('home')) // redirects to homepage
             : $response = new Response(
             $this->twig->render('createTrick.html.twig', [
                 'form' => $createTrickType->createView()
-            ]));
+            ])
+        );
 
         return $response;
     }

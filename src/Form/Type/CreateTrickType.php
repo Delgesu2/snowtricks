@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
-class CreateTrickType extends AbstractType
+final class CreateTrickType extends AbstractType
 {
     /**
      * @inheritdoc

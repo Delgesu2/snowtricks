@@ -52,11 +52,11 @@ final class UserRegistrationResponder implements UserRegistrationResponderInterf
         Request $request,
         $redirect = false,
         FormInterface $form = null
-    ): Response
-    {
+    ): Response {
+
         $redirect
-            ? $response = new RedirectResponse($this->urlGenerator->generate('name'))
-            : $response = new Response(
+            ? $response = new RedirectResponse($this->urlGenerator->generate('home'))
+            : $response = new Response(
                 $this->twig->render('security/user_registration.html.twig', [
                     'form' => $form->createView()
                 ])

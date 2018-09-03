@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @package App\Form\Type\Security
  */
-class UserRegistrationType extends AbstractType
+final class UserRegistrationType extends AbstractType
 {
     /**
      * @inheritdoc
@@ -32,8 +32,7 @@ class UserRegistrationType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label_attr' => ['class' => 'label'],
-                'attr'       => ['class' => 'input']
+                'label_attr' => ['class' => 'label']
             ])
 
             ->add('photo', FileType::class, [
@@ -44,8 +43,7 @@ class UserRegistrationType extends AbstractType
             ])
 
             ->add('nick', TextType::class, [
-                'label_attr' => ['class' => 'label'],
-                'attr'       => ['class' => 'input']
+                'label_attr' => ['class' => 'label']
             ])
 
             ->add('password', PasswordType::class, [
@@ -53,7 +51,9 @@ class UserRegistrationType extends AbstractType
                 'required'   => 'true'
             ])
 
-            ->add('email', EmailType::class);
+            ->add('email', EmailType::class,[
+                'label_attr' => ['class' => 'label']
+            ]);
     }
 
     /**
@@ -66,9 +66,10 @@ class UserRegistrationType extends AbstractType
             'empty_data' => function(FormInterface $form) {
                 return new UserRegistrationDTO(
                     $form->get('name')      ->getData(),
-                    $form->get('photo')     ->getData(),
                     $form->get('nick')      ->getData(),
-                    $form->get('password')  ->getData()
+                    $form->get('password')  ->getData(),
+                    $form->get('email')     ->getData(),
+                    $form->get('photo')     ->getData()
                 );
             }
         ]);

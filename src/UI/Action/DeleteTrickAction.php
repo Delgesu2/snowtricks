@@ -8,7 +8,7 @@
 
 namespace App\UI\Action;
 
-use App\Infra\Doctrine\Repository\TricksRepository;
+use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
 use App\UI\Responder\Interfaces\HomeResponderInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,7 +19,7 @@ class DeleteTrickAction
 {
     private $repository;
 
-    public function __construct(TricksRepository $repository)
+    public function __construct(TricksRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

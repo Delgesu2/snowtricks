@@ -14,6 +14,7 @@ interface TrickFactoryInterface
 {
     /**
      * @param NewTrickDTOInterface $newTrickDTO
+     *
      * @return mixed
      */
     public function create(NewTrickDTOInterface $newTrickDTO);

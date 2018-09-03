@@ -20,7 +20,7 @@ class FileUploaderHelper
     private $pictDir;
 
     /**
-     * FileUploaderHelper constructor
+     * FileUploaderHelperInterface constructor
      * @param UploadedFile     $file
      * @param string           $pictDir
      */

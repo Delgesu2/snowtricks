@@ -58,6 +58,6 @@ class UserRegistrationAction implements UserRegistrationActionInterface
             return $responder($request, true);
         }
 
-        return $responder($request, false);
+        return $responder($request, false, $type);
     }
 }

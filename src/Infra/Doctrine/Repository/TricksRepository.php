@@ -10,6 +10,9 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 
 class TricksRepository extends ServiceEntityRepository implements TricksRepositoryInterface
 {
+    /**
+     * @inheritdoc
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Trick::class);
@@ -26,8 +29,8 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
     }
 
     /**
-     * @param $slug
-     * @return mixed
+     * @inheritdoc
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOneTrick($slug)
@@ -40,8 +43,7 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
     }
 
     /**
-     * @param TrickInterface $trick
-     * @return mixed|void
+     * @inheritdoc
      */
     public function save(TrickInterface $trick)
     {
@@ -49,6 +51,11 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
         $this->_em->flush();
     }
 
+    /**
+     * @inheritdoc
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function deleteTrick($slug)
     {
         $trick = $this->createQueryBuilder('trick')

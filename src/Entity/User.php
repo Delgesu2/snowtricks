@@ -17,6 +17,11 @@ class User implements UserTrickInterface
     */
 	private $id;
 
+    /**
+     * @var string
+     */
+	private $slug;
+
 	/**
     * @var string
     */
@@ -70,8 +75,8 @@ class User implements UserTrickInterface
         $nick,
         $password,
         $email,
-        $status,
-        $role,
+        $status = null,
+        $role = null,
         $photo = null,
         $trick = null,
         $comment = null
@@ -79,6 +84,7 @@ class User implements UserTrickInterface
     {
         $this->id = Uuid::uuid4();
         $this->name = $name;
+        $this->slug = $this->createSlug($name);
         $this->nick = $nick;
         $this->password = $password;
         $this->email = $email;
@@ -97,23 +103,40 @@ class User implements UserTrickInterface
 	}
 
     /**
-     * @return string
+     * @inheritdoc
      */
 	public function getName() :string
 	{
 		return $this->name;
 	}
 
+    /**
+     * @inheritdoc
+     */
+    public function getSlug() :string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param $name
+     * @return mixed|null|string|string[]
+     */
+    private function createSlug($name)
+    {
+        return mb_strtolower(strtr($name, ' ', '-'), 'UTF-8');
+    }
+
 	/**
-    * @return photo
+    * @inheritdoc
     */
-	public function getPhoto()
+	public function getPhoto() :string
 	{
 		return $this->photo;
 	}
 
 	/**
-    * @return string
+    * @inheritdoc
     */
 	public function getNick() :string
 	{
@@ -121,7 +144,7 @@ class User implements UserTrickInterface
 	}
 
 	/**
-    * @return string
+    * @inheritdoc
     */
 	public function getPassword() :string
 	{
@@ -129,7 +152,7 @@ class User implements UserTrickInterface
 	}
 
 	/**
-    * @return string
+    * @inheritdoc
     */
 	public function getEmail() :string
 	{
@@ -137,7 +160,7 @@ class User implements UserTrickInterface
 	}
 
     /**
-    * @return trick
+    * @inheritdoc
     */
     public function getTrick()
     {
@@ -146,7 +169,7 @@ class User implements UserTrickInterface
 
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getComment() :string
     {
@@ -154,7 +177,7 @@ class User implements UserTrickInterface
     }
 
 	/**
-    * @return boolean
+    * @inheritdoc
     */
 	public function getStatus() :bool
 	{
@@ -162,7 +185,7 @@ class User implements UserTrickInterface
 	}
 
 	/**
-    * @return string
+    * @inheritdoc
     */
 	public function getRole() :string
 	{

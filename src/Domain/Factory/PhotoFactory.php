@@ -10,6 +10,7 @@ namespace App\Domain\Factory;
 
 use App\Domain\DTO\Interfaces\NewPhotoDTOInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
+use App\Entity\Interfaces\PhotoInterface;
 use App\Entity\Photo;
 
 
@@ -29,4 +30,17 @@ class PhotoFactory implements PhotoFactoryInterface
             $alt
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createFromFile(\SplFileInfo $file): PhotoInterface
+    {
+        return new Photo(
+            'file',
+            md5(str_rot13($file->getBasename('.'.$file->getExtension()))).'.'.$file->guessExtension(),
+            'Photo_profile'
+        );
+    }
+
 }

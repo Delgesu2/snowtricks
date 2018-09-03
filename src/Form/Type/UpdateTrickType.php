@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
-class UpdateTrickType extends AbstractType
+final class UpdateTrickType extends AbstractType
 {
     private $transformer;
 

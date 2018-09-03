@@ -17,10 +17,14 @@ interface CreateTrickResponderInterface
 {
     /**
      * CreateTrickResponderInterface constructor.
+     *
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator);
+    public function __construct(
+        Environment $twig,
+        UrlGeneratorInterface $urlGenerator
+    );
 
     /**
      * @param bool $redirect
@@ -28,5 +32,8 @@ interface CreateTrickResponderInterface
      *
      * @return HttpResponse
      */
-    public function __invoke($redirect = false, FormInterface $createTrickType = null): HttpResponse;
+    public function __invoke(
+        $redirect = false,
+        FormInterface $createTrickType = null
+    ): HttpResponse;
 }

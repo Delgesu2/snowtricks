@@ -115,4 +115,13 @@ class Photo implements PhotoInterface
     {
         $this->trick_photo = $trick_photo;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function upload(string $folder): void
+    {
+        $this->path = $folder.$this->title;
+    }
+
 }

@@ -8,6 +8,8 @@
 
 namespace App\Domain\Factory\Interfaces;
 
+use App\Entity\Interfaces\PhotoInterface;
+
 interface PhotoFactoryInterface
 {
     /**
@@ -17,4 +19,6 @@ interface PhotoFactoryInterface
      * @return mixed
      */
     public function create($title, $path, $alt);
+
+    public function createFromfile(\SplFileInfo $file): PhotoInterface;
 }

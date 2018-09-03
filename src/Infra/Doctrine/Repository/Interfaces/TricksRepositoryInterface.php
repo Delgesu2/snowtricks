@@ -16,21 +16,34 @@ interface TricksRepositoryInterface
 {
     /**
      * TricksRepositoryInterface constructor.
+     *
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry);
 
+    /**
+     * @return mixed
+     */
     public function getAllTricks();
 
     /**
      * @param $slug
+     *
      * @return mixed
      */
     public function getOneTrick($slug);
 
     /**
      * @param TrickInterface $trick
+     *
      * @return mixed
      */
     public function save(TrickInterface $trick);
+
+    /**
+     * @param $trick
+     *
+     * @return mixed
+     */
+    public function deleteTrick($trick);
 }

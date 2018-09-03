@@ -39,16 +39,16 @@ final class UserRegistrationDTO implements UserRegistrationDTOInterface
 
     public function __construct(
         string       $name,
-        \SplFileInfo $photo = null,
         string       $nick,
         string       $password,
-        string       $email
+        string       $email,
+        \SplFileInfo $photo = null
     )
     {
         $this->name     = $name;
-        $this->photo    = $photo;
         $this->nick     = $nick;
         $this->password = $password;
         $this->email    = $email;
+        $this->photo    = $photo;
     }
 }

@@ -12,6 +12,7 @@ services:
         public: false       # Allows optimizing the container by removing unused services; this also means
         bind:               # fetching services directly from the container via $container->get() won't work.
             $pictDir: '%tricks_pict_directory%'
+            $publicFolder: 'uploads/'
                             # The best practice is to be explicit about your dependencies anyway.
 
     # makes classes in src/ available to be used as services

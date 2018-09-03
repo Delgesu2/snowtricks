@@ -46,4 +46,6 @@ interface PhotoInterface
      * @return mixed
      */
     public function update($title, $path, $alt);
+
+    public function upload(string $path);
 }

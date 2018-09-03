@@ -13,9 +13,9 @@ interface UserRegistrationDTOInterface
 {
     public function __construct(
         string       $name,
-        \SplFileInfo $photo = null,
         string       $nick,
         string       $password,
-        string       $email
+        string       $email,
+        \SplFileInfo $photo = null
     );
 }

@@ -24,6 +24,11 @@ interface UserTrickInterface
     public function getName() :string;
 
     /**
+     * @return string
+     */
+    public function getSlug() :string;
+
+    /**
      * @return mixed
      */
     public function getPhoto();

@@ -61,7 +61,7 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
         $this->fileUploaderHelper = $fileUploaderHelper;
         $this->photoFactory       = $photoFactory;
         $this->trickFactory       = $trickFactory;
-        $this->tricksRepository    = $tricksRepository;
+        $this->tricksRepository   = $tricksRepository;
         $this->videoFactory       = $videoFactory;
         $this->validator          = $validator;
     }
@@ -86,7 +86,7 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
                 $videos[] = $this->videoFactory->create($video);
             }
 
-            $trick->addPhoto($pictures);
+            $trick->addPhoto($pictures);  // addPhoto est dans Trick, pas dans $trick qui est ici le Factory
             $trick->addVideo($videos);
 
             $constraints = $this->validator->validate($trick,[],['Trick']);
@@ -95,11 +95,11 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
                 return false;
             }
 
-            $this->trickRepository->save($trick);
+            $this->tricksRepository->save($trick);
 
             $this->session->getFlashBag()->add('success', 'Trick enregistré');
 
-            return true;
+            return true;  // Pourquoi ça ramène à 'home' ?
         }
 
         return false;

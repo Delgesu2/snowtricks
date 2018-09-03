@@ -17,8 +17,7 @@ final class TricksListResponder implements TricksListResponderInterface
     private $twig;
 
     /**
-     * TricksListResponder constructor.
-     * @param Environment $twig
+     * @inheritdoc
      */
     public function __construct(Environment $twig)
     {
