@@ -37,12 +37,12 @@ final class UserRegistrationResponder implements UserRegistrationResponderInterf
      * @inheritdoc
      */
     public function __construct(
-        Environment $twig,
+        Environment           $twig,
         UrlGeneratorInterface $urlGenerator
     )
     {
-        $this->twig = $twig;
         $this->urlGenerator = $urlGenerator;
+        $this->twig         = $twig;
     }
 
     /**

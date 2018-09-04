@@ -19,11 +19,10 @@ interface UserRegistrationActionInterface
      * UserRegistrationActionInterface constructor.
      *
      * @param FormFactoryInterface $formFactory
-     * @param UserRegistrationTypeHandlerInterface $formHandler
      */
     public function __construct(
         FormFactoryInterface $formFactory,
-        UserRegistrationTypeHandlerInterface $formHandler
+        UserRegistrationTypeHandlerInterface $typeHandler
 );
 
     /**

@@ -15,9 +15,28 @@ use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Factory\Interfaces\UserFactoryInterface;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 interface UserRegistrationTypeHandlerInterface
 {
+    /**
+     * UserRegistrationTypeHandlerInterface constructor.
+     *
+     * @param UserFactoryInterface $userFactory
+     * @param UsersRepositoryInterface $usersRepository
+     * @param UserInterface $user
+     * @param UserPasswordEncoderInterface $encoder
+     */
+    public function __construct(
+        /**EncoderFactoryInterface        $encoderFactory,
+        OneFileUploaderHelperInterface $fileUploaderHelper,
+        PhotoFactoryInterface          $photoFactory,**/
+        UserFactoryInterface           $userFactory,
+        UsersRepositoryInterface       $usersRepository,
+        UserInterface                  $user,
+        UserPasswordEncoderInterface   $encoder
+    );
 
     /**
      * @param FormInterface $form
@@ -26,20 +45,6 @@ interface UserRegistrationTypeHandlerInterface
      */
     public function handle(FormInterface $form): bool;
 
-    /**
-     * UserRegistrationTypeHandlerInterface constructor.
-     *
-     * @param EncoderFactoryInterface $encoderFactory
-     * @param OneFileUploaderHelperInterface $fileUploaderHelper
-     * @param PhotoFactoryInterface $photoFactory
-     * @param UserFactoryInterface $userFactory
-     * @param UsersRepositoryInterface $usersRepository
-     */
-    public function __construct(
-        EncoderFactoryInterface        $encoderFactory,
-        OneFileUploaderHelperInterface $fileUploaderHelper,
-        PhotoFactoryInterface          $photoFactory,
-        UserFactoryInterface           $userFactory,
-        UsersRepositoryInterface       $usersRepository
-    );
+
+
 }

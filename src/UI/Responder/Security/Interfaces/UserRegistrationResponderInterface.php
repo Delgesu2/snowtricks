@@ -23,7 +23,7 @@ interface UserRegistrationResponderInterface
      * @param UrlGeneratorInterface $urlGenerator
      */
     public function __construct(
-        Environment $twig,
+        Environment           $twig,
         UrlGeneratorInterface $urlGenerator
     );
 

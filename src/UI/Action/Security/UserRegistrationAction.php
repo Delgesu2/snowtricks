@@ -19,7 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class UserRegistrationAction
- * @Route(name="user_registration", path="/register", methods={"GET", "POST"})
+ * @Route(
+ *     name="user_registration",
+ *     path="/register",
+ *     methods={"GET", "POST"}
+ *     )
  */
 class UserRegistrationAction implements UserRegistrationActionInterface
 {
@@ -33,27 +37,30 @@ class UserRegistrationAction implements UserRegistrationActionInterface
      */
     private $formHandler;
 
+
     /**
      * @inheritdoc
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         UserRegistrationTypeHandlerInterface $formHandler
-)
-    {
+    ) {
         $this->formFactory = $formFactory;
         $this->formHandler = $formHandler;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function __invoke(
         Request $request,
         UserRegistrationResponderInterface $responder
     ): Response {
 
         $type = $this->formFactory->create(UserRegistrationType::class)
-                                  ->handleRequest($request);
+                                     ->handleRequest($request);
 
-        // HANDLER
+
         if($this->formHandler->handle($type)) {
             return $responder($request, true);
         }

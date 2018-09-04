@@ -9,21 +9,25 @@
 namespace App\Form\Handler\Security;
 
 
+use App\Domain\DTO\Security\UserRegistrationDTO;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Factory\Interfaces\UserFactoryInterface;
+use App\Entity\Interfaces\UserTrickInterface;
 use App\Entity\User;
 use App\Form\Handler\Security\Interfaces\UserRegistrationTypeHandlerInterface;
 use App\Helper\Interfaces\OneFileUploaderHelperInterface;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class UserRegistrationHandler
+ * Class UserRegistrationTypeHandler
  *
  * @author Xavier Coutant
  */
-final class UserRegistrationHandler implements UserRegistrationTypeHandlerInterface
+final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerInterface
 {
     /**
      * @var EncoderFactoryInterface
@@ -50,24 +54,39 @@ final class UserRegistrationHandler implements UserRegistrationTypeHandlerInterf
      */
     private $usersRepository;
 
+    /**
+     * @var UserInterface
+     */
+    private $user;
+
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;
+
 
     /**
      * @inheritdoc
      */
     public function __construct(
-        EncoderFactoryInterface        $encoderFactory,
+        /**EncoderFactoryInterface        $encoderFactory,
         OneFileUploaderHelperInterface $fileUploaderHelper,
-        PhotoFactoryInterface          $photoFactory,
+        PhotoFactoryInterface          $photoFactory,**/
         UserFactoryInterface           $userFactory,
-        UsersRepositoryInterface       $usersRepository
+        UsersRepositoryInterface       $usersRepository,
+        UserInterface                  $user,
+        UserPasswordEncoderInterface   $encoder
     )
     {
-        $this->encoderFactory     = $encoderFactory;
+        /**$this->encoderFactory     = $encoderFactory;
         $this->fileUploaderHelper = $fileUploaderHelper;
-        $this->photoFactory       = $photoFactory;
+        $this->photoFactory       = $photoFactory;**/
         $this->userFactory        = $userFactory;
         $this->usersRepository    = $usersRepository;
+        $this->user               = $user;
+        $this->userPasswordEncoder= $encoder;
     }
+
 
     /**
      * @inheritdoc
@@ -76,24 +95,19 @@ final class UserRegistrationHandler implements UserRegistrationTypeHandlerInterf
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if (!\is_null($form->getData()->photo)) {
-                $media = $this->photoFactory->createFromfile($form->getData()->photo);
-                $this->fileUploaderHelper->upload($form->getData()->photo, $media);
-            }
 
-            $encoder = $this->encoderFactory->getEncoder(User::class);
 
-            $password = $encoder->encodePassword($form->getData()->password, null);
+            // ENCODAGE
+            $plainPassword = $form->get('password')->getNormData();
 
-            $user = $this->userFactory->create(
-                $form->getData()->name,
-                $form->getData()->nick,
-                $password,
-                $form->getData()->email,
-                $media ?? null
-            );
+            $encoded = $this->encoder->encodePassword($this->user, $plainPassword);
 
-          $this->usersRepository->saveUser($user);
+            $form->setData($encoded);
+            // FIN ENCODAGE
+
+            $newUser = $this->userFactory->create($form->getData());
+
+            $this->usersRepository->saveUser($newUser);
 
             return true;
         }
@@ -101,3 +115,9 @@ final class UserRegistrationHandler implements UserRegistrationTypeHandlerInterf
         return false;
     }
 }
+
+/** if (!\is_null($form->getData()->photo)) {
+$media = $this->photoFactory->createFromfile($form->getData()->photo);
+$this->fileUploaderHelper->upload($form->getData()->photo, $media);
+}
+ **/
