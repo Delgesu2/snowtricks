@@ -9,7 +9,8 @@
 namespace App\UI\Action;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use App\UI\Action\Interfaces\DeleteUserActionInterface;
-use App\UI\Responder\Interfaces\UserListResponderInterface;
+use App\UI\Responder\Interfaces\DeleteUserResponderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -34,12 +35,12 @@ class DeleteUserAction implements DeleteUserActionInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(UserListResponderInterface $responder, $slug)
+    public function __invoke(DeleteUserResponderInterface $responder, Request $request)
     {
-        $this->repository->deleteUser($slug);
-        $users = $this->repository->getAllUsers();
+        $this->repository->deleteUser($request->attributes->get('slug'));
 
-        return $responder($users);
+
+        return $responder();
     }
 
 }

@@ -29,12 +29,11 @@ interface UserRegistrationTypeHandlerInterface
      * @param UserPasswordEncoderInterface $encoder
      */
     public function __construct(
-        /**EncoderFactoryInterface        $encoderFactory,
-        OneFileUploaderHelperInterface $fileUploaderHelper,
+        EncoderFactoryInterface        $encoderFactory,
+        /**OneFileUploaderHelperInterface $fileUploaderHelper,
         PhotoFactoryInterface          $photoFactory,**/
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
-        UserInterface                  $user,
         UserPasswordEncoderInterface   $encoder
     );
 
@@ -44,7 +43,4 @@ interface UserRegistrationTypeHandlerInterface
      * @return bool
      */
     public function handle(FormInterface $form): bool;
-
-
-
 }

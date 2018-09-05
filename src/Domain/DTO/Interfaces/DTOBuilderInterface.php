@@ -8,9 +8,9 @@
 
 namespace App\Domain\DTO\Interfaces;
 
-use App\Entity\Interfaces\PhotoInterface;
-use App\Entity\Interfaces\TrickInterface;
-use App\Entity\Interfaces\VideoInterface;
+use App\Domain\Entity\Interfaces\PhotoInterface;
+use App\Domain\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Interfaces\VideoInterface;
 
 interface DTOBuilderInterface
 {

@@ -2,8 +2,8 @@
 
 namespace App\Infra\Doctrine\Repository;
 
-use App\Entity\Interfaces\TrickInterface;
-use App\Entity\Trick;
+use App\Domain\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Trick;
 use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;

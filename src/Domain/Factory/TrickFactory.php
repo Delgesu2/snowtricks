@@ -10,7 +10,7 @@ namespace App\Domain\Factory;
 
 use App\Domain\DTO\Interfaces\NewTrickDTOInterface;
 use App\Domain\Factory\Interfaces\TrickFactoryInterface;
-use App\Entity\Trick;
+use App\Domain\Entity\Trick;
 
 class TrickFactory implements TrickFactoryInterface
 {

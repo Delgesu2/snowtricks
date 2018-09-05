@@ -8,7 +8,7 @@
 
 namespace App\Infra\Doctrine\Repository;
 
-use App\Entity\Group;
+use App\Domain\Entity\Group;
 use App\Infra\Doctrine\Repository\Interfaces\GroupsRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;

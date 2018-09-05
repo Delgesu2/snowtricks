@@ -11,7 +11,7 @@ namespace App\Domain\Factory;
 
 use App\Domain\DTO\Security\Interfaces\UserRegistrationDTOInterface;
 use App\Domain\Factory\Interfaces\UserFactoryInterface;
-use App\Entity\User;
+use App\Domain\Entity\User;
 
 class UserFactory implements UserFactoryInterface
 {

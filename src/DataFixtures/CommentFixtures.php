@@ -8,7 +8,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Comment;
+use App\Domain\Entity\Comment;
 use App\DataFixtures\UserFixtures;
 use App\DataFixtures\TrickFixtures;
 

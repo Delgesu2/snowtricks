@@ -3,7 +3,7 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
-  <entity name="App\Entity\Trick"  table="snowtricks_trick">
+  <entity name="App\Domain\Entity\Trick"  table="snowtricks_trick">
     <id name="id" column="id" type="uuid">
         <generator strategy="CUSTOM" />
         <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
@@ -12,32 +12,32 @@
     <field name="description" type="string" length="800"/>
       <field name="slug" type="string" length="35"/>
 
-    <many-to-one field="trick_group" target-entity="App\Entity\Group" inversed-by="trick">
+    <many-to-one field="trick_group" target-entity="App\Domain\Entity\Group" inversed-by="trick">
         <cascade>
             <cascade-persist />
         </cascade>
     </many-to-one>
 
-      <one-to-many field="comment" target-entity="App\Entity\Comment" mapped-by="trick" >
+      <one-to-many field="comment" target-entity="App\Domain\Entity\Comment" mapped-by="trick" >
           <cascade>
               <cascade-persist />
           </cascade>
       </one-to-many>
 
-    <one-to-many field="photo" target-entity="App\Entity\Photo" mapped-by="trick_photo" orphan-removal="true">
+    <one-to-many field="photo" target-entity="App\Domain\Entity\Photo" mapped-by="trick_photo" orphan-removal="true">
         <cascade>
             <cascade-persist/>
             <cascade-remove />
         </cascade>
     </one-to-many>
 
-    <one-to-many field="video" target-entity="App\Entity\Video" mapped-by="trick_video">
+    <one-to-many field="video" target-entity="App\Domain\Entity\Video" mapped-by="trick_video">
         <cascade>
             <cascade-all />
         </cascade>
     </one-to-many>
 
-    <many-to-one field="trick_user" target-entity="App\Entity\User" inversed-by="trick">
+    <many-to-one field="trick_user" target-entity="App\Domain\Entity\User" inversed-by="trick">
     </many-to-one>
 
     <field name="datecreate" type="integer" />

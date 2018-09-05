@@ -8,8 +8,8 @@
 
 namespace App\Infra\Doctrine\Repository;
 
-use App\Entity\Interfaces\CommentInterface;
-use App\Entity\Comment;
+use App\Domain\Entity\Interfaces\CommentInterface;
+use App\Domain\Entity\Comment;
 use App\Infra\Doctrine\Repository\Interfaces\CommentsRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\ManagerRegistry;

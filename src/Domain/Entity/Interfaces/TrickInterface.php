@@ -6,7 +6,7 @@
  * Time: 11:44
  */
 
-namespace App\Entity\Interfaces;
+namespace App\Domain\Entity\Interfaces;
 
 use Ramsey\Uuid\UuidInterface;
 

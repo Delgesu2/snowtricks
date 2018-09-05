@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\Entity;
 
-use App\Entity\Interfaces\CommentInterface;
+use App\Domain\Entity\Interfaces\CommentInterface;
+use App\Domain\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -28,7 +29,7 @@ class Comment implements CommentInterface
     private $text;
 
     /**
-    * @var User
+    * @var \App\Domain\Entity\User
     */
     private $user;
      

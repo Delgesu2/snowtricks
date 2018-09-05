@@ -8,8 +8,8 @@
 
 namespace App\Infra\Doctrine\Repository;
 
-use App\Entity\Interfaces\UserTrickInterface;
-use App\Entity\User;
+use App\Domain\Entity\Interfaces\UserTrickInterface;
+use App\Domain\Entity\User;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -46,7 +46,7 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
     {
         $user = $this->createQueryBuilder('user')
             ->where('user.slug = :slug')
-            ->setParameter('user', $user)
+            ->setParameter('slug', $user)
             ->getQuery()
             ->getOneOrNullResult();
         $this->_em->remove($user);

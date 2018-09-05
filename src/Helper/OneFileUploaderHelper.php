@@ -9,7 +9,7 @@
 namespace App\Helper;
 
 
-use App\Entity\Interfaces\PhotoInterface;
+use App\Domain\Entity\Interfaces\PhotoInterface;
 use App\Helper\Interfaces\OneFileUploaderHelperInterface;
 use Psr\Log\LoggerInterface;
 

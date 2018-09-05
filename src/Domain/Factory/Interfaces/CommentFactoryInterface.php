@@ -8,7 +8,6 @@
 
 namespace App\Domain\Factory\Interfaces;
 
-
 use App\Domain\DTO\Interfaces\NewCommentDTOInterface;
 
 interface CommentFactoryInterface

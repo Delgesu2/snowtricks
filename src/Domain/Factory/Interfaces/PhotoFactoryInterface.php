@@ -8,7 +8,7 @@
 
 namespace App\Domain\Factory\Interfaces;
 
-use App\Entity\Interfaces\PhotoInterface;
+use App\Domain\Entity\Interfaces\PhotoInterface;
 
 interface PhotoFactoryInterface
 {

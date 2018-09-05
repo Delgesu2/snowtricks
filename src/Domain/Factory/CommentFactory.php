@@ -10,7 +10,7 @@ namespace App\Domain\Factory;
 
 use App\Domain\DTO\Interfaces\NewCommentDTOInterface;
 use App\Domain\Factory\Interfaces\CommentFactoryInterface;
-use App\Entity\Comment;
+use App\Domain\Entity\Comment;
 
 class CommentFactory implements CommentFactoryInterface
 {

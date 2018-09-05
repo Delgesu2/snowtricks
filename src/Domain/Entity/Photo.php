@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\Entity;
 
-use App\Entity\Interfaces\PhotoInterface;
+use App\Domain\Entity\Interfaces\PhotoInterface;
+use App\Domain\Entity\Trick;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

@@ -12,9 +12,9 @@ use App\Domain\DTO\Interfaces\DTOBuilderInterface;
 use App\Domain\DTO\Interfaces\UpdatePhotoDTOInterface;
 use App\Domain\DTO\Interfaces\UpdateTrickDTOInterface;
 use App\Domain\DTO\Interfaces\UpdateVideoDTOInterface;
-use App\Entity\Interfaces\PhotoInterface;
-use App\Entity\Interfaces\TrickInterface;
-use App\Entity\Interfaces\VideoInterface;
+use App\Domain\Entity\Interfaces\PhotoInterface;
+use App\Domain\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Interfaces\VideoInterface;
 
 class DTOBuilder implements DTOBuilderInterface
 {

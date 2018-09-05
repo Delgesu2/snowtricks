@@ -12,8 +12,8 @@ namespace App\Form\Handler\Security;
 use App\Domain\DTO\Security\UserRegistrationDTO;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Factory\Interfaces\UserFactoryInterface;
-use App\Entity\Interfaces\UserTrickInterface;
-use App\Entity\User;
+use App\Domain\Entity\Interfaces\UserTrickInterface;
+use App\Domain\Entity\User;
 use App\Form\Handler\Security\Interfaces\UserRegistrationTypeHandlerInterface;
 use App\Helper\Interfaces\OneFileUploaderHelperInterface;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
@@ -60,30 +60,22 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
     private $user;
 
     /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $encoder;
-
-
-    /**
      * @inheritdoc
      */
     public function __construct(
-        /**EncoderFactoryInterface        $encoderFactory,
-        OneFileUploaderHelperInterface $fileUploaderHelper,
+        EncoderFactoryInterface        $encoderFactory,
+        /**OneFileUploaderHelperInterface $fileUploaderHelper,
         PhotoFactoryInterface          $photoFactory,**/
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
-        UserInterface                  $user,
         UserPasswordEncoderInterface   $encoder
     )
     {
-        /**$this->encoderFactory     = $encoderFactory;
-        $this->fileUploaderHelper = $fileUploaderHelper;
+        $this->encoderFactory     = $encoderFactory;
+        /**$this->fileUploaderHelper = $fileUploaderHelper;
         $this->photoFactory       = $photoFactory;**/
         $this->userFactory        = $userFactory;
         $this->usersRepository    = $usersRepository;
-        $this->user               = $user;
         $this->userPasswordEncoder= $encoder;
     }
 
@@ -95,19 +87,17 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if (!\is_null($form->getData()->photo)) {
+                $media = $this->photoFactory->createFromfile($form->getData()->photo);
+                $this->fileUploaderHelper->upload($form->getData()->photo, $media);
+            }
 
+            $encoder = $this->encoderFactory->getEncoder(User::class);
+            $form->getData()->password = $encoder->encodePassword($form->getData()->password, null);
 
-            // ENCODAGE
-            $plainPassword = $form->get('password')->getNormData();
+            $user = $this->userFactory->create($form->getData());
 
-            $encoded = $this->encoder->encodePassword($this->user, $plainPassword);
-
-            $form->setData($encoded);
-            // FIN ENCODAGE
-
-            $newUser = $this->userFactory->create($form->getData());
-
-            $this->usersRepository->saveUser($newUser);
+            $this->usersRepository->saveUser($user);
 
             return true;
         }
@@ -116,8 +106,4 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
     }
 }
 
-/** if (!\is_null($form->getData()->photo)) {
-$media = $this->photoFactory->createFromfile($form->getData()->photo);
-$this->fileUploaderHelper->upload($form->getData()->photo, $media);
-}
- **/
+

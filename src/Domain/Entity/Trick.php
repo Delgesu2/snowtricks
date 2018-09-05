@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\Entity;
 
-use App\Entity\Interfaces\CommentInterface;
-use App\Entity\Interfaces\GroupInterface;
-use App\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Interfaces\CommentInterface;
+use App\Domain\Entity\Interfaces\GroupInterface;
+use App\Domain\Entity\Interfaces\PhotoInterface;
+use App\Domain\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Interfaces\VideoInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
@@ -37,7 +39,7 @@ class Trick implements TrickInterface
     private $description;
 
     /**
-    * @var Group
+    * @var GroupInterface
     */
     private $trick_group;
 
@@ -47,7 +49,7 @@ class Trick implements TrickInterface
     private $comment;
 
     /**
-    * @var Photo
+    * @var PhotoInterface
     */
     private $photo;
 
@@ -150,7 +152,7 @@ class Trick implements TrickInterface
     }
 
     /**
-    * @return photo
+    * @return PhotoInterface
     */
     public function getPhoto()
     {
@@ -158,7 +160,7 @@ class Trick implements TrickInterface
     }
 
     /**
-    * @return video
+    * @return VideoInterface
     */
     public function getVideo()
     {

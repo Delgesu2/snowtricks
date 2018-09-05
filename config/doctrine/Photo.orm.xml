@@ -3,7 +3,7 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
-  <entity name="App\Entity\Photo" table="snowtricks_photo">
+  <entity name="App\Domain\Entity\Photo" table="snowtricks_photo">
     <id name="id" column="id" type="uuid">
 	  	<generator strategy="CUSTOM" />
 	  	<custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
@@ -11,7 +11,7 @@
 	<field name="title" type="string" length="60" nullable="true" />
 	<field name="path" type="string" length="100" />
 
-	<many-to-one field="trick_photo" target-entity="App\Entity\Trick" inversed-by="photo">
+	<many-to-one field="trick_photo" target-entity="App\Domain\Entity\Trick" inversed-by="photo">
 	</many-to-one>
 
     <field name="alt" type="string" length="60" nullable="true" />

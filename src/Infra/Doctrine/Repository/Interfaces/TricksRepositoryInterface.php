@@ -9,7 +9,7 @@
 namespace App\Infra\Doctrine\Repository\Interfaces;
 
 
-use App\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Interfaces\TrickInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 interface TricksRepositoryInterface

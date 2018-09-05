@@ -3,13 +3,13 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
-  <entity name="App\Entity\User"  table="snowtricks_user">
+  <entity name="App\Domain\Entity\User"  table="snowtricks_user">
     <id name="id" column="id" type="uuid">
         <generator strategy="CUSTOM" />
         <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
     </id>
     <field name="name" type="string" length="60" nullable="false" unique="true" />
-    <one-to-one field="photo" target-entity="App\Entity\Photo">
+    <one-to-one field="photo" target-entity="App\Domain\Entity\Photo">
         <cascade>
             <cascade-remove />
         </cascade>
@@ -18,9 +18,9 @@
       <field name="nick" type="string" length="60" nullable="false" unique="true" />
     <field name="password" type="string" length="110" />
     <field name="email" type="string" length="40" nullable="false" unique="true" />
-    <one-to-many field="trick" target-entity="App\Entity\Trick" mapped-by="trick_user">
+    <one-to-many field="trick" target-entity="App\Domain\Entity\Trick" mapped-by="trick_user">
     </one-to-many>
-      <one-to-many field="comment" target-entity="App\Entity\Comment" mapped-by="user">
+      <one-to-many field="comment" target-entity="App\Domain\Entity\Comment" mapped-by="user">
       </one-to-many>
     <field name="status" type="boolean" nullable="true" />
     <field name="role" type="array" nullable="true" />

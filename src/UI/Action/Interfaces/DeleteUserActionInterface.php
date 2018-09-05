@@ -10,7 +10,9 @@ namespace App\UI\Action\Interfaces;
 
 
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
+use App\UI\Responder\Interfaces\DeleteUserResponderInterface;
 use App\UI\Responder\Interfaces\UserListResponderInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 interface DeleteUserActionInterface
 {
@@ -27,5 +29,5 @@ interface DeleteUserActionInterface
      *
      * @return mixed
      */
-    public function __invoke(UserListResponderInterface $responder, $user);
+    public function __invoke(DeleteUserResponderInterface $responder, Request $request);
 }

@@ -3,15 +3,15 @@
  * Created by PhpStorm.
  * User: ronsard
  * Date: 26/06/18
- * Time: 20:11
+ * Time: 20:12
  */
 
-namespace App\Entity\Interfaces;
+namespace App\Domain\Entity\Interfaces;
 
-
+use App\Domain\Entity\Trick;
 use Ramsey\Uuid\UuidInterface;
 
-interface CommentInterface
+interface VideoInterface
 {
     /**
      * @return UuidInterface
@@ -19,23 +19,19 @@ interface CommentInterface
     public function getId() :UuidInterface;
 
     /**
-     * @return \DateTime|null
-     */
-    public function getDate() :?\DateTime;
-
-    /**
      * @return string
      */
-    public function getText() :string;
+    public function getUrl() :string;
 
     /**
-     * @return mixed
+     * @return Trick|null
      */
-    public function getUser();
+    public function getTrickVideo() :?Trick;
 
     /**
+     * @param $url
+     *
      * @return mixed
      */
-    public function getTrick();
-
+    public function update($url);
 }

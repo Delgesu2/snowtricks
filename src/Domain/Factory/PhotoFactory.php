@@ -10,8 +10,8 @@ namespace App\Domain\Factory;
 
 use App\Domain\DTO\Interfaces\NewPhotoDTOInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
-use App\Entity\Interfaces\PhotoInterface;
-use App\Entity\Photo;
+use App\Domain\Entity\Interfaces\PhotoInterface;
+use App\Domain\Entity\Photo;
 
 
 class PhotoFactory implements PhotoFactoryInterface

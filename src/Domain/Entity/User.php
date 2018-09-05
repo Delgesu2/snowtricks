@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\Entity;
 
-use App\Entity\Interfaces\UserTrickInterface;
+use App\Domain\Entity\Interfaces\UserTrickInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -28,7 +28,7 @@ class User implements UserTrickInterface
 	private $name;
 
 	/**
-    * @var photo
+    * @var Photo
     */
 	private $photo;
 

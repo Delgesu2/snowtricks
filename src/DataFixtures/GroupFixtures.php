@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Group;
+use App\Domain\Entity\Group;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\Tests\Compiler\G;

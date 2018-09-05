@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Trick;
+use App\Domain\Entity\Trick;
 use App\DataFixtures\PhotoFixtures;
 use App\DataFixtures\GroupFixtures;
 use App\DataFixtures\UserFixtures;

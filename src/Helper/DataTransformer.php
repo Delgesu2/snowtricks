@@ -8,7 +8,7 @@
 
 namespace App\Helper;
 
-use App\Entity\Interfaces\VideoInterface;
+use App\Domain\Entity\Interfaces\VideoInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;  // pas utilisé
