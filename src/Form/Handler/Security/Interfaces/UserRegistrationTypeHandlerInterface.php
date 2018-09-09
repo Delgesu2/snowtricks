@@ -9,6 +9,7 @@
 namespace App\Form\Handler\Security\Interfaces;
 
 
+use App\Helper\MailSubscriberHelper;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use App\Helper\Interfaces\OneFileUploaderHelperInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
@@ -34,7 +35,8 @@ interface UserRegistrationTypeHandlerInterface
         PhotoFactoryInterface          $photoFactory,**/
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
-        UserPasswordEncoderInterface   $encoder
+        UserPasswordEncoderInterface   $encoder,
+        MailSubscriberHelper           $mailer
     );
 
     /**

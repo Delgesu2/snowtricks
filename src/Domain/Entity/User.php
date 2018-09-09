@@ -60,7 +60,12 @@ class User implements UserTrickInterface
 	/**
 	* boolean
 	*/
-	private $status;
+	private $valid;
+
+    /**
+     * @var string
+     */
+	private $token;
 
 	/**
 	* role (array)
@@ -75,23 +80,24 @@ class User implements UserTrickInterface
         $nick,
         $password,
         $email,
-        $status = null,
-        $role = null,
-        $photo = null,
-        $trick = null,
-        $comment = null
+        $valid  = null,
+        $role   = null,
+        $photo  = null,
+        $trick  = null,
+        $comment= null
     )
     {
         $this->id = Uuid::uuid4();
-        $this->name = $name;
-        $this->slug = $this->createSlug($name);
-        $this->nick = $nick;
+        $this->name     = $name;
+        $this->slug     = $this->createSlug($name);
+        $this->nick     = $nick;
         $this->password = $password;
-        $this->email = $email;
-        $this->status = $status;
-        $this->role = $role;
-        $this->photo = $photo;
-        $this->comment = $comment;
+        $this->email    = $email;
+        $this->token    = uniqid(rand(), true);
+        $this->valid    = $valid;
+        $this->role     = $role;
+        $this->photo    = $photo;
+        $this->comment  = $comment;
     }
 
 	/**
@@ -160,13 +166,28 @@ class User implements UserTrickInterface
 	}
 
     /**
+     * @inheritdoc
+     */
+    public function getValid() :bool
+    {
+        return $this->valid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
     * @inheritdoc
     */
     public function getTrick()
     {
     	return $this->trick;
     }
-
 
     /**
      * @inheritdoc
@@ -175,14 +196,6 @@ class User implements UserTrickInterface
     {
         return $this->comment;
     }
-
-	/**
-    * @inheritdoc
-    */
-	public function getStatus() :bool
-	{
-		return $this->status;
-	}
 
 	/**
     * @inheritdoc

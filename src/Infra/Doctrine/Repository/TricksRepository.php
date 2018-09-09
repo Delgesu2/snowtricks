@@ -56,11 +56,11 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function deleteTrick($slug)
+    public function deleteTrick($trick)
     {
         $trick = $this->createQueryBuilder('trick')
             ->where('trick.slug = :slug')
-            ->setParameter('slug', $slug)
+            ->setParameter('slug', $trick)
                 ->getQuery()
                 ->getOneOrNullResult();
         $this->_em->remove($trick);

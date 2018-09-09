@@ -16,6 +16,7 @@ use App\Domain\Entity\Interfaces\UserTrickInterface;
 use App\Domain\Entity\User;
 use App\Form\Handler\Security\Interfaces\UserRegistrationTypeHandlerInterface;
 use App\Helper\Interfaces\OneFileUploaderHelperInterface;
+use App\Helper\MailSubscriberHelper;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -59,6 +60,8 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
      */
     private $user;
 
+    private $mailer;
+
     /**
      * @inheritdoc
      */
@@ -68,7 +71,8 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
         PhotoFactoryInterface          $photoFactory,**/
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
-        UserPasswordEncoderInterface   $encoder
+        UserPasswordEncoderInterface   $encoder,
+        MailSubscriberHelper           $mailer
     )
     {
         $this->encoderFactory     = $encoderFactory;
@@ -77,6 +81,7 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
         $this->userFactory        = $userFactory;
         $this->usersRepository    = $usersRepository;
         $this->userPasswordEncoder= $encoder;
+        $this->mailer             = $mailer;
     }
 
 
@@ -96,6 +101,8 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
             $form->getData()->password = $encoder->encodePassword($form->getData()->password, null);
 
             $user = $this->userFactory->create($form->getData());
+
+            $this->mailer->registrationSend($form, $user);
 
             $this->usersRepository->saveUser($user);
 

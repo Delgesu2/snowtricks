@@ -48,6 +48,16 @@ interface UserTrickInterface
     public function getEmail() :string;
 
     /**
+     * @return bool
+     */
+    public function getValid() :bool;
+
+    /**
+     * @return string
+     */
+    public function getToken() :string;
+
+    /**
      * @return mixed
      */
     public function getTrick();
@@ -57,10 +67,6 @@ interface UserTrickInterface
      */
     public function getComment() :string;
 
-    /**
-     * @return bool
-     */
-    public function getStatus() :bool;
 
     /**
      * @return string

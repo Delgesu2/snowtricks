@@ -60,7 +60,6 @@ class UserRegistrationAction implements UserRegistrationActionInterface
         $type = $this->formFactory->create(UserRegistrationType::class)
                                      ->handleRequest($request);
 
-
         if($this->formHandler->handle($type)) {
             return $responder($request, true);
         }
