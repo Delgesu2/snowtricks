@@ -72,4 +72,9 @@ interface UserTrickInterface
      * @return string
      */
     public function getRole() :string;
+
+    /**
+     * @return bool
+     */
+    public function validate() :void;
 }

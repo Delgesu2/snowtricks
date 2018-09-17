@@ -9,37 +9,48 @@
 namespace App\Helper;
 
 use App\Domain\Entity\Interfaces\UserTrickInterface;
-use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
+use App\Helper\Interfaces\MailSubscriberHelperInterface;
 use Symfony\Component\Form\FormInterface;
+use Twig\Environment;
 
-class MailSubscriberHelper
+class MailSubscriberHelper implements MailSubscriberHelperInterface
 {
-    public function registrationSend(FormInterface $form, UserTrickInterface $user)
+    /**
+     * @var Environment
+     */
+    private $twig;
+
+    /**
+     * @inheritdoc
+     */
+    public function __construct(Environment $twig)
     {
-        // Get mailer information
-        $data = require __DIR__ . './../../config/mailer/mailer.php';
+        $this->twig = $twig;
+    }
 
-        // Create the Transport
-        $transport = (new \Swift_SmtpTransport($data['smtp'], 465, 'ssl'))
-            ->setUsername($data['username'])
-            ->setPassword($data['password'])
-            ;
+    /**
+     * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function registrationSend(FormInterface $form, \Swift_Mailer $swift_Mailer, UserTrickInterface $user)
+    {
+       $message = (new \Swift_Message('Bienvenue sur Snowtricks'))
+           ->setFrom('contact@devxdemo.eu')
+           ->setTo($form->getData()->email)
+           ->setSubject('Création de votre compte Snowtricks')
+           ->setBody(
+               $this->twig->render(
+                   'email/registration.html.twig',
+                   array('name'=>$user->getName(),
+                         'token'=>$user->getToken()
+                       )
+               ),
+               'text/html'
+           );
 
-        // Create the Mailer
-        $mailer = new \Swift_Mailer($transport);
-
-        // Create a message
-        $text = 'Salut ' . $form->getData()->name . ' ! Bienvenue sur Snowtricks, le site des fous de la glisse ! 
-        Confirmez votre inscription en cliquant sur le lien suivant:'.'<a href="http://127.0.0.1:8000/register?token='
-            . $user->getToken() . ' ">Cliquez ici !
-        </a></br>';
-        $message = (new \Swift_Message('Inscription sur Snowtricks'))
-            ->setFrom([$data['from'] => 'Snowtricks'])
-            ->setTo($form->getData()->email)
-            ->setSubject('Création de votre compte Snowtricks')
-            ->setBody($text, 'text/html');
-
-        // Send the message
-        $result = $mailer->send($message);
+       $swift_Mailer->send($message);
     }
 }

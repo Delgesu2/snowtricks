@@ -39,4 +39,11 @@ interface UsersRepositoryInterface
      * @return mixed
      */
     public function deleteUser($user);
+
+    /**
+     * @param $token
+     *
+     * @return mixed
+     */
+    public function checkToken($token);
 }

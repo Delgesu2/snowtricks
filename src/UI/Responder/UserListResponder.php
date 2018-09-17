@@ -12,7 +12,7 @@ use App\UI\Responder\Interfaces\UserListResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class UserListResponder implements UserListResponderInterface
+final class UserListResponder implements UserListResponderInterface
 {
     /**
      * @inheritdoc

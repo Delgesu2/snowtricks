@@ -73,6 +73,11 @@ class User implements UserTrickInterface
 	private $role;
 
     /**
+     * @var \DateTimeInterface|null
+     */
+	private $validationDate = null;
+
+    /**
      * User constructor
      */
     public function __construct(
@@ -93,7 +98,7 @@ class User implements UserTrickInterface
         $this->nick     = $nick;
         $this->password = $password;
         $this->email    = $email;
-        $this->token    = uniqid(rand(), true);
+        $this->token    = md5(uniqid(rand(), false));
         $this->valid    = $valid;
         $this->role     = $role;
         $this->photo    = $photo;
@@ -174,7 +179,7 @@ class User implements UserTrickInterface
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getToken(): string
     {
@@ -206,11 +211,12 @@ class User implements UserTrickInterface
 	}
 
     /**
-    * User validate
+    * @inheritdoc
     */
-    public function validate()
+    public function validate() :void
     {
-
+        $this->valid = true;
+        $this->validationDate = new \DateTimeImmutable();
     }
 
     /**

@@ -7,7 +7,9 @@ use App\UI\Responder\SelectedTrickResponder;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route(name="selected_trick", path="/trick/{slug}", requirements={"slug"="[a-zA-Z0-9-]+"})
+ * @Route(name="selected_trick",
+ *      path="/trick/{slug}",
+ *      requirements={"slug"="[a-zA-Z0-9-]+"})
  */
 class SelectedTrickAction
 {

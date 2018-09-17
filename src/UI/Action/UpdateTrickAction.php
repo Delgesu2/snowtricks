@@ -22,7 +22,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route(name="update_trick", path="/update/{slug}", requirements={"slug"="[a-zA-Z0-9-]+"})
+ * @Route(name="update_trick",
+ *      path="/update/{slug}",
+ *      requirements={"slug"="[a-zA-Z0-9-]+"})
  */
 class UpdateTrickAction
 {

@@ -1,1 +1,28 @@
 App\Entity\User:
+    properties:
+        name:
+          - NotBlank: ~
+        nick:
+          - NotBlank: ~
+          - Length:
+              min: 3
+              max: 25
+              minMessage: 'Le pseudo doit contenir au moins 3 caractères.'
+              maxMessage: 'Le pseudo ne doit pas faire plus de 15 caractères.'
+        photo:
+          - Image:
+              allowLandscape: true
+              allowPortrait: false
+              allowSquare: true
+              maxSize: 1M
+              maxSizeMessage: 'Le fichier est trop grand. Taille maximale:
+              {{ limit }} {{ suffix }}.'
+              mimeTypes: [image/png, image/tiff, image/jpeg]
+              mimeTypesMessage: 'Charger une image dans un des formats suivants: png, tiff ou jpeg'
+        password:
+            - Regex:
+                pattern: '#(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\S{8,}#'
+        email:
+            - Email:
+                mode: loose
+                message: 'Adresse courriel non valide.'

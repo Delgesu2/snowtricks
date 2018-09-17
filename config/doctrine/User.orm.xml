@@ -19,6 +19,7 @@
     <field name="password" type="string" length="110" />
     <field name="email" type="string" length="40" nullable="false" unique="true" />
       <field name="valid" type="boolean" nullable="true" />
+      <field name="validationDate" type="datetime" nullable="true" />
       <field name="token" type="string" nullable="true" />
     <one-to-many field="trick" target-entity="App\Domain\Entity\Trick" mapped-by="trick_user">
     </one-to-many>

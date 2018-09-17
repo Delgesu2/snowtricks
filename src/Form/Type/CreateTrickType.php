@@ -9,7 +9,7 @@
 namespace App\Form\Type;
 
 use App\Domain\DTO\NewTrickDTO;
-use App\Entity\Group;
+use App\Domain\Entity\Group;
 use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

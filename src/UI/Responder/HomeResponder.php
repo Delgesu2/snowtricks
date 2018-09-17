@@ -14,8 +14,7 @@ final class HomeResponder implements HomeResponderInterface
 	private $twig;
 
     /**
-     * HomeResponder constructor.
-     * @param Environment $twig
+     * @inheritdoc
      */
 	public function __construct(Environment $twig)
 	{
@@ -23,9 +22,7 @@ final class HomeResponder implements HomeResponderInterface
 	}
 
     /**
-     * @param $tricks
-     *
-     * @return mixed|Response
+     * @inheritdoc
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime

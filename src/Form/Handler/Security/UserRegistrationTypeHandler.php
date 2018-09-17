@@ -19,9 +19,11 @@ use App\Helper\Interfaces\OneFileUploaderHelperInterface;
 use App\Helper\MailSubscriberHelper;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class UserRegistrationTypeHandler
@@ -60,7 +62,25 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
      */
     private $user;
 
+    /**
+     * @var MailSubscriberHelper
+     */
     private $mailer;
+
+    /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
+     * @var \Swift_Mailer
+     */
+    private $swift_Mailer;
 
     /**
      * @inheritdoc
@@ -72,7 +92,10 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
         UserPasswordEncoderInterface   $encoder,
-        MailSubscriberHelper           $mailer
+        MailSubscriberHelper           $mailer,
+        SessionInterface               $session,
+        ValidatorInterface             $validator,
+        \Swift_Mailer                  $swift_Mailer
     )
     {
         $this->encoderFactory     = $encoderFactory;
@@ -82,6 +105,9 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
         $this->usersRepository    = $usersRepository;
         $this->userPasswordEncoder= $encoder;
         $this->mailer             = $mailer;
+        $this->session            = $session;
+        $this->validator          = $validator;
+        $this->swift_Mailer       = $swift_Mailer;
     }
 
 
@@ -97,16 +123,30 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
                 $this->fileUploaderHelper->upload($form->getData()->photo, $media);
             }
 
-            $encoder = $this->encoderFactory->getEncoder(User::class);
-            $form->getData()->password = $encoder->encodePassword($form->getData()->password, null);
+            /* REGEX: at least 1 capital letter, 1 number, at least 8 characters, no space
+            $regex_mdp = '#(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\S{8,}#'; */
 
-            $user = $this->userFactory->create($form->getData());
+           /* if (preg_match($regex_mdp, $form->getData()->password)) {  */
 
-            $this->mailer->registrationSend($form, $user);
+                $encoder = $this->encoderFactory->getEncoder(User::class);
+                $form->getData()->password = $encoder->encodePassword($form->getData()->password, null);
 
-            $this->usersRepository->saveUser($user);
+                $user = $this->userFactory->create($form->getData());
 
-            return true;
+                $constraints = $this->validator->validate($user, [], ['User']);
+
+                if (\count($constraints) > 0) {
+                    return false;
+                }
+
+                $this->mailer->registrationSend($form, $this->swift_Mailer, $user);
+
+                $this->usersRepository->saveUser($user);
+
+                return true;
+           /* } else {
+                echo 'Mot de passe invalide.';
+            }*/
         }
 
         return false;
