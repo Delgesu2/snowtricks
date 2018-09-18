@@ -10,9 +10,10 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
+use App\Helper\Interfaces\FileUploaderHelperInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileUploaderHelper
+class FileUploaderHelper implements FileUploaderHelperInterface
 {
     /**
      * @var string
@@ -33,6 +34,9 @@ class FileUploaderHelper
         $this->pictDir = $pictDir;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function upload(UploadedFile $file)
     {
         // create filename for database

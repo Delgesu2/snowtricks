@@ -9,10 +9,12 @@
 namespace App\Form\Handler\Security\Interfaces;
 
 
+
 use App\Helper\MailSubscriberHelper;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use App\Helper\Interfaces\OneFileUploaderHelperInterface;
+use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Factory\Interfaces\UserFactoryInterface;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
@@ -27,17 +29,20 @@ interface UserRegistrationTypeHandlerInterface
      * UserRegistrationTypeHandlerInterface constructor.
      *
      * @param EncoderFactoryInterface $encoderFactory
+     * @param FileUploaderHelperInterface $fileUploaderHelper
+     * @param PhotoFactoryInterface $photoFactory
      * @param UserFactoryInterface $userFactory
      * @param UsersRepositoryInterface $usersRepository
      * @param UserPasswordEncoderInterface $encoder
      * @param MailSubscriberHelper $mailer
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
+     * @param \Swift_Mailer $swift_Mailer
      */
     public function __construct(
         EncoderFactoryInterface        $encoderFactory,
-        /**OneFileUploaderHelperInterface $fileUploaderHelper,
-        PhotoFactoryInterface          $photoFactory,**/
+        FileUploaderHelperInterface    $fileUploaderHelper,
+        PhotoFactoryInterface          $photoFactory,
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
         UserPasswordEncoderInterface   $encoder,

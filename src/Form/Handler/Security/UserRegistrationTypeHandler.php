@@ -15,7 +15,7 @@ use App\Domain\Factory\Interfaces\UserFactoryInterface;
 use App\Domain\Entity\Interfaces\UserTrickInterface;
 use App\Domain\Entity\User;
 use App\Form\Handler\Security\Interfaces\UserRegistrationTypeHandlerInterface;
-use App\Helper\Interfaces\OneFileUploaderHelperInterface;
+use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Helper\MailSubscriberHelper;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -38,7 +38,7 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
     private $encoderFactory;
 
     /**
-     * @var OneFileUploaderHelperInterface
+     * @var FileUploaderHelperInterface
      */
     private $fileUploaderHelper;
 
@@ -87,8 +87,8 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
      */
     public function __construct(
         EncoderFactoryInterface        $encoderFactory,
-        /**OneFileUploaderHelperInterface $fileUploaderHelper,
-        PhotoFactoryInterface          $photoFactory,**/
+        FileUploaderHelperInterface    $fileUploaderHelper,
+        PhotoFactoryInterface          $photoFactory,
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
         UserPasswordEncoderInterface   $encoder,
@@ -99,8 +99,8 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
     )
     {
         $this->encoderFactory     = $encoderFactory;
-        /**$this->fileUploaderHelper = $fileUploaderHelper;
-        $this->photoFactory       = $photoFactory;**/
+        $this->fileUploaderHelper = $fileUploaderHelper;
+        $this->photoFactory       = $photoFactory;
         $this->userFactory        = $userFactory;
         $this->usersRepository    = $usersRepository;
         $this->userPasswordEncoder= $encoder;
@@ -120,7 +120,7 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
 
             if (!\is_null($form->getData()->photo)) {
                 $media = $this->photoFactory->createFromfile($form->getData()->photo);
-                $this->fileUploaderHelper->upload($form->getData()->photo, $media);
+                $this->fileUploaderHelper->upload($media);
             }
 
             /* REGEX: at least 1 capital letter, 1 number, at least 8 characters, no space

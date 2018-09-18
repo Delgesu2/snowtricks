@@ -38,7 +38,7 @@ class PhotoFactory implements PhotoFactoryInterface
     {
         return new Photo(
             'file',
-            md5(str_rot13($file->getBasename('.'.$file->getExtension()))).'.'.$file->guessExtension(),
+            md5(str_rot13($file->getBasename('.'.$file->getExtension()))).'.'.$file->getExtension(),
             'Photo_profile'
         );
     }

@@ -9,7 +9,21 @@
 namespace App\Helper\Interfaces;
 
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 interface FileUploaderHelperInterface
 {
-    public function upload(\SplFileInfo $splFileInfo): bool;
+    /**
+     * FileUploaderHelperInterface constructor.
+     *
+     * @param string $pictDir
+     */
+    public function __construct(string $pictDir);
+
+    /**
+     * @param UploadedFile $file
+     *
+     * @return mixed
+     */
+    public function upload(UploadedFile $file);
 }
