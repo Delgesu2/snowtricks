@@ -10,6 +10,10 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
+use App\Domain\Entity\Interfaces\PhotoInterface;
+use App\Domain\Entity\Photo;
+use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
+use App\Domain\Factory\PhotoFactory;
 use App\Helper\Interfaces\FileUploaderHelperInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -37,10 +41,9 @@ class FileUploaderHelper implements FileUploaderHelperInterface
     /**
      * @inheritdoc
      */
-    public function upload(UploadedFile $file)
+    public function upload(UploadedFile $file, PhotoFactoryInterface $photoFactory)
     {
-        // create filename for database
-        $filename = md5(uniqid()) . '.' . $file->guessExtension();
+          $filename = new PhotoFactory();
 
         // move file to /tricks directory (à appeler dans la boucle du handler)
         $file->move(

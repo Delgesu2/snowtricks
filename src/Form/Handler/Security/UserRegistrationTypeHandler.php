@@ -19,6 +19,7 @@ use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Helper\MailSubscriberHelper;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -41,6 +42,11 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
      * @var FileUploaderHelperInterface
      */
     private $fileUploaderHelper;
+
+    /**
+     * @var UploadedFile
+     */
+    private $uploadedFile;
 
     /**
      * @var PhotoFactoryInterface
@@ -114,13 +120,13 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
     /**
      * @inheritdoc
      */
-    public function handle(FormInterface $form): bool
+    public function handle(FormInterface $form, UploadedFile $uploadedFile): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
             if (!\is_null($form->getData()->photo)) {
                 $media = $this->photoFactory->createFromfile($form->getData()->photo);
-                $this->fileUploaderHelper->upload($media);
+                $this->fileUploaderHelper->upload($this->uploadedFile, $media);
             }
 
             /* REGEX: at least 1 capital letter, 1 number, at least 8 characters, no space

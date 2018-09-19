@@ -57,5 +57,5 @@ interface UserRegistrationTypeHandlerInterface
      *
      * @return bool
      */
-    public function handle(FormInterface $form): bool;
+    public function handle(FormInterface $form, UploadedFile $uploadedFile): bool;
 }

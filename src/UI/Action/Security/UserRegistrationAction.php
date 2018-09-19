@@ -13,6 +13,7 @@ use App\Form\Type\Security\UserRegistrationType;
 use App\UI\Action\Security\Interfaces\UserRegistrationActionInterface;
 use App\UI\Responder\Security\Interfaces\UserRegistrationResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +37,11 @@ class UserRegistrationAction implements UserRegistrationActionInterface
      * @var UserRegistrationTypeHandlerInterface
      */
     private $formHandler;
+
+    /**
+     * @var UploadedFile
+     */
+    private $uploadedFile;
 
 
     /**

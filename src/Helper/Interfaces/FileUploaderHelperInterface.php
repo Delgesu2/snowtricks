@@ -9,6 +9,8 @@
 namespace App\Helper\Interfaces;
 
 
+use App\Domain\Entity\Interfaces\PhotoInterface;
+use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface FileUploaderHelperInterface
@@ -25,5 +27,5 @@ interface FileUploaderHelperInterface
      *
      * @return mixed
      */
-    public function upload(UploadedFile $file);
+    public function upload(UploadedFile $file, PhotoFactoryInterface $photoFactory);
 }

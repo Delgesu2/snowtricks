@@ -5,6 +5,7 @@ namespace App\UI\Action\Security\Interfaces;
 use App\Form\Handler\Security\Interfaces\UserRegistrationTypeHandlerInterface;
 use App\UI\Responder\Security\Interfaces\UserRegistrationResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,7 +24,7 @@ interface UserRegistrationActionInterface
     public function __construct(
         FormFactoryInterface $formFactory,
         UserRegistrationTypeHandlerInterface $typeHandler
-);
+    );
 
     /**
      * @param Request $request
