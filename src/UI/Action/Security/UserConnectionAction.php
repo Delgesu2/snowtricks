@@ -8,15 +8,18 @@
 
 namespace App\UI\Action\Security;
 
+use App\Form\Handler\Security\Interfaces\UserConnectionHandlerInterface;
+use App\Form\Type\Security\UserConnectionType;
 use App\UI\Action\Security\Interfaces\UserConnectionActionInterface;
-use App\UI\Action\Security\Interfaces\UserConnectionResponderInterface;
-use http\Env\Response;
+use App\UI\Responder\Security\Interfaces\UserConnectionResponderInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class UserConnectionAction
+ *
  * @Route(
  *     name="user_connection",
  *     path="/connection",
@@ -26,14 +29,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserConnectionAction implements UserConnectionActionInterface
 {
     /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
+
+    /**
+     * @var UserConnectionHandlerInterface
+     */
+    private $handler;
+
+    /**
      * @inheritdoc
      */
     public function __construct(
-        FormFactoryInterface               $formFactory,
-        UserConnectionTypeHandlerInterface $typeHandler
+        FormFactoryInterface           $formFactory,
+        UserConnectionHandlerInterface $handler
     ) {
         $this->formFactory = $formFactory;
-        $this->typeHandler = $typeHandler;
+        $this->handler = $handler;
     }
 
     /**
@@ -44,7 +57,15 @@ class UserConnectionAction implements UserConnectionActionInterface
         UserConnectionResponderInterface $responder
     ): Response {
 
-        $type = $this->formFactory->create(UserConnectionType::class)
+        $connectionType = $this->formFactory->create(UserConnectionType::class)
                                     ->handleRequest($request);
+
+        if ($this->handler->handle($connectionType)) {
+
+            return $responder(true);
+
+        }
+
+        return $responder(false,$connectionType);
     }
 }

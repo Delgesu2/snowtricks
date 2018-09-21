@@ -14,7 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 //use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @Route(name="create", path="/create")
+ * Class CreateTrickAction
+ *
+ * @Route(
+ *     name="create",
+ *     path="/create"
+ *     )
  */
 class CreateTrickAction implements CreateTrickActionInterface
 {
@@ -45,14 +50,14 @@ class CreateTrickAction implements CreateTrickActionInterface
      * @param FileUploaderHelper        $fileUploaderHelper
      */
     public function __construct(
-        FormFactoryInterface $formFactory,
+        FormFactoryInterface     $formFactory,
         EventDispatcherInterface $eventDispatcher,
-        FileUploaderHelper $fileUploaderHelper,
-        CreateTrickHandler $createTrickHandler
+        FileUploaderHelper       $fileUploaderHelper,
+        CreateTrickHandler       $createTrickHandler
         )
     {
-        $this->formFactory = $formFactory;
-        $this->eventDispatcher = $eventDispatcher;
+        $this->formFactory        = $formFactory;
+        $this->eventDispatcher    = $eventDispatcher;
         $this->fileUploaderHelper = $fileUploaderHelper;
         $this->createTrickHandler = $createTrickHandler;
     }

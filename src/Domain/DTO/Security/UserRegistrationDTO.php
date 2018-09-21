@@ -37,6 +37,9 @@ final class UserRegistrationDTO implements UserRegistrationDTOInterface
      */
     public $email;
 
+    /**
+     * @inheritdoc
+     */
     public function __construct(
         string       $name,
         string       $nick,

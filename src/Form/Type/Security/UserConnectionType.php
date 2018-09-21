@@ -9,19 +9,20 @@
 namespace App\Form\Type\Security;
 
 use App\Form\Type\Security\Interfaces\UserConnectionTypeInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use App\Domain\DTO\Security\UserConnectionDTO;
 /**
  * Class UserConnectionType
  *
  * @package App\Form\Type\Security
  */
-final class UserConnectionType implements UserConnectionTypeInterface
+final class UserConnectionType extends AbstractType implements UserConnectionTypeInterface
 {
     /**
      * @inheritdoc
@@ -38,7 +39,6 @@ final class UserConnectionType implements UserConnectionTypeInterface
                 'required'   => 'true'
             ])
             ->add('keep', CheckboxType::class, [
-                'help'       => 'Cocher la case pour rester connecté jusqu\'à la prochaine visite',
                 'required'   => 'false'
             ]);
     }

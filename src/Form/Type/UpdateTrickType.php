@@ -8,10 +8,11 @@
 
 namespace App\Form\Type;
 
+use App\Form\Type\Interfaces\UpdateTrickTypeInterface;
 use App\Helper\DataTransformer;
 use App\Domain\DTO\Interfaces\UpdateTrickDTOInterface;
-use App\Entity\Group;
-use App\Entity\Trick;
+use App\Domain\Entity\Group;
+use App\Domain\Entity\Trick;
 use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -23,7 +24,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
-final class UpdateTrickType extends AbstractType
+final class UpdateTrickType extends AbstractType implements UpdateTrickTypeInterface
 {
     private $transformer;
 

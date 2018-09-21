@@ -9,6 +9,8 @@
 namespace App\UI\Action\Security\Interfaces;
 
 
+use App\Form\Handler\Security\Interfaces\UserConnectionHandlerInterface;
+use App\UI\Responder\Security\Interfaces\UserConnectionResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -18,11 +20,11 @@ interface UserConnectionActionInterface
      * UserConnectionActionInterface constructor.
      *
      * @param FormFactoryInterface $formFactory
-     * @param UserConnectionTypeHandlerInterface $typeHandler
+     * @param UserConnectionHandlerInterface $typeHandler
      */
     public function __construct(
-        FormFactoryInterface               $formFactory,
-        UserConnectionTypeHandlerInterface $typeHandler
+        FormFactoryInterface           $formFactory,
+        UserConnectionHandlerInterface $handler
     );
 
     /**

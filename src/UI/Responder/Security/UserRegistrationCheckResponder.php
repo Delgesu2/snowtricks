@@ -11,15 +11,24 @@ namespace App\UI\Responder\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class UserRegistrationCheckResponder
+final class UserRegistrationCheckResponder
 {
+    /**
+     * @var UrlGeneratorInterface
+     */
     private $urlGenerator;
 
+    /**
+     * @inheritdoc
+     */
     public function __construct(UrlGeneratorInterface $urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function __invoke()
     {
         return new RedirectResponse($this->urlGenerator->generate('home'));
