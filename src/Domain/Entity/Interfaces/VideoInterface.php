@@ -11,6 +11,11 @@ namespace App\Domain\Entity\Interfaces;
 use App\Domain\Entity\Trick;
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * Interface VideoInterface
+ *
+ * @package App\Domain\Entity\Interfaces
+ */
 interface VideoInterface
 {
     /**

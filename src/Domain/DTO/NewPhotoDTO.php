@@ -10,7 +10,12 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\NewPhotoDTOInterface;
 
-class NewPhotoDTO implements NewPhotoDTOInterface
+/**
+ * Class NewPhotoDTO
+ *
+ * @package App\Domain\DTO
+ */
+final class NewPhotoDTO implements NewPhotoDTOInterface
 {
     /**
      * @var string
@@ -22,10 +27,7 @@ class NewPhotoDTO implements NewPhotoDTOInterface
     public $alt;
 
     /**
-     * NewPhotoDTO constructor.
-     * @param $title
-     * @param $path
-     * @param $alt
+     * {@inheritdoc}
      */
     public function __construct(
         $title,

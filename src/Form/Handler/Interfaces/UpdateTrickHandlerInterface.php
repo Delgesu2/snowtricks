@@ -11,13 +11,18 @@ namespace App\Form\Handler\Interfaces;
 
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Factory\Interfaces\VideoFactoryInterface;
-use App\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Interfaces\TrickInterface;
 use App\Helper\FileUploaderHelper;
 use App\Infra\Doctrine\Repository\TricksRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Interface UpdateTrickHandlerInterface
+ *
+ * @package App\Form\Handler\Interfaces
+ */
 interface UpdateTrickHandlerInterface
 {
     /**

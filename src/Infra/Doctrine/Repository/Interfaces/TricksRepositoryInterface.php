@@ -8,10 +8,14 @@
 
 namespace App\Infra\Doctrine\Repository\Interfaces;
 
-
 use App\Domain\Entity\Interfaces\TrickInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
+/**
+ * Interface TricksRepositoryInterface
+ *
+ * @package App\Infra\Doctrine\Repository\Interfaces
+ */
 interface TricksRepositoryInterface
 {
     /**

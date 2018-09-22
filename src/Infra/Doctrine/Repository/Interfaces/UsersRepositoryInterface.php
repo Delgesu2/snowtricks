@@ -8,10 +8,14 @@
 
 namespace App\Infra\Doctrine\Repository\Interfaces;
 
-
 use App\Domain\Entity\Interfaces\UserTrickInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
+/**
+ * Interface UsersRepositoryInterface
+ *
+ * @package App\Infra\Doctrine\Repository\Interfaces
+ */
 interface UsersRepositoryInterface
 {
     /**

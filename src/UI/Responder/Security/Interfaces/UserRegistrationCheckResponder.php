@@ -2,23 +2,23 @@
 /**
  * Created by PhpStorm.
  * User: ronsard
- * Date: 05/09/18
- * Time: 14:46
+ * Date: 22/09/18
+ * Time: 18:31
  */
 
-namespace App\UI\Responder\Interfaces;
+namespace App\UI\Responder\Security\Interfaces;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Interface DeleteUserResponderInterface
+ * Interface UserRegistrationCheckResponder
  *
- * @package App\UI\Responder\Interfaces
+ * @package App\UI\Responder\Security\Interfaces
  */
-interface DeleteUserResponderInterface
+interface UserRegistrationCheckResponder
 {
     /**
-     * DeleteUserResponderInterface constructor.
+     * UserRegistrationCheckResponder constructor.
      *
      * @param UrlGeneratorInterface $urlGenerator
      */

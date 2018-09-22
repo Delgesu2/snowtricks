@@ -13,8 +13,16 @@ use App\Infra\Doctrine\Repository\Interfaces\GroupsRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-class GroupsRepository extends ServiceEntityRepository implements GroupsRepositoryInterface
+/**
+ * Class GroupsRepository
+ *
+ * @package App\Infra\Doctrine\Repository
+ */
+final class GroupsRepository extends ServiceEntityRepository implements GroupsRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Group::class);

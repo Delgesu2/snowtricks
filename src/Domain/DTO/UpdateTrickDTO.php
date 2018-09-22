@@ -10,7 +10,12 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\UpdateTrickDTOInterface;
 
-class UpdateTrickDTO implements UpdateTrickDTOInterface
+/**
+ * Class UpdateTrickDTO
+ *
+ * @package App\Domain\DTO
+ */
+final class UpdateTrickDTO implements UpdateTrickDTOInterface
 {
     /**
      * @var string

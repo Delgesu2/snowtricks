@@ -14,7 +14,11 @@ use App\Form\Handler\Interfaces\CommentHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-
+/**
+ * Class CommentHandler
+ *
+ * @package App\Form\Handler
+ */
 final class CommentHandler implements CommentHandlerInterface
 {
     /**

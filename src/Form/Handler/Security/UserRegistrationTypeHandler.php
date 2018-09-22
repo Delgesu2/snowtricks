@@ -44,11 +44,6 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
     private $fileUploaderHelper;
 
     /**
-     * @var UploadedFile
-     */
-    private $uploadedFile;
-
-    /**
      * @var PhotoFactoryInterface
      */
     private $photoFactory;
@@ -120,32 +115,24 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
     /**
      * @inheritdoc
      */
-    public function handle(FormInterface $form, UploadedFile $uploadedFile): bool
+    public function handle(FormInterface $form): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
             if (!\is_null($form->getData()->photo)) {
-                $media = $this->photoFactory->createFromfile($form->getData()->photo);
-                $this->fileUploaderHelper->upload($this->uploadedFile, $media);
+                $photo = $this->photoFactory->createFromfile($form->getData()->photo);
+                $this->fileUploaderHelper->upload($form->getData()->photo, $photo, 'users');
             }
-
-            /* REGEX: at least 1 capital letter, 1 number, at least 8 characters, no space
-            $regex_mdp = '#(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\S{8,}#'; */
-
-           /* if (preg_match($regex_mdp, $form->getData()->password)) {  */
 
                 $encoder = $this->encoderFactory->getEncoder(User::class);
                 $form->getData()->password = $encoder->encodePassword($form->getData()->password, null);
 
                 $user = $this->userFactory->create($form->getData());
 
-                $constraints = $this->validator->validate($user, [], ['User']);
 
-                if (\count($constraints) > 0) {
-                    return false;
-                }
 
                 $this->mailer->registrationSend($form, $this->swift_Mailer, $user);
+
 
                 $this->usersRepository->saveUser($user);
 

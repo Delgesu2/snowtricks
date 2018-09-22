@@ -8,12 +8,16 @@
 
 namespace App\Form\Handler\Interfaces;
 
-
 use App\Domain\Factory\Interfaces\CommentFactoryInterface;
 use App\Infra\Doctrine\Repository\Interfaces\CommentsRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Interface CommentHandlerInterface
+ *
+ * @package App\Form\Handler\Interfaces
+ */
 interface CommentHandlerInterface
 {
     /**

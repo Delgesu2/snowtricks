@@ -8,8 +8,6 @@
 
 namespace App\Form\Handler\Security\Interfaces;
 
-
-
 use App\Helper\MailSubscriberHelper;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -23,6 +21,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Interface UserRegistrationTypeHandlerInterface
+ *
+ * @package App\Form\Handler\Security\Interfaces
+ */
 interface UserRegistrationTypeHandlerInterface
 {
     /**
@@ -57,5 +60,5 @@ interface UserRegistrationTypeHandlerInterface
      *
      * @return bool
      */
-    public function handle(FormInterface $form, UploadedFile $uploadedFile): bool;
+    public function handle(FormInterface $form): bool;
 }

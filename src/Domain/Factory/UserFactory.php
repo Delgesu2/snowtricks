@@ -8,12 +8,16 @@
 
 namespace App\Domain\Factory;
 
-
 use App\Domain\DTO\Security\Interfaces\UserRegistrationDTOInterface;
 use App\Domain\Factory\Interfaces\UserFactoryInterface;
 use App\Domain\Entity\User;
 
-class UserFactory implements UserFactoryInterface
+/**
+ * Class UserFactory
+ *
+ * @package App\Domain\Factory
+ */
+final class UserFactory implements UserFactoryInterface
 {
     public function create(UserRegistrationDTOInterface $userRegistrationDTO)
     {

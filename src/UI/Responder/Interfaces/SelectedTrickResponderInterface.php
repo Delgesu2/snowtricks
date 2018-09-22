@@ -8,13 +8,18 @@
 
 namespace App\UI\Responder\Interfaces;
 
-
 use Twig\Environment;
 
+/**
+ * Interface SelectedTrickResponderInterface
+ *
+ * @package App\UI\Responder\Interfaces
+ */
 interface SelectedTrickResponderInterface
 {
     /**
      * SelectedTrickResponderInterface constructor.
+     *
      * @param Environment $twig
      */
     public function __construct(Environment $twig);

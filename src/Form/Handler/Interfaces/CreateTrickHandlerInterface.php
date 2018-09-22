@@ -8,7 +8,6 @@
 
 namespace App\Form\Handler\Interfaces;
 
-
 use App\Domain\Factory\Interfaces\VideoFactoryInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Factory\TrickFactory;
@@ -20,6 +19,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Interface CreateTrickHandlerInterface
+ *
+ * @package App\Form\Handler\Interfaces
+ */
 interface CreateTrickHandlerInterface
 {
 

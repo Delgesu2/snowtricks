@@ -12,6 +12,11 @@ use App\UI\Responder\Interfaces\UserListResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+/**
+ * Class UserListResponder
+ *
+ * @package App\UI\Responder
+ */
 final class UserListResponder implements UserListResponderInterface
 {
     /**

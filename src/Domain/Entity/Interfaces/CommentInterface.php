@@ -8,9 +8,13 @@
 
 namespace App\Domain\Entity\Interfaces;
 
-
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * Interface CommentInterface
+ *
+ * @package App\Domain\Entity\Interfaces
+ */
 interface CommentInterface
 {
     /**

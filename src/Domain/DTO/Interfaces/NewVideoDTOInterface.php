@@ -8,7 +8,11 @@
 
 namespace App\Domain\DTO\Interfaces;
 
-
+/**
+ * Interface NewVideoDTOInterface
+ *
+ * @package App\Domain\DTO\Interfaces
+ */
 interface NewVideoDTOInterface
 {
     /**

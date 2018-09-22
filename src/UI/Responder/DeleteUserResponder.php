@@ -13,15 +13,26 @@ use App\UI\Responder\Interfaces\DeleteUserResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class DeleteUserResponder implements DeleteUserResponderInterface
+/**
+ * Class DeleteUserResponder
+ *
+ * @package App\UI\Responder
+ */
+final class DeleteUserResponder implements DeleteUserResponderInterface
 {
     private $urlGenerator;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct(UrlGeneratorInterface $urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke()
     {
         return new RedirectResponse($this->urlGenerator->generate('userlist'));

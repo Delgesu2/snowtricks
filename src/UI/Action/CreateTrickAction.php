@@ -3,6 +3,8 @@
 namespace App\UI\Action;
 
 use App\Form\Handler\CreateTrickHandler;
+use App\Form\Handler\Interfaces\CreateTrickHandlerInterface;
+use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\UI\Action\Interfaces\CreateTrickActionInterface;
 use App\Helper\FileUploaderHelper;
 use App\Form\Type\CreateTrickType;
@@ -16,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @Route(name="create", path="/create")
  */
-class CreateTrickAction implements CreateTrickActionInterface
+final class CreateTrickAction implements CreateTrickActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -39,16 +41,13 @@ class CreateTrickAction implements CreateTrickActionInterface
     private $createTrickHandler;
 
     /**
-     * CreateTrickAction constructor.
-     * @param FormFactoryInterface      $formFactory
-     * @param EventDispatcherInterface  $eventDispatcher
-     * @param FileUploaderHelper        $fileUploaderHelper
+     * {@inheritdoc}
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         EventDispatcherInterface $eventDispatcher,
-        FileUploaderHelper $fileUploaderHelper,
-        CreateTrickHandler $createTrickHandler
+        FileUploaderHelperInterface $fileUploaderHelper,
+        CreateTrickHandlerInterface $createTrickHandler
         )
     {
         $this->formFactory = $formFactory;
@@ -57,6 +56,9 @@ class CreateTrickAction implements CreateTrickActionInterface
         $this->createTrickHandler = $createTrickHandler;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke(
         Request $request,
         CreateTrickResponderInterface $responder

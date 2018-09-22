@@ -12,6 +12,11 @@ use App\Domain\Entity\Interfaces\PhotoInterface;
 use App\Domain\Entity\Interfaces\TrickInterface;
 use App\Domain\Entity\Interfaces\VideoInterface;
 
+/**
+ * Interface DTOBuilderInterface
+ *
+ * @package App\Domain\DTO\Interfaces
+ */
 interface DTOBuilderInterface
 {
     /**

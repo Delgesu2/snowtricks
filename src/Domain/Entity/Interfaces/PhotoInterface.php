@@ -10,6 +10,11 @@ namespace App\Domain\Entity\Interfaces;
 
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * Interface PhotoInterface
+ *
+ * @package App\Domain\Entity\Interfaces
+ */
 interface PhotoInterface
 {
     /**

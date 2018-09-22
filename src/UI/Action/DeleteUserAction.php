@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route(name="delete_user", path="/delete_user/{slug}")
  */
-class DeleteUserAction implements DeleteUserActionInterface
+final class DeleteUserAction implements DeleteUserActionInterface
 {
     private $repository;
 

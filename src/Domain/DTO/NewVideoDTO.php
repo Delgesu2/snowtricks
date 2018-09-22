@@ -10,7 +10,12 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\NewVideoDTOInterface;
 
-class NewVideoDTO implements NewVideoDTOInterface
+/**
+ * Class NewVideoDTO
+ *
+ * @package App\Domain\DTO
+ */
+final class NewVideoDTO implements NewVideoDTOInterface
 {
     /**
      * @var string

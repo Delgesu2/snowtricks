@@ -15,18 +15,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /**
  * @Route(name="registration_check",
  *     path="/validation/{token}"
  *      )
  */
-class UserRegistrationCheckAction implements UserRegistrationCheckActionInterface
+final class UserRegistrationCheckAction implements UserRegistrationCheckActionInterface
 {
     private $repository;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function __construct(UsersRepository $repository)
     {
@@ -34,7 +33,7 @@ class UserRegistrationCheckAction implements UserRegistrationCheckActionInterfac
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function __invoke(
         Request                        $request,

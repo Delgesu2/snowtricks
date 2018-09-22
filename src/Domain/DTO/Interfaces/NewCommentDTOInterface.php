@@ -8,10 +8,16 @@
 
 namespace App\Domain\DTO\Interfaces;
 
+/**
+ * Interface NewCommentDTOInterface
+ *
+ * @package App\Domain\DTO\Interfaces
+ */
 interface NewCommentDTOInterface
 {
     /**
      * NewCommentDTOInterface constructor.
+     *
      * @param $text
      */
     public function __construct(

@@ -14,16 +14,26 @@ use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-class UsersRepository extends ServiceEntityRepository implements UsersRepositoryInterface
+/**
+ * Class UsersRepository
+ *
+ * @package App\Infra\Doctrine\Repository
+ */
+final class UsersRepository extends ServiceEntityRepository implements UsersRepositoryInterface
 {
     /**
      * UsersRepository constructor.
+     *
+     * {@inheritdoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAllUsers()
     {
         return $this->createQueryBuilder('users')
@@ -32,6 +42,9 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
             ->getResult();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function saveUser(UserTrickInterface $userTrick)
     {
         $this->_em->persist($userTrick);
@@ -39,7 +52,7 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -55,7 +68,7 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -68,6 +81,9 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
                 ->getOneOrNullResult();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function update()
     {
         $this->_em->flush();

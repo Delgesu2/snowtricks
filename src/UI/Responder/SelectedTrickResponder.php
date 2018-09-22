@@ -6,13 +6,17 @@ use App\UI\Responder\Interfaces\SelectedTrickResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+/**
+ * Class SelectedTrickResponder
+ *
+ * @package App\UI\Responder
+ */
 final class SelectedTrickResponder implements SelectedTrickResponderInterface
 {
     private $twig;
 
     /**
-     * SelectedTrickResponder constructor.
-     * @param Environment $twig
+     * {@inheritdoc}
      */
     public function __construct(Environment $twig)
     {
@@ -20,9 +24,7 @@ final class SelectedTrickResponder implements SelectedTrickResponderInterface
     }
 
     /**
-     * @param $trick
-     *
-     * @return Response
+     * {@inheritdoc}
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime

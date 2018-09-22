@@ -8,11 +8,16 @@
 
 namespace App\Domain\DTO\Interfaces;
 
-
+/**
+ * Interface NewPhotoDTOInterface
+ *
+ * @package App\Domain\DTO\Interfaces
+ */
 interface NewPhotoDTOInterface
 {
     /**
      * NewPhotoDTOInterface constructor.
+     *
      * @param $title
      * @param $path
      * @param $alt

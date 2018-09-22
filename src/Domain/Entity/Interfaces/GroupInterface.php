@@ -8,9 +8,13 @@
 
 namespace App\Domain\Entity\Interfaces;
 
-
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * Interface GroupInterface
+ *
+ * @package App\Domain\Entity\Interfaces
+ */
 interface GroupInterface
 {
     /**

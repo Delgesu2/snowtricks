@@ -12,7 +12,12 @@ use App\Domain\Entity\Photo;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class PhotoFixtures extends Fixture
+/**
+ * Class PhotoFixtures
+ *
+ * @package App\DataFixtures
+ */
+final class PhotoFixtures extends Fixture
 {
     /**
      * (@inheritdoc)

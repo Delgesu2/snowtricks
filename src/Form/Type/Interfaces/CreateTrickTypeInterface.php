@@ -8,10 +8,14 @@
 
 namespace App\Form\Type\Interfaces;
 
-
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Interface CreateTrickTypeInterface
+ *
+ * @package App\Form\Type\Interfaces
+ */
 interface CreateTrickTypeInterface
 {
     /**

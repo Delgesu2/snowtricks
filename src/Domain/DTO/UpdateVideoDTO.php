@@ -10,7 +10,12 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\UpdateVideoDTOInterface;
 
-class UpdateVideoDTO implements UpdateVideoDTOInterface
+/**
+ * Class UpdateVideoDTO
+ *
+ * @package App\Domain\DTO
+ */
+final class UpdateVideoDTO implements UpdateVideoDTOInterface
 {
     /**
      * @var string

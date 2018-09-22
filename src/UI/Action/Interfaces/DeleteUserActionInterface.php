@@ -8,12 +8,16 @@
 
 namespace App\UI\Action\Interfaces;
 
-
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use App\UI\Responder\Interfaces\DeleteUserResponderInterface;
 use App\UI\Responder\Interfaces\UserListResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Interface DeleteUserActionInterface
+ *
+ * @package App\UI\Action\Interfaces
+ */
 interface DeleteUserActionInterface
 {
     /**

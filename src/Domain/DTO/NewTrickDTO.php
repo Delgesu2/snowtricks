@@ -12,7 +12,12 @@ use App\Domain\DTO\Interfaces\NewTrickDTOInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class NewTrickDTO implements NewTrickDTOInterface
+/**
+ * Class NewTrickDTO
+ *
+ * @package App\Domain\DTO
+ */
+final class NewTrickDTO implements NewTrickDTOInterface
 {
     /**
      * @var string

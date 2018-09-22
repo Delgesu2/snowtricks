@@ -8,10 +8,26 @@
 
 namespace App\Infra\Doctrine\Repository\Interfaces;
 
-
 use App\Domain\Factory\Interfaces\CommentFactoryInterface;
 
+/**
+ * Interface CommentsRepositoryInterface
+ *
+ * @package App\Infra\Doctrine\Repository\Interfaces
+ */
 interface CommentsRepositoryInterface
 {
+    /**
+     * CommentsRepositoryInterface constructor.
+     *
+     * @param \Doctrine\Common\Persistence\ManagerRegistry $registry
+     */
+    public function __construct(\Doctrine\Common\Persistence\ManagerRegistry $registry);
+
+    /**
+     * @return mixed
+     */
+    public function getAllComments();
+
 
 }

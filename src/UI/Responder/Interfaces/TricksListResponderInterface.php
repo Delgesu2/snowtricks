@@ -8,9 +8,13 @@
 
 namespace App\UI\Responder\Interfaces;
 
-
 use Twig\Environment;
 
+/**
+ * Interface TricksListResponderInterface
+ *
+ * @package App\UI\Responder\Interfaces
+ */
 interface TricksListResponderInterface
 {
     /**

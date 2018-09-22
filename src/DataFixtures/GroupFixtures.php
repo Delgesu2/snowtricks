@@ -7,7 +7,12 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\Tests\Compiler\G;
 
-class GroupFixtures extends Fixture
+/**
+ * Class GroupFixtures
+ *
+ * @package App\DataFixtures
+ */
+final class GroupFixtures extends Fixture
 {
     /**
      * (@inheritdoc)

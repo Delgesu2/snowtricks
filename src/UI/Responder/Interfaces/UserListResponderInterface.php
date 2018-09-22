@@ -8,10 +8,14 @@
 
 namespace App\UI\Responder\Interfaces;
 
-
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+/**
+ * Interface UserListResponderInterface
+ *
+ * @package App\UI\Responder\Interfaces
+ */
 interface UserListResponderInterface
 {
     /**

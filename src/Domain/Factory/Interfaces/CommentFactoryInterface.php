@@ -10,6 +10,11 @@ namespace App\Domain\Factory\Interfaces;
 
 use App\Domain\DTO\Interfaces\NewCommentDTOInterface;
 
+/**
+ * Interface CommentFactoryInterface
+ *
+ * @package App\Domain\Factory\Interfaces
+ */
 interface CommentFactoryInterface
 {
     /**

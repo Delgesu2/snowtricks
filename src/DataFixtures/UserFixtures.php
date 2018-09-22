@@ -6,7 +6,12 @@ use App\Domain\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class UserFixtures extends Fixture
+/**
+ * Class UserFixtures
+ *
+ * @package App\DataFixtures
+ */
+final class UserFixtures extends Fixture
 {
     /**
      * (@inheritdoc)

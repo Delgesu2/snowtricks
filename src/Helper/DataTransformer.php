@@ -13,7 +13,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;  // pas utilisé
 
-class DataTransformer implements DataTransformerInterface
+/**
+ * Class DataTransformer
+ *
+ * @package App\Helper
+ */
+final class DataTransformer implements DataTransformerInterface
 {
     private $entityManager;
 

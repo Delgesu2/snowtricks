@@ -10,6 +10,11 @@ namespace App\Domain\Factory\Interfaces;
 
 use App\Domain\DTO\Security\Interfaces\UserRegistrationDTOInterface;
 
+/**
+ * Interface UserFactoryInterface
+ *
+ * @package App\Domain\Factory\Interfaces
+ */
 interface UserFactoryInterface
 {
     /**

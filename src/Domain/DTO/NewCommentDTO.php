@@ -10,7 +10,12 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\NewCommentDTOInterface;
 
-class NewCommentDTO implements NewCommentDTOInterface
+/**
+ * Class NewCommentDTO
+ *
+ * @package App\Domain\DTO
+ */
+final class NewCommentDTO implements NewCommentDTOInterface
 {
     /**
      * @var string
@@ -18,8 +23,7 @@ class NewCommentDTO implements NewCommentDTOInterface
     public $text;
 
     /**
-     * NewCommentDTO constructor.
-     * @param $text
+     * {@inheritdoc}
      */
     public function __construct($text)
     {

@@ -16,7 +16,12 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class CommentFixtures extends Fixture implements DependentFixtureInterface
+/**
+ * Class CommentFixtures
+ *
+ * @package App\DataFixtures
+ */
+final class CommentFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * (@inheritdoc)
@@ -37,6 +42,9 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDependencies()
     {
         return array(

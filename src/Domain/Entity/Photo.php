@@ -46,11 +46,10 @@ class Photo implements PhotoInterface
      * @param $alt
      * @param null $trick_photo
      */
-    public function __construct($title, $path, $alt, $trick_photo = null)
+    public function __construct($title, $alt, $trick_photo = null)
     {
         $this->id = Uuid::uuid4();
         $this->title = $title;
-        $this->path = $path;
         $this->alt = $alt;
         $this->trick_photo = $trick_photo;
     }
@@ -122,7 +121,7 @@ class Photo implements PhotoInterface
      */
     public function upload(string $folder): void
     {
-        $this->path = $folder.$this->title;
+        $this->path = $folder;
     }
 
 }

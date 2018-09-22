@@ -10,7 +10,7 @@ namespace App\Form\Handler;
 
 use App\Domain\Factory\Interfaces\VideoFactoryInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
-use App\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Interfaces\TrickInterface;
 use App\Form\Handler\Interfaces\UpdateTrickHandlerInterface;
 use App\Infra\Doctrine\Repository\TricksRepository;
 use App\Helper\FileUploaderHelper;
@@ -18,6 +18,11 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class UpdateTrickHandler
+ *
+ * @package App\Form\Handler
+ */
 final class UpdateTrickHandler implements UpdateTrickHandlerInterface
 {
     private $fileUploaderHelper;

@@ -8,6 +8,11 @@
 
 namespace App\Domain\Factory\Interfaces;
 
+/**
+ * Interface VideoFactoryInterface
+ *
+ * @package App\Domain\Factory\Interfaces
+ */
 interface VideoFactoryInterface
 {
     /**

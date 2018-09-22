@@ -16,6 +16,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
+/**
+ * Class CommentType
+ *
+ * @package App\Form\Type
+ */
 final class CommentType extends AbstractType
 {
     /**

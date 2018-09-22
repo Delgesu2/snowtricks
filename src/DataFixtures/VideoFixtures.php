@@ -12,7 +12,12 @@ use App\Domain\Entity\Video;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class VideoFixtures extends Fixture
+/**
+ * Class VideoFixtures
+ *
+ * @package App\DataFixtures
+ */
+final class VideoFixtures extends Fixture
 {
     /**
      * (@inheritdoc)

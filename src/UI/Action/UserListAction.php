@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(name="userlist", path="userlist")
  */
-class UserListAction implements UserListActionInterface
+final class UserListAction implements UserListActionInterface
 {
     /**
      * @var UsersRepositoryInterface
@@ -26,7 +26,7 @@ class UserListAction implements UserListActionInterface
     private $repository;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function __construct(UsersRepositoryInterface $repository)
     {
@@ -34,7 +34,7 @@ class UserListAction implements UserListActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function __invoke(UserListResponderInterface $responder)
     {

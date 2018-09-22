@@ -15,6 +15,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
+/**
+ * Class CreateTrickResponder
+ *
+ * @package App\UI\Responder
+ */
 final class CreateTrickResponder implements CreateTrickResponderInterface
 {
     private $twig;

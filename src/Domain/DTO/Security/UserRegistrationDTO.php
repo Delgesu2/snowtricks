@@ -10,6 +10,11 @@ namespace App\Domain\DTO\Security;
 
 use App\Domain\DTO\Security\Interfaces\UserRegistrationDTOInterface;
 
+/**
+ * Class UserRegistrationDTO
+ *
+ * @package App\Domain\DTO\Security
+ */
 final class UserRegistrationDTO implements UserRegistrationDTOInterface
 {
     /**
@@ -37,6 +42,9 @@ final class UserRegistrationDTO implements UserRegistrationDTOInterface
      */
     public $email;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct(
         string       $name,
         string       $nick,
@@ -51,4 +59,10 @@ final class UserRegistrationDTO implements UserRegistrationDTOInterface
         $this->email    = $email;
         $this->photo    = $photo;
     }
+
+      /**  $constraints = $this->validator->validate($user);
+
+        if (\count($constraints) > 0) {
+        return false;
+        }  **/
 }

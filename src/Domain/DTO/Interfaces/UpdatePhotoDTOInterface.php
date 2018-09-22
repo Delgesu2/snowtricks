@@ -8,7 +8,11 @@
 
 namespace App\Domain\DTO\Interfaces;
 
-
+/**
+ * Interface UpdatePhotoDTOInterface
+ *
+ * @package App\Domain\DTO\Interfaces
+ */
 interface UpdatePhotoDTOInterface
 {
     /**

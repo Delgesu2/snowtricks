@@ -10,15 +10,17 @@ namespace App\Domain\Factory\Interfaces;
 
 use App\Domain\Entity\Interfaces\PhotoInterface;
 
+/**
+ * Interface PhotoFactoryInterface
+ *
+ * @package App\Domain\Factory\Interfaces
+ */
 interface PhotoFactoryInterface
 {
     /**
-     * @param $title
-     * @param $path
-     * @param $alt
-     * @return mixed
+     * @param \SplFileInfo $file
+     *
+     * @return PhotoInterface
      */
-    public function create($title, $path, $alt);
-
     public function createFromfile(\SplFileInfo $file): PhotoInterface;
 }

@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     methods={"GET", "POST"}
  *     )
  */
-class UserRegistrationAction implements UserRegistrationActionInterface
+final class UserRegistrationAction implements UserRegistrationActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -45,7 +45,7 @@ class UserRegistrationAction implements UserRegistrationActionInterface
 
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function __construct(
         FormFactoryInterface $formFactory,
@@ -56,7 +56,7 @@ class UserRegistrationAction implements UserRegistrationActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function __invoke(
         Request $request,

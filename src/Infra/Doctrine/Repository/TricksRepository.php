@@ -8,10 +8,15 @@ use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-class TricksRepository extends ServiceEntityRepository implements TricksRepositoryInterface
+/**
+ * Class TricksRepository
+ *
+ * @package App\Infra\Doctrine\Repository
+ */
+final class TricksRepository extends ServiceEntityRepository implements TricksRepositoryInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -29,7 +34,7 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -43,7 +48,7 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function save(TrickInterface $trick)
     {
@@ -52,7 +57,7 @@ class TricksRepository extends ServiceEntityRepository implements TricksReposito
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */

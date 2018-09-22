@@ -22,6 +22,11 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
+/**
+ * Class CreateTrickType
+ *
+ * @package App\Form\Type
+ */
 final class CreateTrickType extends AbstractType
 {
     /**

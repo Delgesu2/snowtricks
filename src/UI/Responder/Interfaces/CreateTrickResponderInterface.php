@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
+/**
+ * Interface CreateTrickResponderInterface
+ *
+ * @package App\UI\Responder\Interfaces
+ */
 interface CreateTrickResponderInterface
 {
     /**

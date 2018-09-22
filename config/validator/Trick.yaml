@@ -1,4 +1,4 @@
-App\Entity\Trick:
+App\Domain\Entity\Trick:
     properties:
         trick_name:
             - NotBlank: ~

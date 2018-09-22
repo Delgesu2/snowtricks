@@ -12,6 +12,11 @@ use Symfony\Component\Form\FormInterface;
 use App\Domain\Entity\Interfaces\UserTrickInterface;
 use Twig\Environment;
 
+/**
+ * Interface MailSubscriberHelperInterface
+ *
+ * @package App\Helper\Interfaces
+ */
 interface MailSubscriberHelperInterface
 {
     /**

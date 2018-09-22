@@ -10,7 +10,12 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\UpdatePhotoDTOInterface;
 
-class UpdatePhotoDTO implements UpdatePhotoDTOInterface
+/**
+ * Class UpdatePhotoDTO
+ *
+ * @package App\Domain\DTO
+ */
+final class UpdatePhotoDTO implements UpdatePhotoDTOInterface
 {
     /**
      * @var string

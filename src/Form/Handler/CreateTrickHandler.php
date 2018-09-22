@@ -19,6 +19,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class CreateTrickHandler
+ *
+ * @package App\Form\Handler
+ */
 final class CreateTrickHandler implements CreateTrickHandlerInterface
 {
     private $fileUploaderHelper;

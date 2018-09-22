@@ -9,16 +9,19 @@
 namespace App\UI\Action;
 
 use App\Domain\DTO\DTOBuilder;
-use App\Domain\DTO\UpdateTrickDTO;
+use App\Domain\DTO\Interfaces\DTOBuilderInterface;
+use App\Form\Handler\Interfaces\UpdateTrickHandlerInterface;
 use App\Form\Handler\UpdateTrickHandler;
+use App\Helper\Interfaces\FileUploaderHelperInterface;
+use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
 use App\Infra\Doctrine\Repository\TricksRepository;
+use App\UI\Action\Interfaces\UpdateTrickActionInterface;
 use App\UI\Responder\Interfaces\UpdateTrickResponderInterface;
 use App\Helper\FileUploaderHelper;
 use App\Form\Type\UpdateTrickType;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-//use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -26,7 +29,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *      path="/update/{slug}",
  *      requirements={"slug"="[a-zA-Z0-9-]+"})
  */
-class UpdateTrickAction
+final class UpdateTrickAction implements UpdateTrickActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -58,14 +61,16 @@ class UpdateTrickAction
      */
     private $DTOBuilder;
 
-
+    /**
+     * {@inheritdoc}
+     */
     public function __construct(
         FormFactoryInterface $formFactory,
         EventDispatcherInterface $eventDispatcher,
-        FileUploaderHelper $fileUploaderHelper,
-        UpdateTrickHandler $updateTrickHandler,
-        TricksRepository $repository,
-        DTOBuilder $DTOBuilder
+        FileUploaderHelperInterface $fileUploaderHelper,
+        UpdateTrickHandlerInterface $updateTrickHandler,
+        TricksRepositoryInterface $repository,
+        DTOBuilderInterface $DTOBuilder
     )
     {
         $this->formFactory = $formFactory;
@@ -76,6 +81,9 @@ class UpdateTrickAction
         $this->DTOBuilder = $DTOBuilder;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke(
         Request $request,
         UpdateTrickResponderInterface $responder

@@ -12,7 +12,12 @@ use App\Domain\DTO\Interfaces\NewCommentDTOInterface;
 use App\Domain\Factory\Interfaces\CommentFactoryInterface;
 use App\Domain\Entity\Comment;
 
-class CommentFactory implements CommentFactoryInterface
+/**
+ * Class CommentFactory
+ *
+ * @package App\Domain\Factory
+ */
+final class CommentFactory implements CommentFactoryInterface
 {
     /**
      * @param NewCommentDTOInterface $commentDTO

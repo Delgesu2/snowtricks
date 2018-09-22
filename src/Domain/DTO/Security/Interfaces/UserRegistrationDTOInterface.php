@@ -8,9 +8,22 @@
 
 namespace App\Domain\DTO\Security\Interfaces;
 
-
+/**
+ * Interface UserRegistrationDTOInterface
+ *
+ * @package App\Domain\DTO\Security\Interfaces
+ */
 interface UserRegistrationDTOInterface
 {
+    /**
+     * UserRegistrationDTOInterface constructor.
+     *
+     * @param string $name
+     * @param string $nick
+     * @param string $password
+     * @param string $email
+     * @param \SplFileInfo|null $photo
+     */
     public function __construct(
         string       $name,
         string       $nick,

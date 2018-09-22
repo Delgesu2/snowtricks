@@ -14,14 +14,24 @@ use App\Infra\Doctrine\Repository\Interfaces\CommentsRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
-
-class CommentsRepository extends ServiceEntityRepository implements CommentsRepositoryInterface
+/**
+ * Class CommentsRepository
+ *
+ * @package App\Infra\Doctrine\Repository
+ */
+final class CommentsRepository extends ServiceEntityRepository implements CommentsRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function __construct(\Doctrine\Common\Persistence\ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAllComments()
     {
         return $this->createQueryBuilder('comments')
@@ -29,11 +39,17 @@ class CommentsRepository extends ServiceEntityRepository implements CommentsRepo
                     ->getResult();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSelectedTrickComments($trick)
     {
        // return $this->createQueryBuilder()
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function save(CommentInterface $comment)   // ça va pas : il faut que je le lie au Trick concerné
     {
         $this->_em->persist($comment);

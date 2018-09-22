@@ -12,7 +12,12 @@ use App\Domain\DTO\Interfaces\NewTrickDTOInterface;
 use App\Domain\Factory\Interfaces\TrickFactoryInterface;
 use App\Domain\Entity\Trick;
 
-class TrickFactory implements TrickFactoryInterface
+/**
+ * Class TrickFactory
+ *
+ * @package App\Domain\Factory
+ */
+final class TrickFactory implements TrickFactoryInterface
 {
     /**
      * @param NewTrickDTOInterface $newTrickDTO.

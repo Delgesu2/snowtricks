@@ -11,13 +11,15 @@ declare(strict_types=1);
 namespace App\Helper;
 
 use App\Domain\Entity\Interfaces\PhotoInterface;
-use App\Domain\Entity\Photo;
-use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
-use App\Domain\Factory\PhotoFactory;
 use App\Helper\Interfaces\FileUploaderHelperInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileUploaderHelper implements FileUploaderHelperInterface
+/**
+ * Class FileUploaderHelper
+ *
+ * @package App\Helper
+ */
+final class FileUploaderHelper implements FileUploaderHelperInterface
 {
     /**
      * @var string
@@ -25,35 +27,28 @@ class FileUploaderHelper implements FileUploaderHelperInterface
     private $pictDir;
 
     /**
-     * FileUploaderHelperInterface constructor
-     * @param UploadedFile     $file
-     * @param string           $pictDir
+     * {@inheritdoc}
      */
-    public function __construct(
-        //UploadedFile $file,
-        string $pictDir
-    )
+    public function __construct(string $pictDir)
     {
-       // $this->file = $file;
         $this->pictDir = $pictDir;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function upload(UploadedFile $file, PhotoFactoryInterface $photoFactory)
+    public function upload(
+        UploadedFile $file,
+        PhotoInterface $photo,
+        string $folder = ''
+)
     {
-          $filename = new PhotoFactory();
-
-        // move file to /tricks directory (à appeler dans la boucle du handler)
+        // move file
         $file->move(
-            $this->pictDir,
-            $filename
+            $this->pictDir . '/' . $folder,
+            $photo->getTitle()
         );
 
-        return [
-            'filename' => $filename,
-            'pictDir'  => $this->pictDir
-        ];
+        $photo->upload($this->pictDir. '/' . $folder . '/' . $photo->getTitle());
     }
 }

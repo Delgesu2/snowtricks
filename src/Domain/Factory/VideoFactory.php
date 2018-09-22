@@ -12,7 +12,12 @@ use App\Domain\DTO\Interfaces\NewVideoDTOInterface;
 use App\Domain\Factory\Interfaces\VideoFactoryInterface;
 use App\Domain\Entity\Video;
 
-class VideoFactory implements VideoFactoryInterface
+/**
+ * Class VideoFactory
+ *
+ * @package App\Domain\Factory
+ */
+final class VideoFactory implements VideoFactoryInterface
 {
 
     /**

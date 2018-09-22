@@ -13,15 +13,30 @@ use App\UI\Responder\Interfaces\UpdateTrickResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+/**
+ * Class UpdateTrickResponder
+ *
+ * @package App\UI\Responder
+ */
 final class UpdateTrickResponder implements UpdateTrickResponderInterface
 {
     private $twig;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct(Environment $twig)
     {
         $this->twig = $twig;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($form)
     {
         return new Response(

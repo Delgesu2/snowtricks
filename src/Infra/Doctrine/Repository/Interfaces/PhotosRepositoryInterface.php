@@ -2,30 +2,29 @@
 /**
  * Created by PhpStorm.
  * User: ronsard
- * Date: 10/07/18
- * Time: 17:10
+ * Date: 21/09/18
+ * Time: 22:28
  */
 
 namespace App\Infra\Doctrine\Repository\Interfaces;
 
+use App\Domain\Entity\Interfaces\PhotoInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * Interface GroupsRepositoryInterface
+ * Interface PhotosRepositoryInterface
  *
  * @package App\Infra\Doctrine\Repository\Interfaces
  */
-interface GroupsRepositoryInterface
+interface PhotosRepositoryInterface
 {
     /**
-     * GroupsRepositoryInterface constructor.
-     *
-     * @param ManagerRegistry $registry
+     * {@inheritdoc}
      */
     public function __construct(ManagerRegistry $registry);
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function getAllGroups();
+    public function save(PhotoInterface $photo);
 }

@@ -2,8 +2,9 @@
 
 namespace App\UI\Action;
 
-use App\Infra\Doctrine\Repository\TricksRepository;
-use App\UI\Responder\SelectedTrickResponder;
+use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
+use App\UI\Action\Interfaces\SelectedTrickActionInterface;
+use App\UI\Responder\Interfaces\SelectedTrickResponderInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -11,16 +12,22 @@ use Symfony\Component\Routing\Annotation\Route;
  *      path="/trick/{slug}",
  *      requirements={"slug"="[a-zA-Z0-9-]+"})
  */
-class SelectedTrickAction
+final class SelectedTrickAction implements SelectedTrickActionInterface
 {
     private $repository;
 
-    public function __construct(TricksRepository $repository)
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(TricksRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
 
-    public function __invoke(SelectedTrickResponder $responder, $slug)
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke(SelectedTrickResponderInterface $responder, $slug)
     {
         $trick=$this->repository->getOneTrick($slug);
         return $responder($trick);

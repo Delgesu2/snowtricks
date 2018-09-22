@@ -8,7 +8,11 @@
 
 namespace App\Domain\DTO\Interfaces;
 
-
+/**
+ * Interface NewTrickDTOInterface
+ *
+ * @package App\Domain\DTO\Interfaces
+ */
 interface NewTrickDTOInterface
 {
     /**

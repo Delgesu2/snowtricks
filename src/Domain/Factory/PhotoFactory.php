@@ -8,38 +8,27 @@
 
 namespace App\Domain\Factory;
 
-use App\Domain\DTO\Interfaces\NewPhotoDTOInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Entity\Interfaces\PhotoInterface;
 use App\Domain\Entity\Photo;
 
-
-class PhotoFactory implements PhotoFactoryInterface
+/**
+ * Class PhotoFactory
+ *
+ * @package App\Domain\Factory
+ */
+final class PhotoFactory implements PhotoFactoryInterface
 {
-    /**
-     * @param $title
-     * @param $path
-     * @param $alt
-     * @return Photo|mixed
-     */
-    public function create($title, $path, $alt)
-    {
-        return new Photo(
-            $title,
-            $path,
-            $alt
-        );
-    }
-
     /**
      * {@inheritdoc}
      */
     public function createFromFile(\SplFileInfo $file): PhotoInterface
     {
+        $title = md5(str_rot13($file->getBasename('.'.$file->getExtension())));
+
         return new Photo(
-            'file',
-            md5(str_rot13($file->getBasename('.'.$file->getExtension()))),
-            'Photo_profile'
+            $title . '.' . $file->guessExtension(),
+            $title
         );
     }
 }

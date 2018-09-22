@@ -16,10 +16,15 @@ use App\Domain\Entity\Interfaces\PhotoInterface;
 use App\Domain\Entity\Interfaces\TrickInterface;
 use App\Domain\Entity\Interfaces\VideoInterface;
 
-class DTOBuilder implements DTOBuilderInterface
+/**
+ * Class DTOBuilder
+ *
+ * @package App\Domain\DTO
+ */
+final class DTOBuilder implements DTOBuilderInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function hydrateTrickDTO(TrickInterface $trick): UpdateTrickDTOInterface
     {
@@ -33,7 +38,7 @@ class DTOBuilder implements DTOBuilderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function hydratePhotoDTO(PhotoInterface $photo): UpdatePhotoDTOInterface
     {
@@ -45,7 +50,7 @@ class DTOBuilder implements DTOBuilderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function hydrateVideoDTO(VideoInterface $video): UpdateVideoDTOInterface
     {

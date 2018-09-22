@@ -10,6 +10,11 @@ namespace App\Domain\Factory\Interfaces;
 
 use App\Domain\DTO\Interfaces\NewTrickDTOInterface;
 
+/**
+ * Interface TrickFactoryInterface
+ *
+ * @package App\Domain\Factory\Interfaces
+ */
 interface TrickFactoryInterface
 {
     /**

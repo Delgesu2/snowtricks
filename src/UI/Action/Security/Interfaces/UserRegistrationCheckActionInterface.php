@@ -13,6 +13,11 @@ use App\UI\Responder\Security\UserRegistrationCheckResponder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * Interface UserRegistrationCheckActionInterface
+ *
+ * @package App\UI\Action\Security\Interfaces
+ */
 interface UserRegistrationCheckActionInterface
 {
     /**

@@ -11,7 +11,12 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class TrickFixtures extends Fixture implements DependentFixtureInterface
+/**
+ * Class TrickFixtures
+ *
+ * @package App\DataFixtures
+ */
+final class TrickFixtures extends Fixture implements DependentFixtureInterface
 
 {
     /**

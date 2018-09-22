@@ -13,7 +13,12 @@ use App\Helper\Interfaces\MailSubscriberHelperInterface;
 use Symfony\Component\Form\FormInterface;
 use Twig\Environment;
 
-class MailSubscriberHelper implements MailSubscriberHelperInterface
+/**
+ * Class MailSubscriberHelper
+ *
+ * @package App\Helper
+ */
+final class MailSubscriberHelper implements MailSubscriberHelperInterface
 {
     /**
      * @var Environment
@@ -21,7 +26,7 @@ class MailSubscriberHelper implements MailSubscriberHelperInterface
     private $twig;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function __construct(Environment $twig)
     {
@@ -29,7 +34,7 @@ class MailSubscriberHelper implements MailSubscriberHelperInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
