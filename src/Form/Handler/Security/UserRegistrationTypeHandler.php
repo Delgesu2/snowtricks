@@ -123,11 +123,6 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
                 $this->fileUploaderHelper->upload($media);
             }
 
-            /* REGEX: at least 1 capital letter, 1 number, at least 8 characters, no space
-            $regex_mdp = '#(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\S{8,}#'; */
-
-           /* if (preg_match($regex_mdp, $form->getData()->password)) {  */
-
                 $encoder = $this->encoderFactory->getEncoder(User::class);
                 $form->getData()->password = $encoder->encodePassword($form->getData()->password, null);
 
@@ -144,9 +139,7 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
                 $this->usersRepository->saveUser($user);
 
                 return true;
-           /* } else {
-                echo 'Mot de passe invalide.';
-            }*/
+
         }
 
         return false;

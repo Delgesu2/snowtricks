@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route(name="delete_user", path="/delete_user/{slug}")
+ * @Route(name="del_user", path="/del_user/{slug}")
  */
 class DeleteUserAction implements DeleteUserActionInterface
 {

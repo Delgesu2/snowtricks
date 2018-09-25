@@ -8,6 +8,7 @@
 
 namespace App\Form\Handler\Security\Interfaces;
 
+use App\Domain\Entity\Interfaces\UserTrickInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -27,5 +28,5 @@ interface UserConnectionHandlerInterface
      *
      * @return bool
      */
-    public function handle(FormInterface $form): bool;
+    public function handle(FormInterface $form, UserTrickInterface $user): bool;
 }

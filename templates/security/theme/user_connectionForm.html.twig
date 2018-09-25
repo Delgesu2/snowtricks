@@ -12,6 +12,9 @@
     {% endspaceless %}
 {% endblock form_errors %}
 
+{% block form %}
+    {{ form_start(form) }}
+
     <div class="columns is-mobile">
         <div class="column is-10 is-offset-1">
 
@@ -19,7 +22,7 @@
                 <div class="hero-body">
                     <div class="container has-text-centered">
                         <h1 class="title">
-                            Inscription nouveau membre
+                            Connexion
                         </h1>
                     </div>
                 </div>
@@ -54,13 +57,14 @@
                 </div>
 
                 <!-- Checkbox -->
-                <label class="checkbox">
-                    <input type="checkbox">
+                    {{ form_label(form.keep, 'Rester connecté') }}
                     {{ form_widget(form.keep) }}
-                    Rester connecté
-                </label>
 
             </section>
 
+            <button type="submit">Envoyer</button>
+
         </div>
     </div>
+    {{ form_end(form) }}
+{% endblock %}

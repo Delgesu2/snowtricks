@@ -8,8 +8,8 @@
 
 namespace App\Form\Handler\Security;
 
+use App\Domain\Entity\Interfaces\UserTrickInterface;
 use App\Form\Handler\Security\Interfaces\UserConnectionHandlerInterface;
-use Symfony\Bundle\MakerBundle\Validator;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -33,9 +33,13 @@ class UserConnectionHandler implements UserConnectionHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(FormInterface $form): bool
+    public function handle(FormInterface $form, UserTrickInterface $user): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form->getData()->name === $user->getName() && $form->getData()->password === $user->getPassword() ) {
+
+            }
 
             echo "Salut";
             return true;

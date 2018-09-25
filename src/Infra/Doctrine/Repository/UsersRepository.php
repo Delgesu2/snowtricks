@@ -13,8 +13,9 @@ use App\Domain\Entity\User;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
-class UsersRepository extends ServiceEntityRepository implements UsersRepositoryInterface
+class UsersRepository extends ServiceEntityRepository implements UsersRepositoryInterface, UserLoaderInterface
 {
     /**
      * UsersRepository constructor.
@@ -24,6 +25,9 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
         parent::__construct($registry, User::class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAllUsers()
     {
         return $this->createQueryBuilder('users')
@@ -32,6 +36,9 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
             ->getResult();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function saveUser(UserTrickInterface $userTrick)
     {
         $this->_em->persist($userTrick);
@@ -39,7 +46,7 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -55,7 +62,7 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -68,8 +75,26 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
                 ->getOneOrNullResult();
     }
 
+    /**
+     *
+     */
     public function update()
     {
         $this->_em->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function loadUserByUsername($username)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.name = :name OR u.email = :email')
+            ->setParameter('name', $username)
+            ->setParameter('email', $username)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

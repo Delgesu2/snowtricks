@@ -6,11 +6,13 @@ use App\Domain\Entity\Interfaces\UserTrickInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Serializable;
 
 /**
 * Snowtricks_user entity
 */
-class User implements UserTrickInterface
+class User implements UserTrickInterface, AdvancedUserInterface, \Serializable
 {
     /**
     * @var \Ramsey\Uuid\UuidInterface
@@ -92,7 +94,7 @@ class User implements UserTrickInterface
         $comment= null
     )
     {
-        $this->id = Uuid::uuid4();
+        $this->id       = Uuid::uuid4();
         $this->name     = $name;
         $this->slug     = $this->createSlug($name);
         $this->nick     = $nick;
@@ -217,6 +219,7 @@ class User implements UserTrickInterface
     {
         $this->valid = true;
         $this->validationDate = new \DateTimeImmutable();
+        $this->role = 'ROLE_USER';
     }
 
     /**
@@ -226,4 +229,66 @@ class User implements UserTrickInterface
     {
     	
     }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function getUsername()
+    {
+        return $this->name;
+    }
+
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->valid;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->name,
+            $this->password,
+            $this->valid
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->name,
+            $this->password,
+            $this->valid
+            ) = unserialize($serialized);
+    }
+
 }
