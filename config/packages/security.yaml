@@ -17,6 +17,10 @@ security:
             pattern: ^/
             http_basic: ~
             provider: our_db_provider
+
+            guard:
+                authenticators:
+                    - App\Helper\TokenAuthenticator
      #   secured_area:
     #        logout:
    #             path: /logout
@@ -40,7 +44,7 @@ security:
          - { path: ^/update, roles: ROLE_USER }
          - { path: ^/delete$, roles: ROLE_USER }
          - { path: ^/userlist, roles: ROLE_ADMIN }
-         - { path: ^/del_user}
+         - { path: ^/del_user, roles: ROLE_ADMIN}
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
