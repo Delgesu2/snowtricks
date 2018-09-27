@@ -9,6 +9,7 @@
 namespace App\Form\Type;
 
 use App\Domain\DTO\NewCommentDTO;
+use App\Form\Type\Interfaces\CommentTypeInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormInterface;
@@ -21,7 +22,8 @@ use Symfony\Component\Validator\Constraints\Length;
  *
  * @package App\Form\Type
  */
-final class CommentType extends AbstractType
+
+final class CommentType extends AbstractType implements CommentTypeInterface
 {
     /**
      * @inheritdoc

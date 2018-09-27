@@ -13,6 +13,8 @@ use App\Domain\Entity\User;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
+
 
 /**
  * Class UsersRepository
@@ -20,6 +22,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @package App\Infra\Doctrine\Repository
  */
 final class UsersRepository extends ServiceEntityRepository implements UsersRepositoryInterface
+
 {
     /**
      * UsersRepository constructor.
@@ -82,10 +85,26 @@ final class UsersRepository extends ServiceEntityRepository implements UsersRepo
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
+
     public function update()
     {
         $this->_em->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function loadUserByUsername($username)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.name = :name OR u.email = :email')
+            ->setParameter('name', $username)
+            ->setParameter('email', $username)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

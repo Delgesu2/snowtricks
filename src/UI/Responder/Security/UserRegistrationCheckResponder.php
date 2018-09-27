@@ -18,6 +18,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final class UserRegistrationCheckResponder
 {
+    /**
+     * @var UrlGeneratorInterface
+     */
     private $urlGenerator;
 
     /**

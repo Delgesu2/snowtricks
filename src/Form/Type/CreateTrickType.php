@@ -10,6 +10,7 @@ namespace App\Form\Type;
 
 use App\Domain\DTO\NewTrickDTO;
 use App\Domain\Entity\Group;
+use App\Form\Type\Interfaces\CreateTrickTypeInterface;
 use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -27,7 +28,9 @@ use Symfony\Component\Validator\Constraints\Length;
  *
  * @package App\Form\Type
  */
-final class CreateTrickType extends AbstractType
+
+final class CreateTrickType extends AbstractType implements CreateTrickTypeInterface
+
 {
     /**
      * @inheritdoc

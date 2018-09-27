@@ -137,9 +137,7 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
                 $this->usersRepository->saveUser($user);
 
                 return true;
-           /* } else {
-                echo 'Mot de passe invalide.';
-            }*/
+
         }
 
         return false;

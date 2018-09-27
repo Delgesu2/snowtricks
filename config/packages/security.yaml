@@ -2,12 +2,32 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+        our_db_provider:
+            entity:
+                class: App\Domain\Entity\User
+                # if you're using multiple entity managers
+                                # manager_name: customer
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+            pattern: ^/
+            http_basic: ~
+            provider: our_db_provider
+
+            guard:
+                authenticators:
+                    - App\Helper\TokenAuthenticator
+     #   secured_area:
+    #        logout:
+   #             path: /logout
+  #              target: /
+
+#logout:
+ #   path: /logout
 
             # activate different ways to authenticate
 
@@ -20,8 +40,14 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/create$, roles: ROLE_USER }
+         - { path: ^/update, roles: ROLE_USER }
+         - { path: ^/delete$, roles: ROLE_USER }
+         - { path: ^/userlist, roles: ROLE_ADMIN }
+         - { path: ^/del_user, roles: ROLE_ADMIN}
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
 
     encoders:
         App\Domain\Entity\User:

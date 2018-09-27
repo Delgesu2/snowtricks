@@ -50,4 +50,16 @@ interface UsersRepositoryInterface
      * @return mixed
      */
     public function checkToken($token);
+
+    /**
+     * @return mixed
+     */
+    public function update();
+
+    /**
+     * @param $username
+     *
+     * @return mixed|null|\Symfony\Component\Security\Core\User\UserInterface
+     */
+    public function loadUserByUsername($username);
 }

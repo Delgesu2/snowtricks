@@ -48,7 +48,7 @@ final class UserRegistrationAction implements UserRegistrationActionInterface
      * {@inheritdoc}
      */
     public function __construct(
-        FormFactoryInterface $formFactory,
+        FormFactoryInterface                 $formFactory,
         UserRegistrationTypeHandlerInterface $formHandler
     ) {
         $this->formFactory = $formFactory;

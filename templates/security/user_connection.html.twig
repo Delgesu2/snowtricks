@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Snowtricks - Connexion{% endblock %}
+
+{% block body %}
+    {% form_theme form 'security/theme/user_connectionForm.html.twig' %}
+    {{ form(form) }}
+{% endblock %}
