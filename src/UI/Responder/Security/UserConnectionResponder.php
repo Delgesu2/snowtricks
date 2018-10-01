@@ -40,17 +40,13 @@ final class UserConnectionResponder implements UserConnectionResponderInterface
     }
 
     public function __invoke(
-        $redirect = false,
         FormInterface $form
     ): Response {
 
-        $redirect
-            ? $response = new RedirectResponse($this->urlGenerator->generate('home'))
-            : $response = new Response(
+       return new Response(
                   $this->twig->render('security/user_connection.html.twig', [
                       'form' => $form->createView()
                   ])
               );
-        return $response;
     }
 }

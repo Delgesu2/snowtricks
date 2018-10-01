@@ -34,19 +34,11 @@ class UserConnectionAction implements UserConnectionActionInterface
     private $formFactory;
 
     /**
-     * @var UserConnectionHandlerInterface
-     */
-    private $handler;
-
-    /**
      * @inheritdoc
      */
-    public function __construct(
-        FormFactoryInterface           $formFactory,
-        UserConnectionHandlerInterface $handler
-    ) {
+    public function __construct(FormFactoryInterface $formFactory)
+    {
         $this->formFactory = $formFactory;
-        $this->handler = $handler;
     }
 
     /**
@@ -60,12 +52,6 @@ class UserConnectionAction implements UserConnectionActionInterface
         $connectionType = $this->formFactory->create(UserConnectionType::class)
                                     ->handleRequest($request);
 
-        if ($this->handler->handle($connectionType)) {
-
-            return $responder(true);
-
-        }
-
-        return $responder(false,$connectionType);
+        return $responder($connectionType);
     }
 }

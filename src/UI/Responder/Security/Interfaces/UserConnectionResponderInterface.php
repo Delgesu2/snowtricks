@@ -38,8 +38,5 @@ interface UserConnectionResponderInterface
      *
      * @return Response
      */
-    public function __invoke(
-        $redirect = false,
-        FormInterface $form
-    ): Response;
+    public function __invoke(FormInterface $form): Response;
 }

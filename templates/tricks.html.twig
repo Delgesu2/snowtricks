@@ -23,7 +23,7 @@
                             <p>{{ trick.trick_name|capitalize}}</p>
                         </a>
 
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% if is_granted('ROLE_USER') %}
 
                         <a href="{{ path('update_trick', {'slug':trick.slug}) }}">
                                 <span class="icon">

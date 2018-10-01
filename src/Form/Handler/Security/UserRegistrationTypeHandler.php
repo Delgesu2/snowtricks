@@ -130,7 +130,6 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
                 $user = $this->userFactory->create($form->getData());
 
 
-
                 $this->mailer->registrationSend($form, $this->swift_Mailer, $user);
 
 

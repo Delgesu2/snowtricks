@@ -21,8 +21,8 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
  *
  * @package App\Infra\Doctrine\Repository
  */
-final class UsersRepository extends ServiceEntityRepository implements UsersRepositoryInterface
-
+final class UsersRepository extends ServiceEntityRepository implements UsersRepositoryInterface,
+    UserLoaderInterface
 {
     /**
      * UsersRepository constructor.
@@ -33,6 +33,7 @@ final class UsersRepository extends ServiceEntityRepository implements UsersRepo
     {
         parent::__construct($registry, User::class);
     }
+
 
     /**
      * {@inheritdoc}

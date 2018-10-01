@@ -3,16 +3,14 @@
 namespace App\Domain\Entity;
 
 use App\Domain\Entity\Interfaces\UserTrickInterface;
-use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Serializable;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
 * Snowtricks_user entity
 */
-class User implements UserTrickInterface, AdvancedUserInterface, \Serializable
+class User implements UserTrickInterface, UserInterface, \Serializable
 {
     /**
     * @var \Ramsey\Uuid\UuidInterface
@@ -87,8 +85,8 @@ class User implements UserTrickInterface, AdvancedUserInterface, \Serializable
         $nick,
         $password,
         $email,
-        $valid  = null,
         $role   = null,
+        $valid  = null,
         $photo  = null,
         $trick  = null,
         $comment= null
@@ -100,9 +98,9 @@ class User implements UserTrickInterface, AdvancedUserInterface, \Serializable
         $this->nick     = $nick;
         $this->password = $password;
         $this->email    = $email;
+        $this->role     = $role;
         $this->token    = md5(uniqid(rand(), false));
         $this->valid    = $valid;
-        $this->role     = $role;
         $this->photo    = $photo;
         $this->comment  = $comment;
     }
@@ -219,7 +217,7 @@ class User implements UserTrickInterface, AdvancedUserInterface, \Serializable
     {
         $this->valid = true;
         $this->validationDate = new \DateTimeImmutable();
-        $this->role = 'ROLE_USER';
+        $this->role = ['ROLE_USER'];
     }
 
     /**
@@ -251,20 +249,6 @@ class User implements UserTrickInterface, AdvancedUserInterface, \Serializable
         // TODO: Implement getSalt() method.
     }
 
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    public function isAccountNonLocked()
-    {
-        return true;
-    }
-
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
 
     public function isEnabled()
     {

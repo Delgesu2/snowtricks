@@ -21,6 +21,14 @@
             <div class="column is-6">
                 <div class="tabs is-right ">
                     <ul>
+
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                            <li> {{ app.user.name }} connecté</li>
+
+                        {% endif %}
+
+
                         <li class="is-active"><a href="/">Accueil</a></li>
                         <li><a href="/list">Tricks</a></li>
                         <li><a href="/create">Nouveau</a></li>
@@ -45,10 +53,16 @@
                             <a href="/connection" class="dropdown-item">
                                 Connexion
                             </a>
+
+                            {% if is_granted('ROLE_ADMIN') %}
+
                             <a href="/userlist" class="dropdown-item redfont">
                                 Liste inscrits
                             </a>
-                            <a href="#" class="dropdown-item">
+
+                            {% endif %}
+
+                            <a href="/logout" class="dropdown-item">
                                 Déconnexion
                             </a>
                         </div>

@@ -9,16 +9,39 @@
 namespace App\Helper;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 
-class TokenAuthenticator extends AbstractGuardAuthenticator
+class LoginAuthenticator extends AbstractFormLoginAuthenticator
 {
+    private $urlGenerator;
+
+    private $passwordEncoder;
+
+    public function __construct(
+        UrlGeneratorInterface        $urlGenerator,
+        UserPasswordEncoderInterface $passwordEncoder
+)
+    {
+        $this->urlGenerator    = $urlGenerator;
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
+    protected function getLoginUrl()
+    {
+        return $this->urlGenerator->generate('user_connection');
+    }
+
     /**
      * @param Request $request
      *
@@ -26,8 +49,13 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        //return $request->headers->has('X-AUTH-TOKEN');
-        return $request->headers->has('X-AUTH-TOKEN');
+        if ($request->getPathInfo() !== $this->urlGenerator->generate('user_connection') ||
+        'POST' !== $request->getMethod()) {
+
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -37,10 +65,16 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function getCredentials(Request $request)
     {
-         return ([
-             'token' => $request->headers->get('X-AUTH-TOKEN')
-             ]
-         );
+         if (!$request->request->get('user_connection')['name'] &&
+             !$request->request->get('user_connection')['password']) {
+
+             return null;
+         }
+
+         return [
+             'username'=>$request->request->get('user_connection')['name'],
+             'password'=>$request->request->get('user_connection')['password']
+                ];
     }
 
     /**
@@ -51,20 +85,13 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $apiKey = $credentials['token'];
-
-        if (null === $apiKey) {
-            return;
-        }
-
-        return $userProvider->loadUserByUsername($apiKey);
+        return $userProvider->loadUserByUsername($credentials['username']);
     }
 
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-
-        return true;
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     /**
@@ -76,7 +103,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return null;
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
     /**
@@ -87,35 +114,15 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $data = array(
-            'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
-        );
-
-        return JsonResponse($data, Response::HTTP_FORBIDDEN);
+        return new RedirectResponse($this->urlGenerator->generate('user_connection'));
     }
 
-    /**
-     * @param Request $request
-     * @param AuthenticationException|null $authException
-     *
-     * @return JsonResponse|Response
-     */
-    public function start(Request $request, AuthenticationException $authException = null)
-    {
-        $data = array(
-
-            'message' => 'Authentification requise'
-        );
-
-        return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
-    }
 
     /**
      * @return bool
      */
     public function supportsRememberMe()
     {
-        return false;
+        return true;
     }
-
 }

@@ -32,14 +32,14 @@ final class UserConnectionType extends AbstractType implements UserConnectionTyp
         $builder
             ->add('name', TextType::class, [
                 'label_attr' => ['class' => 'label'],
-                'required'   => 'true'
+                'required'   => true
             ])
             ->add('password', PasswordType::class, [
                 'label_attr' => ['class' => 'label'],
-                'required'   => 'true'
+                'required'   => true
             ])
             ->add('keep', CheckboxType::class, [
-                'required'   => 'false'
+                'required'   => false
             ]);
     }
 

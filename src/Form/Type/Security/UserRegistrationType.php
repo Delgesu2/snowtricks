@@ -33,7 +33,7 @@ final class UserRegistrationType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label_attr' => ['class' => 'label'],
-                'required'   => 'true'
+                'required'   => true
             ])
 
             ->add('photo', FileType::class, [
@@ -45,17 +45,17 @@ final class UserRegistrationType extends AbstractType
 
             ->add('nick', TextType::class, [
                 'label_attr' => ['class' => 'label'],
-                'required'   => 'true'
+                'required'   => true
             ])
 
             ->add('password', PasswordType::class, [
                 'label_attr' => ['class' => 'label'],
-                'required'   => 'true'
+                'required'   => true
             ])
 
             ->add('email', EmailType::class,[
                 'label_attr' => ['class' => 'label'],
-                'required'   => 'true'
+                'required'   => true
             ]);
     }
 
