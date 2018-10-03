@@ -8,8 +8,10 @@
 
 namespace App\Domain\DTO\Interfaces;
 
+use App\Domain\DTO\Security\Interfaces\UpdateUserDTOInterface;
 use App\Domain\Entity\Interfaces\PhotoInterface;
 use App\Domain\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Interfaces\UserTrickInterface;
 use App\Domain\Entity\Interfaces\VideoInterface;
 
 /**
@@ -39,4 +41,11 @@ interface DTOBuilderInterface
      * @return UpdateVideoDTOInterface
      */
     public function hydrateVideoDTO(VideoInterface $video): UpdateVideoDTOInterface;
+
+    /**
+     * @param UserTrickInterface $user
+     *
+     * @return UpdateUserDTOInterface
+     */
+    public function hydrateUserDTO(UserTrickInterface $user): UpdateUserDTOInterface;
 }

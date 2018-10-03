@@ -55,7 +55,7 @@
                                 Connexion
                             </a>
 
-                            {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+                            {% if is_granted('ROLE_USER') %}
 
                                 <a href="/userupdate" class="dropdown-item">
                                     Editer profile

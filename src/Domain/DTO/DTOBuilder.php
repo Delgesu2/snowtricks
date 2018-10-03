@@ -12,8 +12,11 @@ use App\Domain\DTO\Interfaces\DTOBuilderInterface;
 use App\Domain\DTO\Interfaces\UpdatePhotoDTOInterface;
 use App\Domain\DTO\Interfaces\UpdateTrickDTOInterface;
 use App\Domain\DTO\Interfaces\UpdateVideoDTOInterface;
+use App\Domain\DTO\Security\Interfaces\UpdateUserDTOInterface;
+use App\Domain\DTO\Security\UpdateUserDTO;
 use App\Domain\Entity\Interfaces\PhotoInterface;
 use App\Domain\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Interfaces\UserTrickInterface;
 use App\Domain\Entity\Interfaces\VideoInterface;
 
 /**
@@ -56,4 +59,19 @@ final class DTOBuilder implements DTOBuilderInterface
     {
         return new UpdateVideoDTO($video->getUrl());
     }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function hydrateUserDTO(UserTrickInterface $user): UpdateUserDTOInterface
+    {
+        return new UpdateUserDTO(
+            $user->getName(),
+            $user->getNick(),
+            $user->getPassword(),
+            $user->getEmail(),
+            $user->getPhoto()
+        );
+    }
+
 }
