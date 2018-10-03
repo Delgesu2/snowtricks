@@ -9,20 +9,32 @@
 namespace App\Command;
 
 use App\Domain\Entity\User;
+use App\Domain\Factory\Interfaces\UserFactoryInterface;
+use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class CreateAdminUserCommand extends Command
 {
+    private $repository;
 
-    private $user;
+    private $userFactory;
 
-    public function __construct(User $user)
+    private $encoderFactory;
+
+    public function __construct(
+        UsersRepositoryInterface $repository,
+        UserFactoryInterface     $userFactory,
+        EncoderFactoryInterface  $encoderFactory
+    )
     {
-        $this->user = $user;
+        $this->repository     = $repository;
+        $this->userFactory    = $userFactory;
+        $this->encoderFactory = $encoderFactory;
+
 
         parent::__construct();
     }
@@ -72,13 +84,19 @@ class CreateAdminUserCommand extends Command
 
         $output->writeln('Role: ROLE_ADMIN');
 
-        $this->user = new User(
+
+        $newPassword = $this->encoderFactory->getEncoder(User::class)
+                            ->encodePassword($input->getArgument('password'), null);
+
+            $user = new User(
             $input->getArgument('username'),
             $input->getArgument('nickname'),
-            $input->getArgument('password'),
+            $newPassword,
             $input->getArgument('email'),
-            'ROLE_ADMIN'
+            true,
+            ['ROLE_ADMIN']
         );
+            $this->repository->saveUser($user);
 
         $output->writeln('Admin successfully generated');
 
