@@ -230,7 +230,8 @@ class User implements UserTrickInterface, UserInterface, \Serializable
 
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        //return ['ROLE_ADMIN'];
+        return $this->role;
     }
 
     public function getUsername()

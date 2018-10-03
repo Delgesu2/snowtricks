@@ -50,9 +50,18 @@
                             <a href="/register" class="dropdown-item">
                                 Inscription
                             </a>
+
                             <a href="/connection" class="dropdown-item">
                                 Connexion
                             </a>
+
+                            {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+
+                                <a href="/userupdate" class="dropdown-item">
+                                    Editer profile
+                                </a>
+
+                            {% endif %}
 
                             {% if is_granted('ROLE_ADMIN') %}
 
