@@ -4,6 +4,7 @@ namespace App\UI\Action\Security;
 
 use App\Domain\DTO\DTOBuilder;
 use App\Domain\DTO\Interfaces\DTOBuilderInterface;
+use App\Form\Handler\Security\Interfaces\UserUpdateHandlerInterface;
 use App\Form\Handler\Security\UserUpdateHandler;
 use App\Form\Type\Security\UpdateUserType;
 use App\Helper\FileUploaderHelper;
@@ -38,7 +39,7 @@ final class UserUpdateAction implements UserUpdateActionInterface
     private $fileUploaderHelper;
 
     /**
-     * @var UserUpdateHandler
+     * @var UserUpdateHandlerInterface
      */
     private $userUpdateHandler;
 
@@ -61,7 +62,7 @@ final class UserUpdateAction implements UserUpdateActionInterface
         FormFactoryInterface $formFactory,
         EventDispatcherInterface $eventDispatcher,
         FileUploaderHelper $fileUploaderHelper,
-        UserUpdateHandler $userUpdateHandler,
+        UserUpdateHandlerInterface $userUpdateHandler,
         UsersRepository $repository,
         DTOBuilder $DTOBuilder
     ) {

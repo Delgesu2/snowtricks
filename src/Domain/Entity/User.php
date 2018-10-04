@@ -223,9 +223,17 @@ class User implements UserTrickInterface, UserInterface, \Serializable
     /**
     * User update
     */
-    public function update()
+    public function update(
+        $nick,
+        $password,
+        $email,
+        $photo
+    )
     {
-    	
+        $this->nick = $nick;
+        $this->password = $password;
+        $this->email = $email;
+        $this->photo = $photo;
     }
 
     public function getRoles()

@@ -82,4 +82,19 @@ interface UserTrickInterface
      * @return bool
      */
     public function validate() :void;
+
+    /**
+     * @param $nick
+     * @param $password
+     * @param $email
+     * @param $photo
+     *
+     * @return mixed
+     */
+    public function update(
+        $nick,
+        $password,
+        $email,
+        $photo
+    );
 }

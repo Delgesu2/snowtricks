@@ -8,10 +8,123 @@
 
 namespace App\Form\Handler\Security;
 
-
+use App\Domain\Entity\User;
+use App\Domain\Entity\Interfaces\UserTrickInterface;
+use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Form\Handler\Security\Interfaces\UserUpdateHandlerInterface;
+use App\Helper\Interfaces\FileUploaderHelperInterface;
+use App\Helper\Interfaces\MailSubscriberHelperInterface;
+use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserUpdateHandler implements UserUpdateHandlerInterface
 {
+    /**
+     * @var EncoderFactoryInterface
+     */
+    private $encoderFactory;
+
+    /**
+     * @var FileUploaderHelperInterface
+     */
+    private $fileUploaderHelper;
+
+    /**
+     * @var PhotoFactoryInterface
+     */
+    private $photoFactory;
+
+    /**
+     * @var UsersRepositoryInterface
+     */
+    private $userRepository;
+
+    /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
+     * @var \Swift_Mailer
+     */
+    private $swift_Mailer;
+
+    /**
+     * @var MailSubscriberHelperInterface
+     */
+    private $mailer;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(
+        EncoderFactoryInterface       $encoderFactory,
+        FileUploaderHelperInterface   $fileUploaderHelper,
+        PhotoFactoryInterface         $photoFactory,
+        UsersRepositoryInterface      $userRepository,
+        SessionInterface              $session,
+        ValidatorInterface            $validator,
+        \Swift_Mailer                 $swift_Mailer,
+        MailSubscriberHelperInterface $mailer
+    ) {
+        $this->encoderFactory     = $encoderFactory;
+        $this->fileUploaderHelper = $fileUploaderHelper;
+        $this->photoFactory       = $photoFactory;
+        $this->userRepository     = $userRepository;
+        $this->session            = $session;
+        $this->validator          = $validator;
+        $this->swift_Mailer       = $swift_Mailer;
+        $this->mailer             = $mailer;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handle(
+        FormInterface      $form,
+        UserTrickInterface $user
+    ) :bool
+    {
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if (!\is_null($form->getData()->photo)) {
+                $photo = $this->photoFactory->createFromfile($form->getData()->photo);
+                $this->fileUploaderHelper->upload($form->getData()->photo, $photo, 'users');
+            }
+
+            $encoder = $this->encoderFactory->getEncoder(User::class);
+
+            $user->update(
+                $form->getData()->nickname,
+                $form->getData()->password = $encoder->encodePassword($form->getData()->password, null),
+                $form->getData()->email,
+                $form->getData()->photo
+            );
+
+            $constraints = $this->validator->validate($user, null, array('User'));
+
+            if (\count($constraints) > 0) {
+                return false;
+            }
+
+            $this->userRepository->saveUser($user);
+
+            $this->session->getFlashbag()->add('success', 'Vos données ont bien été modifiées.');
+
+            return true;
+        }
+
+        return false;
+
+    }
 
 }
