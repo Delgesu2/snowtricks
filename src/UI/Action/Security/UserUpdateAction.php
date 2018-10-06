@@ -15,6 +15,8 @@ use App\UI\Responder\Security\Interfaces\UserUpdateResponderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route(name="user_update",
@@ -74,10 +76,15 @@ final class UserUpdateAction implements UserUpdateActionInterface
         $this->DTOBuilder         = $DTOBuilder;
     }
 
+    public function edit()
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    }
+
     /**
      * {@inheritdoc}
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
      */
     public function __invoke(
         Request                      $request,

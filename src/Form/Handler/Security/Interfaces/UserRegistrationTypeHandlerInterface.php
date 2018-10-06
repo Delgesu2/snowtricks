@@ -8,6 +8,7 @@
 
 namespace App\Form\Handler\Security\Interfaces;
 
+use App\Domain\Entity\Interfaces\UserTrickInterface;
 use App\Helper\MailSubscriberHelper;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -36,6 +37,7 @@ interface UserRegistrationTypeHandlerInterface
      * @param PhotoFactoryInterface $photoFactory
      * @param UserFactoryInterface $userFactory
      * @param UsersRepositoryInterface $usersRepository
+     * @param UserTrickInterface $user
      * @param UserPasswordEncoderInterface $encoder
      * @param MailSubscriberHelper $mailer
      * @param SessionInterface $session
@@ -48,6 +50,7 @@ interface UserRegistrationTypeHandlerInterface
         PhotoFactoryInterface          $photoFactory,
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
+        UserTrickInterface             $user,
         UserPasswordEncoderInterface   $encoder,
         MailSubscriberHelper           $mailer,
         SessionInterface               $session,

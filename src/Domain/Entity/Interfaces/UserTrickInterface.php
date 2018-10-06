@@ -84,6 +84,13 @@ interface UserTrickInterface
     public function validate() :void;
 
     /**
+     * @param $photo
+     *
+     * @return mixed
+     */
+    public function addPhoto($photo);
+
+    /**
      * @param $nick
      * @param $password
      * @param $email

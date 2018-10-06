@@ -26,6 +26,12 @@ security:
                 authenticators:
                     - App\Helper\LoginAuthenticator
 
+            remember_me:
+                secret:    '%kernel.secret%'
+                lifetime: 1209600
+                path:      /
+                secure: true
+
 
             # activate different ways to authenticate
 

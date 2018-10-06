@@ -28,11 +28,6 @@ class User implements UserTrickInterface, UserInterface, \Serializable
 	private $name;
 
 	/**
-    * @var Photo
-    */
-	private $photo;
-
-	/**
     * @var string
     */
 	private $nick;
@@ -47,7 +42,12 @@ class User implements UserTrickInterface, UserInterface, \Serializable
     */
 	private $email;
 
-	/**
+    /**
+     * @var Photo
+     */
+    private $photo;
+
+    /**
 	* @var trick
 	*/
 	private $trick;
@@ -78,18 +78,28 @@ class User implements UserTrickInterface, UserInterface, \Serializable
 	private $validationDate = null;
 
     /**
-     * User constructor
+     * User constructor.
+     *
+     * @param $name
+     * @param $nick
+     * @param $password
+     * @param $email
+     * @param null $photo
+     * @param null $trick
+     * @param null $comment
+     * @param null $valid
+     * @param null $role
      */
     public function __construct(
         $name,
         $nick,
         $password,
         $email,
-        $role   = null,
-        $valid  = null,
         $photo  = null,
         $trick  = null,
-        $comment= null
+        $comment= null,
+        $valid  = null,
+        $role   = null
     )
     {
         $this->id       = Uuid::uuid4();
@@ -98,11 +108,11 @@ class User implements UserTrickInterface, UserInterface, \Serializable
         $this->nick     = $nick;
         $this->password = $password;
         $this->email    = $email;
-        $this->role     = $role;
-        $this->token    = md5(uniqid(rand(), false));
-        $this->valid    = $valid;
         $this->photo    = $photo;
         $this->comment  = $comment;
+        $this->valid    = $valid;
+        $this->role     = $role;
+        $this->token    = md5(uniqid(rand(), false));
     }
 
 	/**
@@ -211,13 +221,22 @@ class User implements UserTrickInterface, UserInterface, \Serializable
 	}
 
     /**
-    * @inheritdoc
+    * {@inheritdoc}
     */
     public function validate() :void
     {
         $this->valid = true;
         $this->validationDate = new \DateTimeImmutable();
         $this->role = ['ROLE_USER'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPhoto($photo)
+    {
+        $this->photo = $photo;
+        $this->photo->setUserPhoto($this);
     }
 
     /**

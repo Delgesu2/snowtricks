@@ -212,7 +212,7 @@ class Trick implements TrickInterface
             if (\count($photos) <= 0) { break; }
 
             $this->photo[] = $photo;
-            $photo->setTrickPhoto($this);
+            $this->photo->setTrickPhoto($this);
         }
     }
 

@@ -14,6 +14,9 @@
 	<many-to-one field="trick_photo" target-entity="App\Domain\Entity\Trick" inversed-by="photo">
 	</many-to-one>
 
+	  <one-to-one field="user_photo" target-entity="App\Domain\Entity\User" inversed-by="photo">
+	  </one-to-one>
+
     <field name="alt" type="string" length="60" nullable="true" />
   </entity>
 </doctrine-mapping>

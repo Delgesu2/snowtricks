@@ -38,7 +38,7 @@ final class UserConnectionType extends AbstractType implements UserConnectionTyp
                 'label_attr' => ['class' => 'label'],
                 'required'   => true
             ])
-            ->add('keep', CheckboxType::class, [
+            ->add('_remember_me', CheckboxType::class, [
                 'required'   => false
             ]);
     }

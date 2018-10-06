@@ -8,6 +8,8 @@
 
 namespace App\Domain\Entity\Interfaces;
 
+use App\Domain\Entity\Trick;
+use App\Domain\Entity\User;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -51,5 +53,20 @@ interface PhotoInterface
      */
     public function update($title, $path, $alt);
 
+    /**
+     * @param Trick $trick_photo
+     */
+    public function setTrickPhoto(Trick $trick_photo): void;
+
+    /**
+     * @param User $user_photo
+     */
+    public function setUserPhoto(User $user_photo): void;
+
+    /**
+     * @param string $path
+     *
+     * @return mixed
+     */
     public function upload(string $path);
 }

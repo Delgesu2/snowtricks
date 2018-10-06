@@ -92,6 +92,7 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
         PhotoFactoryInterface          $photoFactory,
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
+        UserTrickInterface             $user,
         UserPasswordEncoderInterface   $encoder,
         MailSubscriberHelper           $mailer,
         SessionInterface               $session,
@@ -104,6 +105,7 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
         $this->photoFactory       = $photoFactory;
         $this->userFactory        = $userFactory;
         $this->usersRepository    = $usersRepository;
+        $this->user               = $user;
         $this->userPasswordEncoder= $encoder;
         $this->mailer             = $mailer;
         $this->session            = $session;
@@ -129,9 +131,9 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
 
                 $user = $this->userFactory->create($form->getData());
 
+                $this->user->addPhoto($photo);
 
                 $this->mailer->registrationSend($form, $this->swift_Mailer, $user);
-
 
                 $this->usersRepository->saveUser($user);
 

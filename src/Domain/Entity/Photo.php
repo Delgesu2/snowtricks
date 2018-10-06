@@ -34,6 +34,11 @@ class Photo implements PhotoInterface
 	private $trick_photo;
 
     /**
+     * @var User
+     */
+	private $user_photo;
+
+    /**
      * @var string
      */
 	private $alt;
@@ -46,12 +51,18 @@ class Photo implements PhotoInterface
      * @param $alt
      * @param null $trick_photo
      */
-    public function __construct($title, $alt, $trick_photo = null)
+    public function __construct(
+        $title,
+        $alt,
+        $trick_photo = null,
+        $user_photo = null
+    )
     {
         $this->id = Uuid::uuid4();
         $this->title = $title;
         $this->alt = $alt;
         $this->trick_photo = $trick_photo;
+        $this->user_photo  = $user_photo;
     }
 
     /**
@@ -109,11 +120,19 @@ class Photo implements PhotoInterface
 	}
 
     /**
-     * @param Trick $trick_photo
+     * {@inheritdoc}
      */
     public function setTrickPhoto(Trick $trick_photo): void
     {
         $this->trick_photo = $trick_photo;
+    }
+
+    /**
+     * @param User $user_photo
+     */
+    public function setUserPhoto(User $user_photo): void
+    {
+        $this->user_photo = $user_photo;
     }
 
     /**
