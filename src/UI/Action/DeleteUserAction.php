@@ -10,6 +10,7 @@ namespace App\UI\Action;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use App\UI\Action\Interfaces\DeleteUserActionInterface;
 use App\UI\Responder\Interfaces\DeleteUserResponderInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,12 +21,18 @@ final class DeleteUserAction implements DeleteUserActionInterface
 {
     private $repository;
 
+    private $filesystem;
+
     /**
      * @inheritdoc
      */
-    public function __construct(UsersRepositoryInterface $repository)
+    public function __construct(
+        UsersRepositoryInterface $repository,
+        Filesystem               $filesystem
+    )
     {
         $this->repository = $repository;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -35,10 +42,15 @@ final class DeleteUserAction implements DeleteUserActionInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(DeleteUserResponderInterface $responder, Request $request)
+    public function __invoke(
+        DeleteUserResponderInterface $responder,
+        Request $request
+    )
     {
-        $this->repository->deleteUser($request->attributes->get('slug'));
+        $user = $this->repository->getUserBySlug($request->get('slug'));
+        $this->filesystem->remove($user->getPhoto()->getPath());
 
+        $this->repository->deleteUser($user);
 
         return $responder();
     }

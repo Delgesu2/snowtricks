@@ -2,6 +2,7 @@
 
 namespace App\Domain\Entity;
 
+use App\Domain\Entity\Interfaces\PhotoInterface;
 use App\Domain\Entity\Interfaces\UserTrickInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -151,7 +152,7 @@ class User implements UserTrickInterface, UserInterface, \Serializable
 	/**
     * @inheritdoc
     */
-	public function getPhoto() :string
+	public function getPhoto() :? PhotoInterface
 	{
 		return $this->photo;
 	}

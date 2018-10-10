@@ -3,20 +3,17 @@
 namespace App\UI\Action\Security;
 
 use App\Domain\DTO\DTOBuilder;
-use App\Domain\DTO\Interfaces\DTOBuilderInterface;
 use App\Form\Handler\Security\Interfaces\UserUpdateHandlerInterface;
-use App\Form\Handler\Security\UserUpdateHandler;
 use App\Form\Type\Security\UpdateUserType;
 use App\Helper\FileUploaderHelper;
-use App\Helper\Interfaces\FileUploaderHelperInterface;
-use App\Infra\Doctrine\Repository\UsersRepository;
+use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use App\UI\Action\Security\Interfaces\UserUpdateActionInterface;
 use App\UI\Responder\Security\Interfaces\UserUpdateResponderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route(name="user_update",
@@ -46,7 +43,7 @@ final class UserUpdateAction implements UserUpdateActionInterface
     private $userUpdateHandler;
 
     /**
-     * @var UsersRepository
+     * @var UsersRepositoryInterface
      */
     private $repository;
 
@@ -56,17 +53,24 @@ final class UserUpdateAction implements UserUpdateActionInterface
     private $DTOBuilder;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+
+    /**
      * UserUpdateAction constructor.
      *
      * {@inheritdoc}
      */
     public function __construct(
-        FormFactoryInterface $formFactory,
-        EventDispatcherInterface $eventDispatcher,
-        FileUploaderHelper $fileUploaderHelper,
-        UserUpdateHandlerInterface $userUpdateHandler,
-        UsersRepository $repository,
-        DTOBuilder $DTOBuilder
+        FormFactoryInterface        $formFactory,
+        EventDispatcherInterface    $eventDispatcher,
+        FileUploaderHelper          $fileUploaderHelper,
+        UserUpdateHandlerInterface  $userUpdateHandler,
+        UsersRepositoryInterface    $repository,
+        DTOBuilder                  $DTOBuilder,
+        TokenStorageInterface       $tokenStorage
     ) {
         $this->formFactory        = $formFactory;
         $this->eventDispatcher    = $eventDispatcher;
@@ -74,11 +78,7 @@ final class UserUpdateAction implements UserUpdateActionInterface
         $this->userUpdateHandler  = $userUpdateHandler;
         $this->repository         = $repository;
         $this->DTOBuilder         = $DTOBuilder;
-    }
-
-    public function edit()
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->tokenStorage       = $tokenStorage;
     }
 
     /**
@@ -91,7 +91,7 @@ final class UserUpdateAction implements UserUpdateActionInterface
         UserUpdateResponderInterface $responder
     )
     {
-        $user = $this->repository->getOneUser($request->attributes->get('user'));
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $dto = $this->DTOBuilder->hydrateUserDTO($user);
 

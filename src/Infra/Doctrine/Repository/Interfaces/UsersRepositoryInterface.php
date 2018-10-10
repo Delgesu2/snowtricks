@@ -42,6 +42,13 @@ interface UsersRepositoryInterface
      *
      * @return mixed
      */
+    public function getUserBySlug($user);
+
+    /**
+     * @param $user
+     *
+     * @return mixed
+     */
     public function deleteUser($user);
 
     /**

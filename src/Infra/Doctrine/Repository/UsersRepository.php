@@ -60,21 +60,24 @@ final class UsersRepository extends ServiceEntityRepository implements UsersRepo
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function deleteUser($user)
+    public function getUserBySlug($user)
     {
-        $user = $this->createQueryBuilder('user')
+        return $this->createQueryBuilder('user')
             ->where('user.slug = :slug')
             ->setParameter('slug', $user)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function deleteUser($user)
+    {
         $this->_em->remove($user);
         $this->_em->flush();
-
-        $photoRepository = new PhotosRepository();
-        $photoRepository->deleteUserPhoto($user);
-
-        $fileSystem = new Filesystem();
-        $fileSystem->remove($photo);
     }
 
     /**

@@ -11,6 +11,7 @@ namespace App\UI\Action\Interfaces;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use App\UI\Responder\Interfaces\DeleteUserResponderInterface;
 use App\UI\Responder\Interfaces\UserListResponderInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -24,8 +25,12 @@ interface DeleteUserActionInterface
      * DeleteUserActionInterface constructor.
      *
      * @param UsersRepositoryInterface $repository
+     * @param Filesystem $filesystem
      */
-    public function __construct(UsersRepositoryInterface $repository);
+    public function __construct(
+        UsersRepositoryInterface $repository,
+        Filesystem               $filesystem
+    );
 
     /**
      * @param UserListResponderInterface $responder

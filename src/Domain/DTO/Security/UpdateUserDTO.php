@@ -22,7 +22,7 @@ final class UpdateUserDTO implements UpdateUserDTOInterface
 
     public $email;
 
-    public $photo;
+    public $photo = null;
 
     /**
      * {@inheritdoc}
@@ -32,7 +32,7 @@ final class UpdateUserDTO implements UpdateUserDTOInterface
         $nick,
         $password,
         $email,
-        $photo
+        $photo = null
     ) {
         $this->name = $name;
         $this->nick = $nick;

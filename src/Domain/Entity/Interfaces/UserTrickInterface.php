@@ -33,9 +33,9 @@ interface UserTrickInterface
     public function getSlug() :string;
 
     /**
-     * @return mixed
+     * @return PhotoInterface
      */
-    public function getPhoto();
+    public function getPhoto() :? PhotoInterface;
 
     /**
      * @return string
