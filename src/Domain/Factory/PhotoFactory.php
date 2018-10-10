@@ -11,6 +11,7 @@ namespace App\Domain\Factory;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Entity\Interfaces\PhotoInterface;
 use App\Domain\Entity\Photo;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
  * Class PhotoFactory
@@ -20,6 +21,11 @@ use App\Domain\Entity\Photo;
 final class PhotoFactory implements PhotoFactoryInterface
 {
     /**
+     * @var PhotoInterface
+     */
+    private $photo;
+
+    /**
      * {@inheritdoc}
      */
     public function createFromFile(\SplFileInfo $file): PhotoInterface
@@ -28,6 +34,7 @@ final class PhotoFactory implements PhotoFactoryInterface
 
         return new Photo(
             $title . '.' . $file->guessExtension(),
+            $title,
             $title
         );
     }

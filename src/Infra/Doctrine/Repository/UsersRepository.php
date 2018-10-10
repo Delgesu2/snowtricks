@@ -14,6 +14,7 @@ use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 
 /**
@@ -34,7 +35,6 @@ final class UsersRepository extends ServiceEntityRepository implements UsersRepo
         parent::__construct($registry, User::class);
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -49,9 +49,9 @@ final class UsersRepository extends ServiceEntityRepository implements UsersRepo
     /**
      * {@inheritdoc}
      */
-    public function saveUser(UserTrickInterface $userTrick)
+    public function saveUser(UserTrickInterface $user)
     {
-        $this->_em->persist($userTrick);
+        $this->_em->persist($user);
         $this->_em->flush();
     }
 
@@ -69,6 +69,12 @@ final class UsersRepository extends ServiceEntityRepository implements UsersRepo
             ->getOneOrNullResult();
         $this->_em->remove($user);
         $this->_em->flush();
+
+        $photoRepository = new PhotosRepository();
+        $photoRepository->deleteUserPhoto($user);
+
+        $fileSystem = new Filesystem();
+        $fileSystem->remove($photo);
     }
 
     /**
@@ -107,5 +113,6 @@ final class UsersRepository extends ServiceEntityRepository implements UsersRepo
             ->setParameter('email', $username)
             ->getQuery()
             ->getOneOrNullResult();
+
     }
 }

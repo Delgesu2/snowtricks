@@ -59,7 +59,7 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
     private $usersRepository;
 
     /**
-     * @var UserInterface
+     * @var UserTrickInterface
      */
     private $user;
 
@@ -92,7 +92,6 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
         PhotoFactoryInterface          $photoFactory,
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
-        UserTrickInterface             $user,
         UserPasswordEncoderInterface   $encoder,
         MailSubscriberHelper           $mailer,
         SessionInterface               $session,
@@ -105,14 +104,12 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
         $this->photoFactory       = $photoFactory;
         $this->userFactory        = $userFactory;
         $this->usersRepository    = $usersRepository;
-        $this->user               = $user;
         $this->userPasswordEncoder= $encoder;
         $this->mailer             = $mailer;
         $this->session            = $session;
         $this->validator          = $validator;
         $this->swift_Mailer       = $swift_Mailer;
     }
-
 
     /**
      * @inheritdoc
@@ -131,18 +128,16 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
 
                 $user = $this->userFactory->create($form->getData());
 
-                $this->user->addPhoto($photo);
+                $user->addPhoto($photo);
 
                 $this->mailer->registrationSend($form, $this->swift_Mailer, $user);
 
                 $this->usersRepository->saveUser($user);
 
                 return true;
-
         }
 
         return false;
     }
 }
-
 

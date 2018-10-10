@@ -14,7 +14,9 @@ use App\UI\Responder\Interfaces\HomeResponderInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route(name="delete_trick", path="/delete/{slug}", requirements={"slug"="[a-zA-Z0-9-]+"})
+ * @Route(name="delete_trick",
+ *      path="/delete/{slug}",
+ *      requirements={"slug"="[a-zA-Z0-9-]+"})
  */
 final class DeleteTrickAction implements DeleteTrickActionInterface
 {

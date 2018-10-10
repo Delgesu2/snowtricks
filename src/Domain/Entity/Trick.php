@@ -74,7 +74,12 @@ class Trick implements TrickInterface
     private $dateupdate = null;
 
     /**
-     * Trick constructor
+     * Trick constructor.
+     *
+     * @param $trick_name
+     * @param $description
+     * @param $trick_group
+     * @param $trick_user
      */
     public function __construct(
         $trick_name,
@@ -120,7 +125,7 @@ class Trick implements TrickInterface
     }
 
     /**
-    * @return string
+    * {@inheritdoc}
     */
     public function getTrick_name() :string
     {
@@ -128,7 +133,7 @@ class Trick implements TrickInterface
     }
 
     /**
-    * @return string
+    * {@inheritdoc}
     */
     public function getDescription() :string
     {
@@ -152,7 +157,7 @@ class Trick implements TrickInterface
     }
 
     /**
-    * @return PhotoInterface
+    * {@inheritdoc}
     */
     public function getPhoto()
     {
@@ -160,7 +165,7 @@ class Trick implements TrickInterface
     }
 
     /**
-    * @return VideoInterface
+    * {@inheritdoc}
     */
     public function getVideo()
     {
@@ -168,7 +173,7 @@ class Trick implements TrickInterface
     }
 
     /**
-    * @return string
+    * {@inheritdoc}
     */
     public function getTrick_user() :string
     {
@@ -193,6 +198,8 @@ class Trick implements TrickInterface
 
     /**
      * Get random photo for 1 trick (homepage)
+     *
+     * {@inheritdoc}
      */
     public function getRandPhoto()
     {
@@ -205,6 +212,8 @@ class Trick implements TrickInterface
 
     /**
      * Add photo
+     *
+     * {@inheritdoc}
      */
     public function addPhoto(array $photos)
     {
@@ -218,6 +227,8 @@ class Trick implements TrickInterface
 
     /**
      * Add video
+     *
+     * {@inheritdoc}
      */
     public function addVideo(array $videos)
     {

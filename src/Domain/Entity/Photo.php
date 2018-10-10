@@ -53,14 +53,16 @@ class Photo implements PhotoInterface
      */
     public function __construct(
         $title,
+        $path,
         $alt,
         $trick_photo = null,
         $user_photo = null
     )
     {
         $this->id = Uuid::uuid4();
-        $this->title = $title;
-        $this->alt = $alt;
+        $this->title       = $title;
+        $this->path        = $path;
+        $this->alt         = $alt;
         $this->trick_photo = $trick_photo;
         $this->user_photo  = $user_photo;
     }
@@ -128,7 +130,7 @@ class Photo implements PhotoInterface
     }
 
     /**
-     * @param User $user_photo
+     * {@inheritdoc}
      */
     public function setUserPhoto(User $user_photo): void
     {
@@ -142,5 +144,4 @@ class Photo implements PhotoInterface
     {
         $this->path = $folder;
     }
-
 }

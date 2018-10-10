@@ -80,10 +80,10 @@ class User implements UserTrickInterface, UserInterface, \Serializable
     /**
      * User constructor.
      *
-     * @param $name
-     * @param $nick
-     * @param $password
-     * @param $email
+     * @param string $name
+     * @param string $nick
+     * @param string $password
+     * @param string $email
      * @param null $photo
      * @param null $trick
      * @param null $comment
@@ -91,10 +91,10 @@ class User implements UserTrickInterface, UserInterface, \Serializable
      * @param null $role
      */
     public function __construct(
-        $name,
-        $nick,
-        $password,
-        $email,
+        string $name = null,
+        string $nick = null,
+        string $password = null,
+        string $email = null,
         $photo  = null,
         $trick  = null,
         $comment= null,

@@ -32,17 +32,16 @@ interface UserRegistrationTypeHandlerInterface
     /**
      * UserRegistrationTypeHandlerInterface constructor.
      *
-     * @param EncoderFactoryInterface $encoderFactory
-     * @param FileUploaderHelperInterface $fileUploaderHelper
-     * @param PhotoFactoryInterface $photoFactory
-     * @param UserFactoryInterface $userFactory
-     * @param UsersRepositoryInterface $usersRepository
-     * @param UserTrickInterface $user
+     * @param EncoderFactoryInterface      $encoderFactory
+     * @param FileUploaderHelperInterface  $fileUploaderHelper
+     * @param PhotoFactoryInterface        $photoFactory
+     * @param UserFactoryInterface         $userFactory
+     * @param UsersRepositoryInterface     $usersRepository
      * @param UserPasswordEncoderInterface $encoder
-     * @param MailSubscriberHelper $mailer
-     * @param SessionInterface $session
-     * @param ValidatorInterface $validator
-     * @param \Swift_Mailer $swift_Mailer
+     * @param MailSubscriberHelper         $mailer
+     * @param SessionInterface             $session
+     * @param ValidatorInterface           $validator
+     * @param \Swift_Mailer                $swift_Mailer
      */
     public function __construct(
         EncoderFactoryInterface        $encoderFactory,
@@ -50,7 +49,6 @@ interface UserRegistrationTypeHandlerInterface
         PhotoFactoryInterface          $photoFactory,
         UserFactoryInterface           $userFactory,
         UsersRepositoryInterface       $usersRepository,
-        UserTrickInterface             $user,
         UserPasswordEncoderInterface   $encoder,
         MailSubscriberHelper           $mailer,
         SessionInterface               $session,

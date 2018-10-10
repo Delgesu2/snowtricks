@@ -8,6 +8,7 @@
 
 namespace App\Infra\Doctrine\Repository\Interfaces;
 
+use App\Domain\Entity\Interfaces\CommentInterface;
 use App\Domain\Factory\Interfaces\CommentFactoryInterface;
 
 /**
@@ -29,5 +30,24 @@ interface CommentsRepositoryInterface
      */
     public function getAllComments();
 
+    /**
+     * @param $trick
+     *
+     * @return mixed
+     */
+    public function getSelectedTrickComment($trick);
 
+    /**
+     * @param CommentInterface $comment
+     *
+     * @return mixed
+     */
+    public function save(CommentInterface $comment);
+
+    /**
+     * @param $comment
+     *
+     * @return mixed
+     */
+    public function deleteComment($comment);
 }

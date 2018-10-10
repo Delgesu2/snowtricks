@@ -39,12 +39,12 @@ final class FileUploaderHelper implements FileUploaderHelperInterface
      */
     public function upload(
         UploadedFile $file,
-        PhotoInterface $photo,
+      PhotoInterface $photo,
         string $folder = ''
 )
     {
         // move file
-        $file->move(
+       $file->move(
             $this->pictDir . '/' . $folder,
             $photo->getTitle()
         );

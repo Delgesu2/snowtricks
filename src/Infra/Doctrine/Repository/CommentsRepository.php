@@ -42,7 +42,7 @@ final class CommentsRepository extends ServiceEntityRepository implements Commen
     /**
      * {@inheritdoc}
      */
-    public function getSelectedTrickComments($trick)
+    public function getSelectedTrickComment($trick)
     {
        // return $this->createQueryBuilder()
     }
@@ -54,5 +54,17 @@ final class CommentsRepository extends ServiceEntityRepository implements Commen
     {
         $this->_em->persist($comment);
         $this->_em->flush();
+    }
+
+    public function deleteComment($comment)
+    {
+        $comment = $this->createQueryBuilder($comment)
+            ->where('comment.outset = :outset')
+            ->setParameter('outset', $comment)
+                ->getQuery()
+                ->getOneOrNullResult();
+        $this->_em->remove($comment);
+        $this->_em->flush();
+
     }
 }

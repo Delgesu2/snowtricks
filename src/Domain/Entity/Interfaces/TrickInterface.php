@@ -23,16 +23,6 @@ interface TrickInterface
     public function getId() :UuidInterface;
 
     /**
-     * @return \DateTime|null
-     */
-    public function getDateCreate() :?\DateTime;
-
-    /**
-     * @return \DateTime|null
-     */
-    public function getDateUpdate() :?\DateTime;
-
-    /**
      * @return string
      */
     public function getTrick_name() :string;
@@ -54,12 +44,12 @@ interface TrickInterface
     public function getComment() :\ArrayAccess;
 
     /**
-     * @return mixed
+     * @return PhotoInterface
      */
     public function getPhoto();
 
     /**
-     * @return mixed
+     * @return VideoInterface
      */
     public function getVideo();
 
@@ -67,6 +57,36 @@ interface TrickInterface
      * @return string
      */
     public function getTrick_user() :string;
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDateCreate() :?\DateTime;
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDateUpdate() :?\DateTime;
+
+    /**
+     * @return mixed
+     */
+    public function getRandPhoto();
+
+    /**
+     * @param array $photos
+     *
+     * @return mixed
+     */
+    public function addPhoto(array $photos);
+
+    /**
+     * @param array $videos
+     *
+     * @return mixed
+     */
+    public function addVideo(array $videos);
+
 
     /**
      * @param $name

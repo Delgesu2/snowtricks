@@ -84,7 +84,7 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
 
             foreach ($form->getData()->photo as $photo) {
                 $data = $this->fileUploaderHelper->upload($photo);
-                $pictures[] = $this->photoFactory->create($data['filename'], $data['pictDir'], $data['filename']);
+                $pictures[] = $this->photoFactory->createFromfile($data['filename'], $data['pictDir'], $data['filename']);
             }
 
             foreach ($form->getData()->video as $video) {

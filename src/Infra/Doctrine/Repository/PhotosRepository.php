@@ -19,7 +19,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  *
  * @package App\Infra\Doctrine\Repository
  */
-final class PhotosRepository implements PhotosRepositoryInterface
+final class PhotosRepository extends ServiceEntityRepository implements PhotosRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -36,5 +36,20 @@ final class PhotosRepository implements PhotosRepositoryInterface
     {
         $this->_em->persist($photo);
         $this->_em->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function deleteUserPhoto($user)
+    {
+        $photo = $this->createQueryBuilder('photo')
+            ->where('photo.user_photo_id' == 'user.id')
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $photo;
     }
 }

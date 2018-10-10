@@ -9,6 +9,7 @@
 namespace App\Domain\Factory\Interfaces;
 
 use App\Domain\Entity\Interfaces\PhotoInterface;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * Interface PhotoFactoryInterface

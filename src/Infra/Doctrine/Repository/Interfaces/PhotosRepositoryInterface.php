@@ -19,12 +19,23 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 interface PhotosRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * PhotosRepositoryInterface constructor.
+     *
+     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry);
 
     /**
-     * {@inheritdoc}
+     * @param PhotoInterface $photo
+     *
+     * @return mixed
      */
     public function save(PhotoInterface $photo);
+
+    /**
+     * @param $user
+     *
+     * @return mixed
+     */
+    public function deleteUserPhoto($user);
 }
