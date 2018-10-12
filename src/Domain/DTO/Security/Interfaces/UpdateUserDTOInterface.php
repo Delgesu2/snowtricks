@@ -25,7 +25,7 @@ interface UpdateUserDTOInterface
      * @param $photo
      */
     public function __construct(
-        string $name,
+        $name,
         $nick,
         $password,
         $email,

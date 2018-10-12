@@ -128,7 +128,9 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
 
                 $user = $this->userFactory->create($form->getData());
 
-                $user->addPhoto($photo);
+                if (!\is_null($form->getData()->photo)) {
+                    $user->addPhoto($photo);
+                }
 
                 $this->mailer->registrationSend($form, $this->swift_Mailer, $user);
 

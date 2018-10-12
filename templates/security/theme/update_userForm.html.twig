@@ -22,7 +22,7 @@
                 <div class="hero-body">
                     <div class="container has-text-centered">
                         <h1 class="title">
-                            Inscription nouveau membre
+                            Edition du profile
                         </h1>
                     </div>
                 </div>
@@ -96,8 +96,8 @@
                     <div class="field-body">
                         <div class="control">
                             <div class="file">
-                                <label class="file-label" oninput="showFile()">
-                                    {{ form_widget(form.photo) }}
+                                <label class="file-label" oninput="showFileUpdating()">
+                                {{ form_widget(form.photo) }}
                                     <span class="file-cta">
                                                   <span class="file-icon">
                                                     <i class="fas fa-upload"></i>
@@ -107,8 +107,10 @@
                                                   </span>
                                                 </span>
                                 </label>
-                                <output id="loadedFile"></output>
                             </div>
+                            <div>Ancienne photo: </div>
+                                <!--{# <img src="{{ asset(user.photo.path) }}">  #}-->
+                            <div>Nouvelle photo: <output id="loadedFile"></output></div>
                         </div>
                     </div>
                 </div>

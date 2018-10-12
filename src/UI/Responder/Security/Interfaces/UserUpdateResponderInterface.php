@@ -22,6 +22,7 @@ interface UserUpdateResponderInterface
 
     /**
      * @param $form
+     * @param $user
      *
      * @return mixed
      */

@@ -11,6 +11,7 @@ namespace App\Form\Handler\Security;
 use App\Domain\Entity\User;
 use App\Domain\Entity\Interfaces\UserTrickInterface;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
+use App\Domain\Factory\Interfaces\UserFactoryInterface;
 use App\Form\Handler\Security\Interfaces\UserUpdateHandlerInterface;
 use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Helper\Interfaces\MailSubscriberHelperInterface;
@@ -31,6 +32,11 @@ class UserUpdateHandler implements UserUpdateHandlerInterface
      * @var FileUploaderHelperInterface
      */
     private $fileUploaderHelper;
+
+    /**
+     * @var UserFactoryInterface
+     */
+    private $userFactory;
 
     /**
      * @var PhotoFactoryInterface
@@ -104,17 +110,24 @@ class UserUpdateHandler implements UserUpdateHandlerInterface
             $encoder = $this->encoderFactory->getEncoder(User::class);
 
             $user->update(
-                $form->getData()->nickname,
+                $form->getData()->nick,
                 $form->getData()->password = $encoder->encodePassword($form->getData()->password, null),
                 $form->getData()->email,
                 $form->getData()->photo
             );
 
+            if (!\is_null($form->getData()->photo)) {
+                $user->addPhoto($photo);
+            }
+
+
+/**
             $constraints = $this->validator->validate($user, null, array('User'));
 
             if (\count($constraints) > 0) {
                 return false;
             }
+**/
 
             $this->userRepository->saveUser($user);
 

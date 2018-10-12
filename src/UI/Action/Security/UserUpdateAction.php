@@ -99,9 +99,10 @@ final class UserUpdateAction implements UserUpdateActionInterface
             ->handleRequest($request);
 
         if ($this->userUpdateHandler->handle($updateUserType, $user)){
-            return $responder(true);
+            return $responder(true, $user);
+            //return $responder(true);
         }
 
-        return $responder($updateUserType);
+        return $responder($updateUserType, $user);
     }
 }

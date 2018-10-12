@@ -16,19 +16,32 @@ final class UpdateUserDTO implements UpdateUserDTOInterface
      */
     public $name;
 
+    /**
+     * @var string
+     */
     public $nick;
 
+    /**
+     * @var string
+     *
+     */
     public $password;
 
+    /**
+     * @var string
+     */
     public $email;
 
+    /**
+     * @var \SplFileInfo
+     */
     public $photo = null;
 
     /**
      * {@inheritdoc}
      */
     public function __construct(
-        string $name,
+        $name,
         $nick,
         $password,
         $email,

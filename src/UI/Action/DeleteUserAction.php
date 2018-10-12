@@ -48,7 +48,12 @@ final class DeleteUserAction implements DeleteUserActionInterface
     )
     {
         $user = $this->repository->getUserBySlug($request->get('slug'));
-        $this->filesystem->remove($user->getPhoto()->getPath());
+
+        if (!\is_null($user->getPhoto())) {
+
+            $this->filesystem->remove($user->getPhoto()->getPath());
+
+        }
 
         $this->repository->deleteUser($user);
 

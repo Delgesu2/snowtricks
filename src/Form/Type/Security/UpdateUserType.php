@@ -38,7 +38,7 @@ final class UpdateUserType extends AbstractType implements UpdateUserTypeInterfa
                 'disabled'   => true
             ])
 
-            ->add('nickname', TextType::class, [
+            ->add('nick', TextType::class, [
                 'label_attr' => ['class' => 'label'],
                 'attr'       => ['class' => 'input']
             ])
@@ -57,7 +57,8 @@ final class UpdateUserType extends AbstractType implements UpdateUserTypeInterfa
                 'label_attr' => ['class' => 'label'],
                 'attr'       => ['class' => 'file-input'],
                 'multiple'   => false,
-                'required'   => false
+                'required'   => false,
+                'data_class' => null
             ]);
     }
 
