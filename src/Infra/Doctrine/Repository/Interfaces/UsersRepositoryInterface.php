@@ -31,6 +31,11 @@ interface UsersRepositoryInterface
     public function getAllUsers();
 
     /**
+     * @return mixed
+     */
+    public function getAllEmails();
+
+    /**
      * @param UserTrickInterface $userTrick
      *
      * @return mixed

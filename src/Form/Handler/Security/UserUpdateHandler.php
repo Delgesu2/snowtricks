@@ -21,7 +21,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class UserUpdateHandler implements UserUpdateHandlerInterface
+/**
+ * Class UserUpdateHandler
+ *
+ * @package App\Form\Handler\Security
+ */
+final class UserUpdateHandler implements UserUpdateHandlerInterface
 {
     /**
      * @var EncoderFactoryInterface

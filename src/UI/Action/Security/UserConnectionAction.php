@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     methods={"GET","POST"}
  *     )
  */
-class UserConnectionAction implements UserConnectionActionInterface
+final class UserConnectionAction implements UserConnectionActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -45,7 +45,7 @@ class UserConnectionAction implements UserConnectionActionInterface
      * @inheritdoc
      */
     public function __invoke(
-        Request $request,
+        Request                          $request,
         UserConnectionResponderInterface $responder
     ): Response {
 

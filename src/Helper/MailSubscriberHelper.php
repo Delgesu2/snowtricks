@@ -58,4 +58,30 @@ final class MailSubscriberHelper implements MailSubscriberHelperInterface
 
        $swift_Mailer->send($message);
     }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function emailCheckSend(FormInterface $form, \Swift_Mailer $swift_Mailer, UserTrickInterface $user)
+    {
+        $message = (new \Swift_Message('Réinitialisation du mot de passe - Snowtricks'))
+            ->setFrom('contact@devdemo.eu')
+            ->setTo($form->getData()->email)
+            ->setSubject('Réinitialisation de votre mot de passe')
+            ->setBody(
+                $this->twig->render(
+                    'email/passwordreset.html.twig',
+                    array('name'=>$user->getName(),
+                          'token'=>$user->getToken()
+                        )
+                ),
+                'text/html'
+            );
+
+        $swift_Mailer->send($message);
+    }
 }

@@ -49,6 +49,18 @@ final class UsersRepository extends ServiceEntityRepository implements UsersRepo
     /**
      * {@inheritdoc}
      */
+    public function getAllEmails()
+    {
+        return $this->createQueryBuilder('user')
+            ->select('email')
+            ->from('User', 'User')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function saveUser(UserTrickInterface $user)
     {
         $this->_em->persist($user);

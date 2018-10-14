@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Snowtricks - Vérification courriel{% endblock %}
+
+{% block body %}
+    {% form_theme form 'security/theme/email_checkForm.html.twig' %}
+    {{ form(form) }}
+{% endblock %}

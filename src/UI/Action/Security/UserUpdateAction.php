@@ -98,11 +98,11 @@ final class UserUpdateAction implements UserUpdateActionInterface
         $updateUserType = $this->formFactory->create(UpdateUserType::class, $dto)
             ->handleRequest($request);
 
-        if ($this->userUpdateHandler->handle($updateUserType, $user)){
-            return $responder(true, $user);
+        if ($this->userUpdateHandler->handle($updateUserType, $user)) {
             //return $responder(true);
+            return $responder($updateUserType);
         }
 
-        return $responder($updateUserType, $user);
+        return $responder($updateUserType);
     }
 }

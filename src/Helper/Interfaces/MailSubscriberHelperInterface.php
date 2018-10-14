@@ -34,4 +34,14 @@ interface MailSubscriberHelperInterface
      * @return mixed
      */
     public function registrationSend(FormInterface $form, \Swift_Mailer $swift_Mailer, UserTrickInterface $user);
+
+    /**
+     * @param FormInterface $form
+     * @param \Swift_Mailer $swift_Mailer
+     * @param UserTrickInterface $user
+     *
+     * @return mixed
+     */
+    public function emailCheckSend(FormInterface $form, \Swift_Mailer $swift_Mailer, UserTrickInterface $user);
+
 }

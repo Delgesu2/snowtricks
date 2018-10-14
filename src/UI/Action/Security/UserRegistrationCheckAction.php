@@ -22,6 +22,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class UserRegistrationCheckAction implements UserRegistrationCheckActionInterface
 {
+    /**
+     * @var UsersRepository
+     */
     private $repository;
 
     /**

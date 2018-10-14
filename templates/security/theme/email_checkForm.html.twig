@@ -1,0 +1,65 @@
+{% form_theme form _self %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% block form %}
+    {{ form_start(form) }}
+
+<div class="columns is-mobile">
+    <div class="column is-10 is-offset-1">
+
+        <div class="hero is-info">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <h1 class="title">
+                        Changement mot de passe
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">Entrez <span class="has-text-weight-semibold">l'adresse courriel utilis&eacute;e
+                lors de l'inscription</span>, puis cliquez sur le lien pr&eacute;sent dans le message
+                que vous trouverez dans votre bo&icirc;te de r&eacute;ception. Cela vous renverra sur un formulaire de cr&eacute;ation
+                d'un nouveau mot de passe.
+        </div>
+
+        <div class="section">
+
+            <div class="field is-horizontal">
+
+            <div class="field-label is-normal">
+                {{ form_label(form.email, 'Courriel: ') }}
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="field">
+            <div class="control">   <!-- Submit -->
+                <button type="submit" class="button is-primary">Envoyer</button>
+            </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+    {{ form_end(form) }}
+{% endblock %}

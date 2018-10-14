@@ -10,7 +10,9 @@ namespace App\UI\Responder\Security;
 
 
 use App\UI\Responder\Security\Interfaces\UserUpdateResponderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 /**
@@ -20,6 +22,9 @@ use Twig\Environment;
  */
 final class UserUpdateResponder implements UserUpdateResponderInterface
 {
+    /**
+     * @var Environment
+     */
     private $twig;
 
     /**
@@ -37,14 +42,13 @@ final class UserUpdateResponder implements UserUpdateResponderInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($form)
+    public function __invoke(FormInterface $form)
     {
         return new Response(
-            $this->twig->render('security/update_user.html.twig', [
-                'form' => $form->createView()
-            ])
+                    $this->twig->render('security/update_user.html.twig', [
+                        'form' => $form->createView()
+                    ])
         );
-
 
     }
 }

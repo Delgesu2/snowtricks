@@ -39,14 +39,12 @@ final class UserConnectionResponder implements UserConnectionResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke(
-        FormInterface $form
-    ): Response {
+    public function __invoke(FormInterface $form): Response {
 
        return new Response(
-                  $this->twig->render('security/user_connection.html.twig', [
-                      'form' => $form->createView()
-                  ])
-              );
+          $this->twig->render('security/user_connection.html.twig', [
+              'form' => $form->createView()
+          ])
+      );
     }
 }

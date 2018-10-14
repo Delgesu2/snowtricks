@@ -9,6 +9,7 @@
 namespace App\UI\Responder\Security\Interfaces;
 
 
+use Symfony\Component\Form\FormInterface;
 use Twig\Environment;
 
 interface UserUpdateResponderInterface
@@ -21,10 +22,9 @@ interface UserUpdateResponderInterface
     public function __construct(Environment $twig);
 
     /**
-     * @param $form
-     * @param $user
+     * @param FormInterface $form
      *
      * @return mixed
      */
-    public function __invoke($form);
+    public function __invoke(FormInterface $form);
 }

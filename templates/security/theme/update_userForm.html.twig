@@ -109,7 +109,11 @@
                                 </label>
                             </div>
                             <div>Ancienne photo: </div>
-                                <!--{# <img src="{{ asset(user.photo.path) }}">  #}-->
+
+                            {% if app.user.photo.path is defined %}
+                              <img src="{{ app.user.photo.path }}">
+                            {% endif %}
+
                             <div>Nouvelle photo: <output id="loadedFile"></output></div>
                         </div>
                     </div>
