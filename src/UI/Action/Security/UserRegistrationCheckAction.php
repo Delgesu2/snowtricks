@@ -10,7 +10,7 @@ namespace App\UI\Action\Security;
 
 use App\Infra\Doctrine\Repository\UsersRepository;
 use App\UI\Action\Security\Interfaces\UserRegistrationCheckActionInterface;
-use App\UI\Responder\Security\UserRegistrationCheckResponder;
+use App\UI\Responder\Security\Interfaces\UserRegistrationCheckResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,9 +39,9 @@ final class UserRegistrationCheckAction implements UserRegistrationCheckActionIn
      * {@inheritdoc}
      */
     public function __invoke(
-        Request                        $request,
-        UserRegistrationCheckResponder $responder,
-        SessionInterface               $session
+        Request                                 $request,
+        UserRegistrationCheckResponderInterface $responder,
+        SessionInterface                        $session
     )
     {
         $user = $this->repository->checkToken($request->attributes->get('token'));

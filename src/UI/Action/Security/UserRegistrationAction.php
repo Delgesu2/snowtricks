@@ -20,6 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class UserRegistrationAction
+ *
  * @Route(
  *     name="user_registration",
  *     path="/register",

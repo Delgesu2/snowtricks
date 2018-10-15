@@ -9,6 +9,7 @@
 namespace App\Form\Type\Security;
 
 use App\Domain\DTO\Security\UserRegistrationDTO;
+use App\Form\Type\Security\Interfaces\UserRegistrationTypeInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -23,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @package App\Form\Type\Security
  */
-final class UserRegistrationType extends AbstractType
+final class UserRegistrationType extends AbstractType implements UserRegistrationTypeInterface
 {
     /**
      * @inheritdoc

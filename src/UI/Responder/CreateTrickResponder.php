@@ -22,7 +22,14 @@ use Twig\Environment;
  */
 final class CreateTrickResponder implements CreateTrickResponderInterface
 {
+    /**
+     * @var Environment
+     */
     private $twig;
+
+    /**
+     * @var UrlGeneratorInterface
+     */
     private $urlGenerator;
 
     /**

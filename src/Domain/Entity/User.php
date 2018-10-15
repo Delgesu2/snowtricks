@@ -241,7 +241,7 @@ class User implements UserTrickInterface, UserInterface, \Serializable
     }
 
     /**
-    * User update
+    * {@inheritdoc}
     */
     public function update(
         $nick,
@@ -256,34 +256,57 @@ class User implements UserTrickInterface, UserInterface, \Serializable
         $this->photo = $photo;
     }
 
+    public function changePassword($password)
+    {
+        $this->password = $password;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRoles()
     {
         //return ['ROLE_ADMIN'];
         return $this->role;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUsername()
     {
         return $this->name;
     }
 
 
+    /**
+     * {@inheritdoc}
+     */
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSalt()
     {
         // TODO: Implement getSalt() method.
     }
 
-
+    /**
+     * {@inheritdoc}
+     */
     public function isEnabled()
     {
         return $this->valid;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function serialize()
     {
         return serialize(array(
@@ -294,6 +317,9 @@ class User implements UserTrickInterface, UserInterface, \Serializable
         ));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function unserialize($serialized)
     {
         list(

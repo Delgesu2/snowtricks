@@ -8,15 +8,16 @@
 
 namespace App\UI\Responder\Security;
 
+use App\UI\Responder\Security\Interfaces\UserRegistrationCheckResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Class UserRegistrationCheckResponder
+ * Class UserRegistrationCheckResponderInterface
  *
  * @package App\UI\Responder\Security
  */
-final class UserRegistrationCheckResponder
+final class UserRegistrationCheckResponder implements UserRegistrationCheckResponderInterface
 {
     /**
      * @var UrlGeneratorInterface

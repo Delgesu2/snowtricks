@@ -116,7 +116,6 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('user_connection'));
     }
 
-
     /**
      * @return bool
      */

@@ -9,7 +9,7 @@
 namespace App\UI\Action\Security\Interfaces;
 
 use App\Infra\Doctrine\Repository\UsersRepository;
-use App\UI\Responder\Security\UserRegistrationCheckResponder;
+use App\UI\Responder\Security\Interfaces\UserRegistrationCheckResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -28,15 +28,16 @@ interface UserRegistrationCheckActionInterface
     public function __construct(UsersRepository $repository);
 
     /**
-     * @param UserRegistrationCheckResponder $responder
-     * @param $token
+     * @param Request                                 $request
+     * @param UserRegistrationCheckResponderInterface $responder
+     * @param SessionInterface                        $session
      *
      * @return mixed
      */
     public function __invoke(
-        Request                        $request,
-        UserRegistrationCheckResponder $responder,
-        SessionInterface               $session
+        Request                                 $request,
+        UserRegistrationCheckResponderInterface $responder,
+        SessionInterface                        $session
     );
 
 }

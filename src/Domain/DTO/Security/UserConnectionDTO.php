@@ -10,7 +10,12 @@ namespace App\Domain\DTO\Security;
 
 use App\Domain\DTO\Security\Interfaces\UserConnectionDTOInterface;
 
-class UserConnectionDTO implements UserConnectionDTOInterface
+/**
+ * Class UserConnectionDTO
+ *
+ * @package App\Domain\DTO\Security
+ */
+final class UserConnectionDTO implements UserConnectionDTOInterface
 {
     /**
      * @var string

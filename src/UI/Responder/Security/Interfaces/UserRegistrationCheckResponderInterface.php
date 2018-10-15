@@ -11,14 +11,14 @@ namespace App\UI\Responder\Security\Interfaces;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Interface UserRegistrationCheckResponder
+ * Interface UserRegistrationCheckResponderInterface
  *
  * @package App\UI\Responder\Security\Interfaces
  */
-interface UserRegistrationCheckResponder
+interface UserRegistrationCheckResponderInterface
 {
     /**
-     * UserRegistrationCheckResponder constructor.
+     * UserRegistrationCheckResponderInterface constructor.
      *
      * @param UrlGeneratorInterface $urlGenerator
      */
