@@ -102,6 +102,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        $request->getSession()->getFlashBag()->add('success', 'Vous êtes connecté.');
         return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
@@ -121,6 +122,6 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function supportsRememberMe()
     {
-        return true;
+        return false;
     }
 }

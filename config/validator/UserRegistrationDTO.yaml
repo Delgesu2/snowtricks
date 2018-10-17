@@ -1,4 +1,4 @@
-App\Domain\Entity\User:
+App\Domain\DTO\Security\UserRegistrationDTO:
     properties:
         name:
           - NotBlank: ~
@@ -12,7 +12,7 @@ App\Domain\Entity\User:
         photo:
           - Image:
               allowLandscape: true
-              allowPortrait: false
+              allowPortrait: true
               allowSquare: true
               maxSize: 1M
               maxSizeMessage: 'Le fichier est trop grand. Taille maximale:

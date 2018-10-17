@@ -75,7 +75,8 @@ final class UserRegistrationType extends AbstractType implements UserRegistratio
                     $form->get('email')     ->getData(),
                     $form->get('photo')     ->getData()
                 );
-            }
+            },
+            'validation_groups' => ['UserRegistrationDTO']
         ]);
     }
 }

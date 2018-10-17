@@ -15,7 +15,9 @@ use App\Domain\Factory\Interfaces\UserFactoryInterface;
 use App\Form\Handler\Security\Interfaces\UserUpdateHandlerInterface;
 use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Helper\Interfaces\MailSubscriberHelperInterface;
+use App\Infra\Doctrine\Repository\Interfaces\PhotosRepositoryInterface;
 use App\Infra\Doctrine\Repository\Interfaces\UsersRepositoryInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -74,6 +76,16 @@ final class UserUpdateHandler implements UserUpdateHandlerInterface
     private $mailer;
 
     /**
+     * @var Filesystem
+     */
+    private $fileSystem;
+
+    /**
+     * @var PhotosRepositoryInterface
+     */
+    private $photosRepository;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct(
@@ -84,7 +96,9 @@ final class UserUpdateHandler implements UserUpdateHandlerInterface
         SessionInterface              $session,
         ValidatorInterface            $validator,
         \Swift_Mailer                 $swift_Mailer,
-        MailSubscriberHelperInterface $mailer
+        MailSubscriberHelperInterface $mailer,
+        Filesystem                    $filesystem,
+        PhotosRepositoryInterface     $photosRepository
     ) {
         $this->encoderFactory     = $encoderFactory;
         $this->fileUploaderHelper = $fileUploaderHelper;
@@ -94,6 +108,8 @@ final class UserUpdateHandler implements UserUpdateHandlerInterface
         $this->validator          = $validator;
         $this->swift_Mailer       = $swift_Mailer;
         $this->mailer             = $mailer;
+        $this->fileSystem         = $filesystem;
+        $this->photosRepository   = $photosRepository;
     }
 
 
@@ -110,6 +126,16 @@ final class UserUpdateHandler implements UserUpdateHandlerInterface
             if (!\is_null($form->getData()->photo)) {
                 $photo = $this->photoFactory->createFromfile($form->getData()->photo);
                 $this->fileUploaderHelper->upload($form->getData()->photo, $photo, 'users');
+
+                if (!\is_null($user->getPhoto()->getPath())){
+
+                    // delete file
+                    $this->fileSystem->remove($user->getPhoto()->getPath());
+
+                    // delete photo object
+                    $oldPhoto = $user->getPhoto();
+                    $this->photosRepository->deleteUserPhoto($oldPhoto);
+                }
             }
 
             $encoder = $this->encoderFactory->getEncoder(User::class);
@@ -121,18 +147,7 @@ final class UserUpdateHandler implements UserUpdateHandlerInterface
                 $form->getData()->photo
             );
 
-            if (!\is_null($form->getData()->photo)) {
-                $user->addPhoto($photo);
-            }
-
-
-/**
-            $constraints = $this->validator->validate($user, null, array('User'));
-
-            if (\count($constraints) > 0) {
-                return false;
-            }
-**/
+            $user->addPhoto($photo);
 
             $this->userRepository->saveUser($user);
 

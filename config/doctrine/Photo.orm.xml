@@ -10,7 +10,6 @@
 	</id>
 	<field name="title" type="string" length="60" nullable="true" />
 	<field name="path" type="string" length="100" />
-
 	<many-to-one field="trick_photo" target-entity="App\Domain\Entity\Trick" inversed-by="photo">
 	</many-to-one>
 

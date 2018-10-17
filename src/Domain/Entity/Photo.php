@@ -86,15 +86,24 @@ class Photo implements PhotoInterface
     /**
      * @return string
      */
-	public function getPath() :string
+	public function getPath() :? string
 	{
 		return $this->path;
 	}
 
     /**
+     * @return string
+     */
+    public function makeNewPath(): string
+    {
+        $parts = explode("/public", $this->path);
+        return $parts[1];
+    }
+
+    /**
      * @return Trick|null
      */
-    public function getTrickPhoto(): ?Trick
+    public function getTrickPhoto():? Trick
     {
         return $this->trick_photo;
     }
@@ -128,6 +137,15 @@ class Photo implements PhotoInterface
     {
         $this->trick_photo = $trick_photo;
     }
+
+    /**
+     * {@inheritdoc}
+
+    public function removeUserPhoto()
+    {
+        $this->user_photo = null;
+    }
+     * */
 
     /**
      * {@inheritdoc}

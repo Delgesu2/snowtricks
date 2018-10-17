@@ -76,9 +76,14 @@
 
                             {% endif %}
 
+                            {% if is_granted('ROLE_USER', 'ROLE_ADMIN') %}
+
                             <a href="/logout" class="dropdown-item">
                                 Déconnexion
                             </a>
+
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>
@@ -113,7 +118,11 @@
             </nav>
         </div>
         <!-- end Navbar -->
-        
+
+        {% for success in app.flashes('success') %}
+            {{ success }}
+        {% endfor %}
+
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>

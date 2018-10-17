@@ -233,6 +233,16 @@ class User implements UserTrickInterface, UserInterface, \Serializable
 
     /**
      * {@inheritdoc}
+
+    public function removePhoto($photo)
+    {
+        $this->photo = $photo;
+        $this->photo->removeUserPhoto($photo);
+    }
+*/
+
+    /**
+     * {@inheritdoc}
      */
     public function addPhoto($photo = null)
     {

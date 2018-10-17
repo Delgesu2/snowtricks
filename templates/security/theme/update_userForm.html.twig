@@ -37,6 +37,7 @@
                         <div class="field">
                             <div class="control">
                                 {{ form_widget(form.name, {'attr': {'class': 'input'}}) }}
+                                {{ form_errors(form.name) }}
                             </div>
                         </div>
                     </div>
@@ -51,6 +52,7 @@
                         <div class="field">
                             <div class="control">
                                 {{ form_widget(form.nick, {'attr': {'class': 'input'}}) }}
+                                {{ form_errors(form.nick) }}
                             </div>
                         </div>
                     </div>
@@ -110,8 +112,10 @@
                             </div>
                             <div>Ancienne photo: </div>
 
-                            {% if app.user.photo.path is defined %}
-                              <img src="{{ app.user.photo.path }}">
+                            {% if app.user.getPhoto.makeNewPath is defined %}
+                                <figure class="image is-128x128">
+                                    <img src="{{ asset(app.user.getPhoto.makeNewPath) }}">
+                                </figure>
                             {% endif %}
 
                             <div>Nouvelle photo: <output id="loadedFile"></output></div>

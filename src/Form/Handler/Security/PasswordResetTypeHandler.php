@@ -48,7 +48,7 @@ class PasswordResetTypeHandler implements PasswordResetTypeHandlerInterface
     {
         $this->validator     = $validator;
         $this->repository    = $repository;
-        $this->encoderFacory = $encoderFactory;
+        $this->encoderFactory = $encoderFactory;
     }
 
 
@@ -69,8 +69,6 @@ class PasswordResetTypeHandler implements PasswordResetTypeHandlerInterface
 
                 $encoder = $this->encoderFactory->getEncoder(User::class);
                 $form->getData()->newpassword = $encoder->encodePassword($form->getData()->newpassword, null);
-
-                die;
 
                 $user->changePassword($form->getData()->newpassword);
 

@@ -60,9 +60,4 @@ final class UserRegistrationDTO implements UserRegistrationDTOInterface
         $this->photo    = $photo;
     }
 
-      /**  $constraints = $this->validator->validate($user);
-
-        if (\count($constraints) > 0) {
-        return false;
-        }  **/
 }

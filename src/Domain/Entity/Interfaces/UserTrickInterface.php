@@ -87,6 +87,14 @@ interface UserTrickInterface
      * @param $photo
      *
      * @return mixed
+
+    public function removePhoto($photo);
+     */
+
+    /**
+     * @param $photo
+     *
+     * @return mixed
      */
     public function addPhoto($photo);
 

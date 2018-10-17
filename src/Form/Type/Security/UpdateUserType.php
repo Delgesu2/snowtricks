@@ -45,12 +45,12 @@ final class UpdateUserType extends AbstractType implements UpdateUserTypeInterfa
 
             ->add('password', PasswordType::class, [
                 'label_attr' => ['class' => 'labe'],
-                'required'   => true
+                'required'   => false
             ])
 
             ->add('email', EmailType::class,[
                 'label_attr' => ['class' => 'label'],
-                'required'   => true
+                'required'   => false
             ])
 
             ->add('photo', FileType::class, [

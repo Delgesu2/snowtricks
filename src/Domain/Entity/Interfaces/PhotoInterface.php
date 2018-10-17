@@ -32,7 +32,7 @@ interface PhotoInterface
     /**
      * @return string
      */
-    public function getPath() :string;
+    public function getPath() :? string;
 
     /**
      * @return mixed
@@ -57,6 +57,14 @@ interface PhotoInterface
      * @param Trick $trick_photo
      */
     public function setTrickPhoto(Trick $trick_photo): void;
+
+    /**
+     * @return mixed
+
+    public function removeUserPhoto(User $user_photo);
+
+     * */
+
 
     /**
      * @param User $user_photo

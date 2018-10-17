@@ -9,6 +9,7 @@
 namespace App\Infra\Doctrine\Repository;
 
 use App\Domain\Entity\Interfaces\PhotoInterface;
+use App\Domain\Entity\Photo;
 use App\Infra\Doctrine\Repository\Interfaces\PhotosRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -34,6 +35,15 @@ final class PhotosRepository extends ServiceEntityRepository implements PhotosRe
     public function save(PhotoInterface $photo)
     {
         $this->_em->persist($photo);
+        $this->_em->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteUserPhoto($oldPhoto)
+    {
+        $this->_em->remove($oldPhoto);
         $this->_em->flush();
     }
 }

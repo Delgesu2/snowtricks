@@ -31,4 +31,11 @@ interface PhotosRepositoryInterface
      * @return mixed
      */
     public function save(PhotoInterface $photo);
+
+    /**
+     * @param $oldPhoto
+     *
+     * @return mixed
+     */
+    public function deleteUserPhoto($oldPhoto);
 }

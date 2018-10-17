@@ -19,8 +19,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class DeleteUserAction implements DeleteUserActionInterface
 {
+    /**
+     * @var UsersRepositoryInterface
+     */
     private $repository;
 
+    /**
+     * @var Filesystem
+     */
     private $filesystem;
 
     /**
@@ -36,11 +42,7 @@ final class DeleteUserAction implements DeleteUserActionInterface
     }
 
     /**
-     * @inheritdoc
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * {@inheritdoc}
      */
     public function __invoke(
         DeleteUserResponderInterface $responder,

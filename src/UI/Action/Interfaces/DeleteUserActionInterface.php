@@ -33,8 +33,8 @@ interface DeleteUserActionInterface
     );
 
     /**
-     * @param UserListResponderInterface $responder
-     * @param $user
+     * @param DeleteUserResponderInterface $responder
+     * @param Request $request
      *
      * @return mixed
      */
