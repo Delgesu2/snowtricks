@@ -67,11 +67,14 @@ class PasswordResetTypeHandler implements PasswordResetTypeHandlerInterface
                             return false;
                         }
 
+                        // Generating new encoded password
                 $encoder = $this->encoderFactory->getEncoder(User::class);
                 $form->getData()->newpassword = $encoder->encodePassword($form->getData()->newpassword, null);
 
                 $user->changePassword($form->getData()->newpassword);
 
+                // Destroy token in User
+                $user->deleteToken();
                 $this->repository->saveUser($user);
 
                 return true;

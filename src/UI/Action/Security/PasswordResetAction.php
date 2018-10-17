@@ -79,10 +79,13 @@ class PasswordResetAction implements PasswordResetActionInterface
 
         if ($user) {
 
+
+
+            // Success !!
             $request->getSession()->getFlashBag()->add('Succes','Adresse courriel vérifiée.
             Accès au formulaire de réinitialisation du mot de passe.');
 
-            // Création formulaire en parallèle avec le handler
+            // Create Form for new password
             $type = $this->formFactory->create(PasswordResetType::class)
                                 ->handleRequest($request);
 

@@ -229,17 +229,24 @@ class User implements UserTrickInterface, UserInterface, \Serializable
         $this->valid = true;
         $this->validationDate = new \DateTimeImmutable();
         $this->role = ['ROLE_USER'];
+        $this->deleteToken();
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function createToken()
+    {
+        $this->token = md5(uniqid(rand()));
     }
 
     /**
      * {@inheritdoc}
-
-    public function removePhoto($photo)
+     */
+    public function deleteToken()
     {
-        $this->photo = $photo;
-        $this->photo->removeUserPhoto($photo);
+        $this->token = null;
     }
-*/
 
     /**
      * {@inheritdoc}

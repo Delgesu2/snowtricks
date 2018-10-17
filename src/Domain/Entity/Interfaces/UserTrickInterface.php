@@ -84,12 +84,14 @@ interface UserTrickInterface
     public function validate() :void;
 
     /**
-     * @param $photo
-     *
      * @return mixed
-
-    public function removePhoto($photo);
      */
+    public function createToken();
+
+    /**
+     * @return mixed
+     */
+    public function deleteToken();
 
     /**
      * @param $photo

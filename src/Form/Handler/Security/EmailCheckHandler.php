@@ -89,6 +89,12 @@ final class EmailCheckHandler implements EmailCheckHandlerInterface
 
                 if ( $user->getEmail() === $form->getData()->email ) {
 
+                    // creating new token in User
+                    $user->createToken();
+
+                    // saving token
+                    $this->repository->saveUser($user);
+
                     $this->mailer->emailCheckSend($form, $this->swift_Mailer, $user);
 
                 }
