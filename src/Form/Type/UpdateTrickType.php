@@ -100,7 +100,8 @@ final class UpdateTrickType extends AbstractType implements UpdateTrickTypeInter
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UpdateTrickDTOInterface::class
+            'data_class' => UpdateTrickDTOInterface::class,
+            'validation_groups' => ['UpdateTrickDTO']
         ]);
     }
 }

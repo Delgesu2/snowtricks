@@ -54,7 +54,8 @@ final class CommentType extends AbstractType implements CommentTypeInterface
                 return new NewCommentDTO(
                     $form->get('text')->getData()
                 );
-            }
+            },
+            'validation_groups' => ['NewCommentDTO']
         ]);
     }
 }

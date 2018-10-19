@@ -49,6 +49,9 @@ final class FileUploaderHelper implements FileUploaderHelperInterface
             $photo->getTitle()
         );
 
-        $photo->upload($this->pictDir. '/' . $folder . '/' . $photo->getTitle());
+       // Creation of $path
+        $photo->upload('images' . '/' . $folder . '/' . $photo->getTitle());
+
+       // $photo->upload($this->pictDir. '/' . $folder . '/' . $photo->getTitle());
     }
 }

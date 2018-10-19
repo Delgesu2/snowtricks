@@ -123,19 +123,21 @@ final class UserUpdateHandler implements UserUpdateHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if (!\is_null($user->getPhoto()->getPath())){ // problème Call to a member function getPath() on null
+
+                // delete file
+                $this->fileSystem->remove($user->getPhoto()->getPath());
+
+                // delete photo object
+                $oldPhoto = $user->getPhoto();
+                $this->photosRepository->deleteUserPhoto($oldPhoto);
+            }
+
             if (!\is_null($form->getData()->photo)) {
                 $photo = $this->photoFactory->createFromfile($form->getData()->photo);
                 $this->fileUploaderHelper->upload($form->getData()->photo, $photo, 'users');
 
-                if (!\is_null($user->getPhoto()->getPath())){
 
-                    // delete file
-                    $this->fileSystem->remove($user->getPhoto()->getPath());
-
-                    // delete photo object
-                    $oldPhoto = $user->getPhoto();
-                    $this->photosRepository->deleteUserPhoto($oldPhoto);
-                }
             }
 
             $encoder = $this->encoderFactory->getEncoder(User::class);

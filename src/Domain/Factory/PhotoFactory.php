@@ -32,10 +32,10 @@ final class PhotoFactory implements PhotoFactoryInterface
     {
         $title = md5(str_rot13($file->getBasename('.'.$file->getExtension())));
 
-        return new Photo(
+       return new Photo(
             $title . '.' . $file->guessExtension(),
-            $title,
-            $title
+             $title,
+             $title
         );
     }
 }

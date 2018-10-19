@@ -24,6 +24,7 @@ let minusIcon = document.getElementById("btnDelVideo");
 let buttons = document.getElementById("buttons");
 let index = document.querySelector('#collection').getAttribute('data-index');
 
+
     // Add new video form field
 plusIcon.addEventListener('click', function (e) {
     e.preventDefault();
@@ -37,13 +38,21 @@ plusIcon.addEventListener('click', function (e) {
     document.querySelector('#collection').setAttribute('data-index', index);
 
     // Display the form
-    buttons.insertAdjacentHTML('afterend', newForm);
+    plusIcon.insertAdjacentHTML('afterend', newForm);
 
     index++;
 });
 
 
+    // Remove field
+minusIcon.addEventListener('click', function (e) {
+    e.preventDefault();
+    let newForm = prototype.replace(/__name__/g, index);
+    newForm.parentNode.removeChild();
 
+})
+
+/**
 // Remove video field     Le mieux : un signe - en face de chaque nouveau champ.
 /*minusIcon.addEventListener('click', function (e) {
     e.preventDefault();

@@ -101,15 +101,16 @@
 
                 {{ form_label(form.video, "Lien(s) vidéo(s)") }}
                 <div data-prototype="{{ form_widget(form.video.vars.prototype,
-                    {'attr' : {'placeholder': 'https://'} })|e('html_attr') }}" data-index="{{ form.video|length }}" id="collection">
+                    {'attr' : {'placeholder': 'https://'} })|e('html_attr') }}" data-index="{{ form.video|length }}"
+                     id="collection">
                 </div>
+
                 {{ form_widget(form.video) }}
 
                 <div id="buttons">
                     <button type="button" id="btnNewVideo"><i class="icon far fa-plus-square"></i></button>
                     <button type="button" id="btnDelVideo"><i class="icon far fa-minus-square"></i></button>
                 </div>
-
 
 
             </section>

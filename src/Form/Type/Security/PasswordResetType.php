@@ -52,7 +52,8 @@ final class PasswordResetType extends AbstractType implements PasswordResetTypeI
                     $form->get('newpassword')->getData(),
                     $form->get('checknewpassword')->getData()
                 );
-            }
+            },
+            'validation_groups' => ['PasswordCheckDTO']
         ]);
     }
 }

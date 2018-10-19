@@ -70,13 +70,13 @@ final class CreateTrickType extends AbstractType implements CreateTrickTypeInter
              ])
 
              ->add('video', CollectionType::class, [
-                 'attr'         => ['class' => 'input'],
-                 'label_attr'   => ['class' => 'label'],
+                 /*'attr'         => ['class' => 'input'],
+                 'label_attr'   => ['class' => 'label'],*/
                  'entry_type'   => TextType::class,
                  'allow_add'    => true,
                  'allow_delete' => true,
                  'prototype'    => true,
-                 'required'     => false
+                 'required'     => false,
              ])
          ;
      }
@@ -96,7 +96,8 @@ final class CreateTrickType extends AbstractType implements CreateTrickTypeInter
                     $form->get('photo')->getData(),
                     $form->get('video')->getData()
                 );
-             }
+             },
+             'validation_groups' => ['NewTrickDTO']
          ]);
      }
 }

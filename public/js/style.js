@@ -1,23 +1,23 @@
 /* Load more videos */
 
-// + and - icons
+    //+ AND - ICONES
     let plusIcon = document.getElementById("btnNewVideo");
     let minusIcon = document.getElementById("btnDelVideo");
 
     let buttons = document.getElementById("buttons");
     let index = document.querySelector('#collection').getAttribute('data-index');
 
-    // Add new video form field
-
+    // ADD NEW VIDEO FORM FIELDS
 plusIcon.addEventListener('click', function (e) {
     e.preventDefault();
-//function newVideo() {
 
     console.log(document.querySelector('#collection').getAttribute('data-prototype'));
 
         //get data-prototype
         let prototype = document.querySelector('#collection').getAttribute('data-prototype');
         let newForm = prototype.replace(/__name__/g, index);
+
+
 
         //let videoForm = document.querySelector('#url-field');
 
@@ -29,8 +29,11 @@ plusIcon.addEventListener('click', function (e) {
         index++;
     });
 
+
+
     // Remove video field
-function removeField() {
+minusIcon.addEventListener('click', function (e) {
+    e.prevent
     // get the div that holds the collection
     var collectionHolder = document.getElementById('collection');
     // field followed by buttons

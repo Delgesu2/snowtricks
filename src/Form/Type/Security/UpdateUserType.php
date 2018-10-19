@@ -68,7 +68,8 @@ final class UpdateUserType extends AbstractType implements UpdateUserTypeInterfa
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UpdateUserDTOInterface::class
+            'data_class' => UpdateUserDTOInterface::class,
+            'validation_groups' => ['UpdateUserDTO']
         ]);
     }
 

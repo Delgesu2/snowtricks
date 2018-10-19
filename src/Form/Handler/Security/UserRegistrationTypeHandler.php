@@ -120,6 +120,7 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
 
             if (!\is_null($form->getData()->photo)) {
                 $photo = $this->photoFactory->createFromfile($form->getData()->photo);
+
                 $this->fileUploaderHelper->upload($form->getData()->photo, $photo, 'users');
             }
 

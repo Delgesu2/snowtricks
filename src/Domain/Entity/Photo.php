@@ -92,15 +92,6 @@ class Photo implements PhotoInterface
 	}
 
     /**
-     * @return string
-     */
-    public function makeNewPath(): string
-    {
-        $parts = explode("/public", $this->path);
-        return $parts[1];
-    }
-
-    /**
      * @return Trick|null
      */
     public function getTrickPhoto():? Trick

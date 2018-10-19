@@ -112,11 +112,16 @@
                             </div>
                             <div>Ancienne photo: </div>
 
-                            {% if app.user.getPhoto.makeNewPath is defined %}
+
                                 <figure class="image is-128x128">
-                                    <img src="{{ asset(app.user.getPhoto.makeNewPath) }}">
+                                    {% if app.user.photo.getPath is defined %}
+                                        <img src="{{ asset(app.user.photo.getPath ?? '') }}">
+                                        {% else %}
+                                        <img src="{{ asset('images/users/PersonPlaceholder.png') }}">
+                                    {% endif %}
                                 </figure>
-                            {% endif %}
+
+
 
                             <div>Nouvelle photo: <output id="loadedFile"></output></div>
                         </div>
