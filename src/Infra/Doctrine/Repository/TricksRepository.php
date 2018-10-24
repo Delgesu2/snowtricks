@@ -58,9 +58,18 @@ final class TricksRepository extends ServiceEntityRepository implements TricksRe
 
     /**
      * {@inheritdoc}
+     */
+    public function deleteTrick($trick)
+    {
+        $this->_em->remove($trick);
+        $this->_em->flush();
+    }
+
+    /**
+     * {@inheritdoc}
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
-     */
+
     public function deleteTrick($trick)
     {
         $trick = $this->createQueryBuilder('trick')
@@ -71,4 +80,5 @@ final class TricksRepository extends ServiceEntityRepository implements TricksRe
         $this->_em->remove($trick);
         $this->_em->flush();
     }
+     **/
 }

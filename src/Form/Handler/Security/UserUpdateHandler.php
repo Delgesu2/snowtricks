@@ -123,7 +123,7 @@ final class UserUpdateHandler implements UserUpdateHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if (!\is_null($user->getPhoto()->getPath())){ // problème Call to a member function getPath() on null
+            if (!\is_null($user->getPhoto())){
 
                 // delete file
                 $this->fileSystem->remove($user->getPhoto()->getPath());
@@ -150,6 +150,12 @@ final class UserUpdateHandler implements UserUpdateHandlerInterface
             );
 
             $user->addPhoto($photo);
+
+            $constraints = $this->validator->validate($user,[],['UpdateUserDTO']);
+
+            if (\count($constraints) > 0) {
+                return false;
+            }
 
             $this->userRepository->saveUser($user);
 

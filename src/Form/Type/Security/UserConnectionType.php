@@ -53,7 +53,8 @@ final class UserConnectionType extends AbstractType implements UserConnectionTyp
                     $form->get('password') ->getData(),
                     $form->get('keep') ->getData()
                 );
-            }
+            },
+            'validation_groups' => ['UserConnectionDTO']
         ]);
     }
 }

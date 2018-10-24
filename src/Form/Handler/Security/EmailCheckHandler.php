@@ -89,6 +89,12 @@ final class EmailCheckHandler implements EmailCheckHandlerInterface
 
                 if ( $user->getEmail() === $form->getData()->email ) {
 
+                    $constraints = $this->validator->validate($form->getData(), [], ['EmailCheckDTO']);
+
+                    if (\count($constraints) > 0) {
+                        return false;
+                    }
+
                     // creating new token in User
                     $user->createToken();
 
@@ -96,6 +102,8 @@ final class EmailCheckHandler implements EmailCheckHandlerInterface
                     $this->repository->saveUser($user);
 
                     $this->mailer->emailCheckSend($form, $this->swift_Mailer, $user);
+
+
 
                 }
 

@@ -129,6 +129,12 @@ final class UserRegistrationTypeHandler implements UserRegistrationTypeHandlerIn
 
                 $user = $this->userFactory->create($form->getData());
 
+                $constraints = $this->validator->validate($user,[],['UserRegistrationDTO']);
+
+                if (\count($constraints) > 0) {
+                    return false;
+                }
+
                 if (!\is_null($form->getData()->photo)) {
                     $user->addPhoto($photo);
                 }

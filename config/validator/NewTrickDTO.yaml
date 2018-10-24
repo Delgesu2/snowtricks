@@ -1,7 +1,9 @@
-App\Domain\Entity\Trick:
+App\Domain\DTO\NewTrickDTO:
     properties:
         trick_name:
             - NotBlank: ~
+            - Length:
+                max: 50
         description:
             - NotBlank: ~
             - Length:
@@ -12,7 +14,7 @@ App\Domain\Entity\Trick:
         photo:
             - Image:
                 allowLandscape: true
-                allowPortrait: false
+                allowPortrait: true
                 allowSquare: true
                 maxSize: 2M
                 maxSizeMessage: 'Le fichier est trop grand. Taille maximale:

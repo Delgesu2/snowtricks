@@ -8,6 +8,7 @@
 
 namespace App\UI\Responder\Interfaces;
 
+use Symfony\Component\Form\FormInterface;
 use Twig\Environment;
 
 /**
@@ -26,8 +27,12 @@ interface SelectedTrickResponderInterface
 
     /**
      * @param $trick
+     * @param FormInterface $form
      *
      * @return mixed
      */
-    public function __invoke($trick);
+    public function __invoke(
+        $trick,
+        FormInterface $form
+    );
 }

@@ -99,7 +99,7 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
                 $form->getData()->video
                 );
 
-            $constraints = $this->validator->validate($trick, null, array('Trick'));
+            $constraints = $this->validator->validate($trick, [], array('UpdateTrickDTO'));
 
             if (\count($constraints) > 0) {
                 return false;

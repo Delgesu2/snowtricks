@@ -11,7 +11,6 @@ namespace App\Domain\Factory;
 use App\Domain\Factory\Interfaces\PhotoFactoryInterface;
 use App\Domain\Entity\Interfaces\PhotoInterface;
 use App\Domain\Entity\Photo;
-use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
  * Class PhotoFactory
@@ -20,11 +19,6 @@ use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
  */
 final class PhotoFactory implements PhotoFactoryInterface
 {
-    /**
-     * @var PhotoInterface
-     */
-    private $photo;
-
     /**
      * {@inheritdoc}
      */

@@ -85,7 +85,7 @@ final class UpdateTrickAction implements UpdateTrickActionInterface
      * {@inheritdoc}
      */
     public function __invoke(
-        Request $request,
+        Request                       $request,
         UpdateTrickResponderInterface $responder
     )
     {

@@ -167,25 +167,13 @@
                 {% endif %}
 
             </article>
-            <article class="media">
-                <figure class="media-left">
-                    <p class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png">
-                    </p>
-                </figure>
-                <div class="media-content">
-                    <div class="field">
-                        <p class="control">
-                            <textarea class="textarea" placeholder="Ajoute ton commentaire"></textarea>
-                        </p>
-                    </div>
-                    <div class="field">
-                        <p class="control">
-                            <button type="submit" class="button" >Envoyer</button>
-                        </p>
-                    </div>
-                </div>
-            </article>
+
+            {% if is_granted('ROLE_USER', 'ROLE_ADMIN') %}
+
+                {% form_theme form 'theme/commentForm.html.twig' %}
+                {{ form(form) }}
+
+            {% endif %}
 
         </div>
     </div>

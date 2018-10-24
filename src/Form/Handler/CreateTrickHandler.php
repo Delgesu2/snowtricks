@@ -84,12 +84,9 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
 
             foreach ($form->getData()->photo as $photo) {
 
-                dump($trick);
-                die;
-
-                //$pictures[] = $this->photoFactory->createFromfile($data['filename'], $data['pictDir'], $data['filename']);
                 $pictures[] = $this->photoFactory->createFromfile($form->getData()->photo);
                 $this->fileUploaderHelper->upload($form->getData()->photo, $photo, 'tricks');
+
             }
 
             foreach ($form->getData()->video as $video) {
@@ -99,8 +96,7 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
             $trick->addPhoto($pictures);  // addPhoto est dans Trick, pas dans $trick qui est ici le Factory
             $trick->addVideo($videos);
 
-
-            $constraints = $this->validator->validate($trick,[],['Trick']);
+            $constraints = $this->validator->validate($trick,[],['NewTrickDTO']);
 
             if (\count($constraints) > 0) {
                 return false;

@@ -94,9 +94,11 @@ final class UpdateTrickType extends AbstractType implements UpdateTrickTypeInter
 
         $builder->get('video')
             ->addModelTransformer($this->transformer);
-
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

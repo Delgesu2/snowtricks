@@ -49,8 +49,8 @@ final class CreateTrickAction implements CreateTrickActionInterface
      * {@inheritdoc}
      */
     public function __construct(
-        FormFactoryInterface     $formFactory,
-        EventDispatcherInterface $eventDispatcher,
+        FormFactoryInterface        $formFactory,
+        EventDispatcherInterface    $eventDispatcher,
         FileUploaderHelperInterface $fileUploaderHelper,
         CreateTrickHandlerInterface $createTrickHandler
         )

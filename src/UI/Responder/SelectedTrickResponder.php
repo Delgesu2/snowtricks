@@ -3,6 +3,7 @@
 namespace App\UI\Responder;
 
 use App\UI\Responder\Interfaces\SelectedTrickResponderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -30,11 +31,15 @@ final class SelectedTrickResponder implements SelectedTrickResponderInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($trick)
+    public function __invoke(
+        $trick,
+        FormInterface $form
+    )
     {
         return new Response(
             $this->twig->render('selected_trick.html.twig', [
-                'oneTrick' => $trick
+                'oneTrick' => $trick,
+                'form'     => $form->createView()
             ])
         );
     }

@@ -59,7 +59,18 @@ final class CommentHandler implements CommentHandlerInterface
 
             $comment = $this->commentFactory->create($form->getData());
 
+            $constraints = $this->validator->validate($comment,[],['NewCommentDTO']);
+
+            dump($constraints);
+            die;
+
+            if (\count($constraints) > 0) {
+                return false;
+            }
+
             $this->commentsRepository->save($comment);
         }
+
+        return false;
     }
 }

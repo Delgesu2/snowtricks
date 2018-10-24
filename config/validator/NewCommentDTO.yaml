@@ -1,0 +1,9 @@
+App\Domain\DTO\NewCommentDTO:
+    properties:
+        text:
+            - NotBlank:
+            - Length:
+                min: 10
+                max: 500
+                minMessage: 'Le commentaire doit contenir au moins 10 caractères.'
+                maxMessage: 'Le commentaire ne doit pas faire plus de 500 caractères.'

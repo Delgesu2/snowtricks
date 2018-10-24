@@ -19,6 +19,7 @@ interface CommentFactoryInterface
 {
     /**
      * @param NewCommentDTOInterface $commentDTO
+     *
      * @return mixed
      */
     public function create(NewCommentDTOInterface $commentDTO);

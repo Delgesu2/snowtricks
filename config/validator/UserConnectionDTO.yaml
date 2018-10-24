@@ -1,0 +1,9 @@
+App\Domain\DTO\Security\UserConnectionDTO:
+    properties:
+        name:
+          - NotBlank: ~
+          - Length:
+              - min: 3
+        password:
+          - Regex: # REGEX: at least 1 capital letter, 1 number, at least 8 characters, no space #
+              pattern: '#(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\S{8,}#'

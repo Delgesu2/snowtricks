@@ -46,7 +46,8 @@ final class EmailCheckType extends AbstractType
                 return new EmailCheckDTO(
                     $form->get('email')->getData()
                 );
-            }
+            },
+            'validation_groups' => ['EmailCheckDTO']
         ]);
     }
 

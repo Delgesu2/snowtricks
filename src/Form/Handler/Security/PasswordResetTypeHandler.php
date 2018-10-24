@@ -44,7 +44,7 @@ class PasswordResetTypeHandler implements PasswordResetTypeHandlerInterface
         ValidatorInterface       $validator,
         UsersRepositoryInterface $repository,
         EncoderFactoryInterface  $encoderFactory
-)
+    )
     {
         $this->validator     = $validator;
         $this->repository    = $repository;
@@ -61,11 +61,11 @@ class PasswordResetTypeHandler implements PasswordResetTypeHandlerInterface
 
             if( $form->getData()->newpassword === $form->getData()->checknewpassword ) {
 
-                $constraints = $this->validator->validate($user, [], ['User']);
+                $constraints = $this->validator->validate($form, null, ['PasswordCheckDTO']); // à corriger
 
-                        if (\count($constraints) > 0) {
-                            return false;
-                        }
+                if (\count($constraints) > 0) {
+                    return false;
+                }
 
                         // Generating new encoded password
                 $encoder = $this->encoderFactory->getEncoder(User::class);

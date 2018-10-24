@@ -67,6 +67,7 @@
                         <div class="field">
                             <div class="control">
                                 {{ form_widget(form.password, {'attr': {'class': 'input'}}) }}
+                                {{ form_errors(form.password) }}
                             </div>
                             <p class="help is-warning">Le mot de passe doit se composer d'au moins 8 caractères, dont
                                 au minimum 1 lettre majuscule, 1 chiffre, et ne comporter aucun espace.</p>
@@ -84,6 +85,7 @@
                         <div class="field">
                             <div class="control">
                                 {{ form_widget(form.email, {'attr': {'class': 'input'}}) }}
+                                {{ form_errors(form.email) }}
                             </div>
                         </div>
                     </div>
@@ -100,6 +102,7 @@
                             <div class="file">
                                 <label class="file-label" oninput="showFileUpdating()">
                                 {{ form_widget(form.photo) }}
+                                    {{ form_errors(form.photo) }}
                                     <span class="file-cta">
                                                   <span class="file-icon">
                                                     <i class="fas fa-upload"></i>

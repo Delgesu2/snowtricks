@@ -128,6 +128,5 @@ final class UsersRepository extends ServiceEntityRepository implements UsersRepo
             ->setParameter('email', $username)
             ->getQuery()
             ->getOneOrNullResult();
-
     }
 }

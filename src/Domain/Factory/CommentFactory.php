@@ -20,15 +20,12 @@ use App\Domain\Entity\Comment;
 final class CommentFactory implements CommentFactoryInterface
 {
     /**
-     * @param NewCommentDTOInterface $commentDTO
-     * @return Comment
+     * {@inheritdoc}
      */
     public function create(NewCommentDTOInterface $commentDTO)
     {
         return new Comment(
-            $commentDTO->text,
-            $commentDTO->user,
-            $commentDTO->trick
+            $commentDTO->text
         );
     }
 }

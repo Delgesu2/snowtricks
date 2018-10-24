@@ -1,0 +1,5 @@
+App\Domain\DTO\Security\EmailCheckDTO:
+    properties:
+        email:
+        - Email:
+            message: 'Adresse courriel non valide.'

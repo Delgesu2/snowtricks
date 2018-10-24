@@ -10,6 +10,7 @@ namespace App\UI\Responder;
 
 
 use App\UI\Responder\Interfaces\UpdateTrickResponderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -20,6 +21,9 @@ use Twig\Environment;
  */
 final class UpdateTrickResponder implements UpdateTrickResponderInterface
 {
+    /**
+     * @var Environment
+     */
     private $twig;
 
     /**
@@ -37,7 +41,7 @@ final class UpdateTrickResponder implements UpdateTrickResponderInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($form)
+    public function __invoke(FormInterface $form)
     {
         return new Response(
             $this->twig->render('updateTrick.html.twig', [

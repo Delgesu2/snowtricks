@@ -9,6 +9,7 @@
 namespace App\UI\Responder\Interfaces;
 
 
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -31,5 +32,5 @@ interface UpdateTrickResponderInterface
      *
      * @return mixed|Response
      */
-    public function __invoke($twig);
+    public function __invoke(FormInterface $form);
 }
