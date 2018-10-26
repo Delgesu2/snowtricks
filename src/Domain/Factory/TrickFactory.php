@@ -11,6 +11,7 @@ namespace App\Domain\Factory;
 use App\Domain\DTO\Interfaces\NewTrickDTOInterface;
 use App\Domain\Factory\Interfaces\TrickFactoryInterface;
 use App\Domain\Entity\Trick;
+use App\Domain\Entity\Interfaces\UserTrickInterface;
 
 /**
  * Class TrickFactory
@@ -24,12 +25,16 @@ final class TrickFactory implements TrickFactoryInterface
      *
      * @return Trick
      */
-    public function create(NewTrickDTOInterface $newTrickDTO)
+    public function create(
+        NewTrickDTOInterface $newTrickDTO,
+        UserTrickInterface   $userTrick
+    )
     {
         return new Trick(
             $newTrickDTO->trick_name,
             $newTrickDTO->description,
             $newTrickDTO->trick_group,
+            $userTrick,
             $newTrickDTO->photo,
             $newTrickDTO->video
             );

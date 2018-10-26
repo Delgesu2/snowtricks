@@ -9,6 +9,8 @@
 namespace App\Domain\Factory\Interfaces;
 
 use App\Domain\DTO\Interfaces\NewCommentDTOInterface;
+use App\Domain\Entity\Interfaces\UserTrickInterface;
+use App\Domain\Entity\Interfaces\TrickInterface;
 
 /**
  * Interface CommentFactoryInterface
@@ -19,8 +21,14 @@ interface CommentFactoryInterface
 {
     /**
      * @param NewCommentDTOInterface $commentDTO
+     * @param UserTrickInterface $user
+     * @param TrickInterface $trick
      *
      * @return mixed
      */
-    public function create(NewCommentDTOInterface $commentDTO);
+    public function create(
+        NewCommentDTOInterface $commentDTO,
+        UserTrickInterface     $user,
+        TrickInterface         $trick
+);
 }

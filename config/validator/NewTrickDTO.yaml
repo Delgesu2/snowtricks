@@ -11,18 +11,18 @@ App\Domain\DTO\NewTrickDTO:
                 max: 800
                 minMessage: 'La description doit contenir au moins 15 caractères.'
                 maxMessage: 'La description ne doit pas faire plus de 800 caractères.'
-        photo:
-            - Image:
-                allowLandscape: true
-                allowPortrait: true
-                allowSquare: true
-                maxSize: 2M
-                maxSizeMessage: 'Le fichier est trop grand. Taille maximale:
-                {{ limit }} {{ suffix }}.'
-                mimeTypes: [image/png, image/tiff, image/jpeg]
-                mimeTypesMessage: 'Charger une image dans un des formats suivants: png, tiff ou jpeg'
-        video:
-            - Regex:
-                pattern: '#^https://www.youtube.com/|^https://www.dailymotion.com#'
+#        photo:
+#            - Image:
+#                allowLandscape: true
+#                allowPortrait: true
+#                allowSquare: true
+#                maxSize: 2M
+#                maxSizeMessage: 'Le fichier est trop grand. Taille maximale:
+#                {{ limit }} {{ suffix }}.'
+#                mimeTypes: [image/png, image/tiff, image/jpeg]
+#                mimeTypesMessage: 'Charger une image dans un des formats suivants: png, tiff ou jpeg'
+#        video:
+#            - Regex:
+#                pattern: '#^https://www.youtube.com/|^https://www.dailymotion.com#'
 
 

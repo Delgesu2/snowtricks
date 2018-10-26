@@ -43,7 +43,7 @@ final class PasswordResetType extends AbstractType implements PasswordResetTypeI
     /**
      * {@inheritdoc}
      */
-  /**  public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => PasswordCheckDTO::class,
@@ -52,9 +52,9 @@ final class PasswordResetType extends AbstractType implements PasswordResetTypeI
                     $form->get('newpassword')->getData(),
                     $form->get('checknewpassword')->getData()
                 );
-            },
-            'validation_groups' => ['PasswordCheckDTO']
+            }
+            //'validation_groups' => ['PasswordCheckDTO']
         ]);
-    }  **/
+    }
 }
 

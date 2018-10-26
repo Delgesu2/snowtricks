@@ -61,7 +61,7 @@ final class SelectedTrickAction implements SelectedTrickActionInterface
 
         $trick = $this->repository->getOneTrick($slug);
 
-        if ($this->handler->handle($commentType)) {
+        if ($this->handler->handle($commentType, $trick)) {
 
         return $responder($trick, $commentType);
     }

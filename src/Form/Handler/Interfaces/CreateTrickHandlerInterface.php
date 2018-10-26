@@ -17,6 +17,7 @@ use App\Helper\FileUploaderHelper;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -29,6 +30,7 @@ interface CreateTrickHandlerInterface
 
     /**
      * CreateTrickHandlerInterface constructor.
+     *
      * @param SessionInterface $session
      * @param RequestStack $requestStack
      * @param FileUploaderHelper $fileUploaderHelper
@@ -37,6 +39,7 @@ interface CreateTrickHandlerInterface
      * @param TricksRepositoryInterface $tricksRepository
      * @param VideoFactoryInterface $videoFactory
      * @param ValidatorInterface $validator
+     * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(
         SessionInterface $session,
@@ -46,7 +49,8 @@ interface CreateTrickHandlerInterface
         TrickFactory $trickFactory,
         TricksRepositoryInterface $tricksRepository,
         VideoFactoryInterface $videoFactory,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        TokenStorageInterface $tokenStorage
     );
 
     /**

@@ -17,6 +17,7 @@ use App\Helper\FileUploaderHelper;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -48,6 +49,11 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
     private $validator;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * @inheritdoc
      */
     public function __construct(
@@ -58,7 +64,9 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
         TrickFactory $trickFactory,
         TricksRepositoryInterface $tricksRepository,
         VideoFactoryInterface $videoFactory,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        TokenStorageInterface   $tokenStorage
+
     ) {
 
         $this->session            = $session;
@@ -69,6 +77,7 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
         $this->tricksRepository   = $tricksRepository;
         $this->videoFactory       = $videoFactory;
         $this->validator          = $validator;
+        $this->tokenStorage       = $tokenStorage;
     }
 
     /**
@@ -78,14 +87,15 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $trick = $this->trickFactory->create($form->getData());
+            $trick = $this->trickFactory->create($form->getData(), $this->tokenStorage->getToken()->getUser());
             $pictures = [];
             $videos = [];
 
             foreach ($form->getData()->photo as $photo) {
 
-                $pictures[] = $this->photoFactory->createFromfile($form->getData()->photo);
-                $this->fileUploaderHelper->upload($form->getData()->photo, $photo, 'tricks');
+                $newPhoto = $this->photoFactory->createFromfile($photo);
+                $this->fileUploaderHelper->upload($photo, $newPhoto, 'tricks');
+                $pictures[] = $newPhoto;
 
             }
 

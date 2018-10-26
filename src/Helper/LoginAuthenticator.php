@@ -114,6 +114,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
+        $request->getSession()->getFlashbag()->add('failure', 'Echec lors de la connexion.');
         return new RedirectResponse($this->urlGenerator->generate('user_connection'));
     }
 

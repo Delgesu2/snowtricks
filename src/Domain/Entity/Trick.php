@@ -6,6 +6,7 @@ use App\Domain\Entity\Interfaces\CommentInterface;
 use App\Domain\Entity\Interfaces\GroupInterface;
 use App\Domain\Entity\Interfaces\PhotoInterface;
 use App\Domain\Entity\Interfaces\TrickInterface;
+use App\Domain\Entity\Interfaces\UserTrickInterface;
 use App\Domain\Entity\Interfaces\VideoInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -60,7 +61,7 @@ class Trick implements TrickInterface
     private $video;
 
     /**
-    * @var User
+    * @var UserTrickInterface
     */
     private $trick_user;
 
@@ -86,7 +87,7 @@ class Trick implements TrickInterface
         $trick_name,
         $description,
         $trick_group,
-        $trick_user
+        UserTrickInterface $trick_user
     ) {
         $this->id = Uuid::uuid4();
         $this->trick_name = $trick_name;
@@ -222,7 +223,7 @@ class Trick implements TrickInterface
             if (\count($photos) <= 0) { break; }
 
             $this->photo[] = $photo;
-            $this->photo->setTrickPhoto($this);
+            $photo->setTrickPhoto($this);
         }
     }
 

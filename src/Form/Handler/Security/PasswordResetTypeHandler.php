@@ -61,11 +61,14 @@ class PasswordResetTypeHandler implements PasswordResetTypeHandlerInterface
 
             if( $form->getData()->newpassword === $form->getData()->checknewpassword ) {
 
+                /**
                 $constraints = $this->validator->validate($form, null, ['PasswordCheckDTO']); // à corriger
 
                 if (\count($constraints) > 0) {
                     return false;
                 }
+
+                 **/
 
                         // Generating new encoded password
                 $encoder = $this->encoderFactory->getEncoder(User::class);

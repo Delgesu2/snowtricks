@@ -89,12 +89,5 @@ class Comment implements CommentInterface
 	{
 		return $this->trick;
 	}
- 	
-	/**
-    * Trick update
-    */
-    public function update()
-    {
 
-    }
 }
