@@ -8,6 +8,7 @@
 
 namespace App\Form\Type;
 
+use App\Domain\DTO\UpdateTrickDTO;
 use App\Form\Type\Interfaces\UpdateTrickTypeInterface;
 use App\Helper\DataTransformer;
 use App\Domain\DTO\Interfaces\UpdateTrickDTOInterface;
@@ -21,6 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -76,12 +78,11 @@ final class UpdateTrickType extends AbstractType implements UpdateTrickTypeInter
             ->add('photo',FileType::class, [
                 'label_attr'    => ['class' => 'label'],
                 'attr'          => ['class' => 'file-input'],
-                'multiple'      => true
+                'multiple'      => true,
+                'required'      => false
             ])
 
             ->add('video', CollectionType::class, [
-                'attr' => ['class' => 'input'],
-                'label_attr'        => ['class' => 'label'],
                 'entry_type'        => TextType::class,
                 'allow_add'         => true,
                 'allow_delete'      => true,
@@ -103,6 +104,15 @@ final class UpdateTrickType extends AbstractType implements UpdateTrickTypeInter
     {
         $resolver->setDefaults([
             'data_class' => UpdateTrickDTOInterface::class,
+            'empty_data' => function(FormInterface $form) {
+            return new UpdateTrickDTO(
+                $form->get('trick_name')->getData(),
+                $form->get('description')->getData(),
+                $form->get('trick_group')->getData(),
+                $form->get('photo')->getData(),
+                $form->get('video')->getData()
+                );
+            },
             'validation_groups' => ['UpdateTrickDTO']
         ]);
     }

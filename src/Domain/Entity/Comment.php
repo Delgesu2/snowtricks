@@ -18,6 +18,11 @@ class Comment implements CommentInterface
     */
 	private $id;
 
+    /**
+     * @var string
+     */
+	private $slug;
+
 	/**
 	* @var \DateTime
 	*/
@@ -39,11 +44,20 @@ class Comment implements CommentInterface
     private $trick;
 
     /**
-     * Comment constructor
+     * Comment constructor.
+     *
+     * @param $text
+     * @param $user
+     * @param $trick
      */
-    public function __construct($text, $user, $trick)
+    public function __construct(
+        $text,
+        $user,
+        $trick
+    )
     {
         $this->id = Uuid::uuid4();
+        $this->slug = $this->createSlug($text);
         $this->date = time();
         $this->text = $text;
         $this->user = $user;
@@ -58,8 +72,28 @@ class Comment implements CommentInterface
 		return $this->id;
 	}
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getSlug() :string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param $text
+     *
+     * @return mixed|null|string|string[]
+     */
+    private function createSlug($text)
+    {
+        $short = substr($text, 0, 20);
+
+        return mb_strtolower(utf8_decode(strtr($short, ' ', '-')));
+    }
+
 	/**
-    * @return \DateTime
+    * {@inheritdoc}
     */
 	public function getDate() :?\DateTime
 	{
@@ -67,7 +101,7 @@ class Comment implements CommentInterface
 	}
 
 	/**
-    * @return string
+    * {@inheritdoc}
     */
 	public function getText() :string
 	{
@@ -75,7 +109,7 @@ class Comment implements CommentInterface
 	}
 
 	/**
-    * @return User
+    * {@inheritdoc}
     */
 	public function getUser()
 	{
@@ -83,7 +117,7 @@ class Comment implements CommentInterface
 	}
 
 	/**
-    * @return trick
+    * {@inheritdoc}
     */
 	public function getTrick()
 	{

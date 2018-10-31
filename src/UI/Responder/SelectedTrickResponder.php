@@ -34,8 +34,8 @@ final class SelectedTrickResponder implements SelectedTrickResponderInterface
     public function __invoke(
         $trick,
         FormInterface $form
-    )
-    {
+    ): Response {
+
         return new Response(
             $this->twig->render('selected_trick.html.twig', [
                 'oneTrick' => $trick,

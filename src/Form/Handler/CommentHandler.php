@@ -13,6 +13,7 @@ use App\Domain\Factory\Interfaces\CommentFactoryInterface;
 use App\Infra\Doctrine\Repository\Interfaces\CommentsRepositoryInterface;
 use App\Form\Handler\Interfaces\CommentHandlerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -24,6 +25,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 final class CommentHandler implements CommentHandlerInterface
 {
+    /**
+     * @var SessionInterface
+     */
+    private $session;
     /**
      * @var CommentFactoryInterface
      */
@@ -48,6 +53,7 @@ final class CommentHandler implements CommentHandlerInterface
      * @inheritdoc
      */
     public function __construct(
+        SessionInterface            $session,
         CommentFactoryInterface     $commentFactory,
         CommentsRepositoryInterface $commentsRepository,
         ValidatorInterface          $validator,
@@ -55,6 +61,7 @@ final class CommentHandler implements CommentHandlerInterface
 
     )
     {
+        $this->session            = $session;
         $this->commentFactory     = $commentFactory;
         $this->commentsRepository = $commentsRepository;
         $this->validator          = $validator;
@@ -77,6 +84,10 @@ final class CommentHandler implements CommentHandlerInterface
             }
 
             $this->commentsRepository->save($comment);
+
+            $this->session->getFlashBag()->add('success', 'Commentaire enregistré.');
+
+            return true;
         }
 
         return false;

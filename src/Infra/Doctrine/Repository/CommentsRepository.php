@@ -42,29 +42,26 @@ final class CommentsRepository extends ServiceEntityRepository implements Commen
     /**
      * {@inheritdoc}
      */
-    public function getSelectedTrickComment($trick)
-    {
-       // return $this->createQueryBuilder()
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function save(CommentInterface $comment)   // ça va pas : il faut que je le lie au Trick concerné
+    public function save(CommentInterface $comment)
     {
         $this->_em->persist($comment);
         $this->_em->flush();
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function deleteComment($comment)
     {
-        $comment = $this->createQueryBuilder($comment)
-            ->where('comment.outset = :outset')
-            ->setParameter('outset', $comment)
+        $comment = $this->createQueryBuilder('comment')
+            ->where('comment.slug = :slug')
+            ->setParameter('slug', $comment)
                 ->getQuery()
                 ->getOneOrNullResult();
         $this->_em->remove($comment);
         $this->_em->flush();
-
     }
+
 }

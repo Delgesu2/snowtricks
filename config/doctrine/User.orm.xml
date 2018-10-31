@@ -26,7 +26,7 @@
       <one-to-many field="trick" target-entity="App\Domain\Entity\Trick" mapped-by="trick_user">
       </one-to-many>
 
-      <one-to-many field="comment" target-entity="App\Domain\Entity\Comment" mapped-by="user">
+      <one-to-many field="comment" target-entity="App\Domain\Entity\Comment" mapped-by="user" orphan-removal="true">
       </one-to-many>
 
       <field name="valid" type="boolean" nullable="true" />

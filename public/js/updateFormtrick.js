@@ -1,8 +1,8 @@
 /* Show loaded images in HTML */
- function showFiles() {
+function showFiles() {
 
-    var files = document.getElementById("create_trick_photo").files;
-                document.getElementById("loadedFiles").innerHTML = "";
+    var files = document.getElementById("update_trick_photo").files;
+    document.getElementById("loadedFiles").innerHTML = "";
 
     for (var i=0; i<files.length; i++) {
         //alert("Photo choisie: " + files.name);
@@ -10,14 +10,14 @@
         var side=document.getElementById("loadedFiles");
 
         side.appendChild(content);
-        }
+    }
 
 }
 
 
 /* Load more videos */
 
-    // + and - icons
+// + and - icons
 let plusIcon = document.getElementById("btnNewVideo");
 let minusIcon = document.getElementById("btnDelVideo");
 
@@ -25,7 +25,7 @@ let buttons = document.getElementById("buttons");
 let index = document.querySelector('#collection').getAttribute('data-index');
 
 
-    // Add new video form field
+// Add new video form field
 plusIcon.addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -44,7 +44,7 @@ plusIcon.addEventListener('click', function (e) {
 });
 
 
-    // Remove field
+// Remove field
 minusIcon.addEventListener('click', function (e) {
     e.preventDefault();
     let newForm = prototype.replace(/__name__/g, index);
@@ -54,8 +54,8 @@ minusIcon.addEventListener('click', function (e) {
 
 
 /**
-// Remove video field     Le mieux : un signe - en face de chaque nouveau champ.
-/*minusIcon.addEventListener('click', function (e) {
+ // Remove video field     Le mieux : un signe - en face de chaque nouveau champ.
+ /*minusIcon.addEventListener('click', function (e) {
     e.preventDefault();
 
     // get the div that holds the collection
@@ -72,4 +72,4 @@ minusIcon.addEventListener('click', function (e) {
     var newLinkLi.parentNode.removeChild(newLinkLi);
     //});
     });
-} */
+ } */

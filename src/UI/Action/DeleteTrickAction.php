@@ -10,15 +10,14 @@ namespace App\UI\Action;
 
 use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
 use App\UI\Action\Interfaces\DeleteTrickActionInterface;
-use App\UI\Responder\Interfaces\HomeResponderInterface;
+use App\UI\Responder\Interfaces\DeleteTrickResponderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route(name="delete_trick",
- *      path="/delete/{slug}",
- *      requirements={"slug"="[a-zA-Z0-9-]+"})
+ *      path="/delete/{slug}")
  */
 final class DeleteTrickAction implements DeleteTrickActionInterface
 {
@@ -48,8 +47,8 @@ final class DeleteTrickAction implements DeleteTrickActionInterface
      * {@inheritdoc}
      */
     public function __invoke(
-        HomeResponderInterface $responder,
-        Request $request
+        DeleteTrickResponderInterface $responder,
+        Request                       $request
     )
     {
         $trick = $this->repository->getOneTrick($request->get('slug'));
@@ -57,17 +56,16 @@ final class DeleteTrickAction implements DeleteTrickActionInterface
         // delete file from database
         if (!\is_null($trick->getPhoto())) {
 
-            $this->filesystem->remove($trick->getPhoto()->getPath());   // tableau !! Voir documentation de la méthode
-
+            foreach ($trick->getPhoto()->toArray() as $photo)
+            {
+                $this->filesystem->remove($photo->getPath());
+            }
         }
 
         // delete object
         $this->repository->deleteTrick($trick);
 
-        // Get all users for Homepage
-        $tricks = $this->repository->getAllTricks();
-
-        return $responder($tricks);
+        return $responder();
     }
 
 }

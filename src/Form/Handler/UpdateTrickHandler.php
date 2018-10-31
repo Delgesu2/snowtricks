@@ -83,8 +83,11 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
             $videos = [];
 
             foreach ($form->getData()->photo as $photo) {
-                $data = $this->fileUploaderHelper->upload($photo);
-                $pictures[] = $this->photoFactory->create($data['filename'], $data['pictDir'], $data['filename']);
+
+                $newPhoto = $this->photoFactory->createFromfile($photo);
+                $this->fileUploaderHelper->upload($photo, $newPhoto, 'tricks');
+                $pictures[] = $newPhoto;
+
             }
 
             foreach ($form->getData()->video as $video) {

@@ -10,7 +10,8 @@ namespace App\UI\Action\Interfaces;
 
 
 use App\Infra\Doctrine\Repository\Interfaces\CommentsRepositoryInterface;
-use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
+use App\UI\Responder\Interfaces\DeleteCommentResponderInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 interface DeleteCommentActionInterface
 {
@@ -18,11 +19,20 @@ interface DeleteCommentActionInterface
      * DeleteCommentActionInterface constructor.
      *
      * @param CommentsRepositoryInterface $commentsRepository
-     * @param TricksRepositoryInterface $tricksRepository
      */
     public function __construct(
-        CommentsRepositoryInterface $commentsRepository,
-        TricksRepositoryInterface $tricksRepository
+        CommentsRepositoryInterface $commentsRepository
+    );
+
+    /**
+     * @param DeleteCommentResponderInterface $responder
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function __invoke(
+        DeleteCommentResponderInterface $responder,
+        Request                         $request
     );
 
 }

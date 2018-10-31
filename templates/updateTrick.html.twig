@@ -6,3 +6,9 @@
     {% form_theme form 'theme/updateTrickForm.html.twig' %}
     {{ form(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script defer src="{{ asset('js/updateFormtrick.js')  }}"></script>
+{% endblock %}
+

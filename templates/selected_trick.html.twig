@@ -130,14 +130,17 @@
                             Espace de discussion
                         </h1>
                         <h2 class="subtitle">
-                            Laisse ton commentaire à l'aide du formulaire
+                            Connecte-toi ou inscris-toi pour laisser un commentaire.
                         </h2>
                     </div>
                 </div>
             </section>
 
+
+            {% for comment in oneTrick.comment %}
+
             <article class="media">
-                {% for comment in oneTrick.comment %}
+
                 <figure class="media-left">
                     <p class="image is-64x64">
                         {% if comment.user.photo.getPath is defined %}
@@ -158,19 +161,20 @@
                         </p>
                     </div>
                 </div>
-                {% endfor %}
 
-                {% if is_granted('ROLE_ADMIN') %}
+                    {% if is_granted('ROLE_ADMIN') %}
 
-                <a href="{#{ path('delcom', {'slug':comment.slug}) }#}">
-                    <span class="icon">
-                        <i class="fas fa-trash redfont" aria-hidden="true"></i>
-                    </span>
-                </a>
+                        <a href="{{ path('delete_comment', {'slug':comment.slug, 'trick':comment.trick.slug }) }}">
+                        <span class="icon">
+                            <i class="fas fa-trash redfont" aria-hidden="true"></i>
+                        </span>
+                        </a>
 
-                {% endif %}
+                    {% endif %}
 
             </article>
+
+            {% endfor %}
 
             {% if is_granted('ROLE_USER', 'ROLE_ADMIN') %}
 

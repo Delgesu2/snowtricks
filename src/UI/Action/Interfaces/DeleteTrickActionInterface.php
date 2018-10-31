@@ -9,7 +9,7 @@
 namespace App\UI\Action\Interfaces;
 
 use App\Infra\Doctrine\Repository\Interfaces\TricksRepositoryInterface;
-use App\UI\Responder\Interfaces\HomeResponderInterface;
+use App\UI\Responder\Interfaces\DeleteTrickResponderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -32,14 +32,13 @@ interface DeleteTrickActionInterface
     );
 
     /**
-     * @param HomeResponderInterface $responder
+     * @param DeleteTrickResponderInterface $responder
      * @param Request $request
-     * @param $slug
      *
      * @return mixed
      */
     public function __invoke(
-        HomeResponderInterface $responder,
-        Request $request
+        DeleteTrickResponderInterface $responder,
+        Request                       $request
         );
 }

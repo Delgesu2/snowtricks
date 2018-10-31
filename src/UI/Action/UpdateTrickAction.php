@@ -27,7 +27,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route(name="update_trick",
  *      path="/update/{slug}",
- *      requirements={"slug"="[a-zA-Z0-9-]+"})
+ *      requirements={"slug"="[a-zA-Z0-9?-]+"})
  */
 final class UpdateTrickAction implements UpdateTrickActionInterface
 {

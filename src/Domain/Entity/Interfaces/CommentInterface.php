@@ -8,6 +8,8 @@
 
 namespace App\Domain\Entity\Interfaces;
 
+use App\Domain\Entity\Trick;
+use App\Domain\Entity\User;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -23,6 +25,11 @@ interface CommentInterface
     public function getId() :UuidInterface;
 
     /**
+     * @return string
+     */
+    public function getSlug() :string;
+
+    /**
      * @return \DateTime|null
      */
     public function getDate() :?\DateTime;
@@ -33,12 +40,12 @@ interface CommentInterface
     public function getText() :string;
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getUser();
 
     /**
-     * @return mixed
+     * @return Trick
      */
     public function getTrick();
 

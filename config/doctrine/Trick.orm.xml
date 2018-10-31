@@ -18,7 +18,7 @@
         </cascade>
     </many-to-one>
 
-      <one-to-many field="comment" target-entity="App\Domain\Entity\Comment" mapped-by="trick" >
+      <one-to-many field="comment" target-entity="App\Domain\Entity\Comment" mapped-by="trick"  orphan-removal="true">
           <cascade>
               <cascade-persist />
           </cascade>

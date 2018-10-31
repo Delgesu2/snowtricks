@@ -70,8 +70,6 @@ final class CreateTrickType extends AbstractType implements CreateTrickTypeInter
              ])
 
              ->add('video', CollectionType::class, [
-                 /*'attr'         => ['class' => 'input'],
-                 'label_attr'   => ['class' => 'label'],*/
                  'entry_type'   => TextType::class,
                  'allow_add'    => true,
                  'allow_delete' => true,

@@ -31,13 +31,6 @@ interface CommentsRepositoryInterface
     public function getAllComments();
 
     /**
-     * @param $trick
-     *
-     * @return mixed
-     */
-    public function getSelectedTrickComment($trick);
-
-    /**
      * @param CommentInterface $comment
      *
      * @return mixed
@@ -47,7 +40,7 @@ interface CommentsRepositoryInterface
     /**
      * @param $comment
      *
-     * @return mixed
+     * @return mixed|void
      */
     public function deleteComment($comment);
 }

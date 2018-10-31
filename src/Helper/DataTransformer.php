@@ -25,16 +25,19 @@ final class DataTransformer implements DataTransformerInterface
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->video = $video;
     }
 
     public function transform($video)
     {
-       if (null==$video){
-           return '';
+       if (\count($video) == 0){
+           return [];
        }
 
-       return $video->getId;
+       foreach ($video as $entry) {
+           $data[] = $entry->getUrl();
+       }
+
+       return $data;
     }
 
     public function reverseTransform($value)

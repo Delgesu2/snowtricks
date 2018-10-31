@@ -76,7 +76,7 @@ class Photo implements PhotoInterface
 	}
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
 	public function getTitle() :string
 	{
@@ -84,7 +84,7 @@ class Photo implements PhotoInterface
 	}
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
 	public function getPath() :? string
 	{
@@ -100,7 +100,7 @@ class Photo implements PhotoInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getAlt() :string
     {
@@ -128,15 +128,6 @@ class Photo implements PhotoInterface
     {
         $this->trick_photo = $trick_photo;
     }
-
-    /**
-     * {@inheritdoc}
-
-    public function removeUserPhoto()
-    {
-        $this->user_photo = null;
-    }
-     * */
 
     /**
      * {@inheritdoc}

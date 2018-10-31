@@ -123,7 +123,7 @@ class Trick implements TrickInterface
      */
     private function createSlug($trick_name)
     {
-        return mb_strtolower(strtr($trick_name, ' ', '-'), 'UTF-8');
+        return mb_strtolower(utf8_decode(strtr($trick_name, ' ', '-')));
     }
 
     /**

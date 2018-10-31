@@ -88,29 +88,21 @@
                     </div>
                 </div>
 
-                <div class="field is-horizontal">   <!-- Videos -->
-                    <div class="field-label is-normal">
-                        <label class="label">{{ form_label(form.video, "Lien(s) vidéo(s)") }}</label>
-                    </div>
-
-                    <div class="field-body" id="url-field">
-                        <div class="field">
-                            <div class="control">
-                                <div data-prototype="{{ form_widget(form.video.vars.prototype,
-                                    {'attr' : {'placeholder': 'https://'} })|e('html_attr') }}" data-index="{{ form.video|length }}" id="collection">
-                                </div>
-                                {{ form_widget(form.video) }}
-                                {{ form_errors(form.video) }}
-                                <p class="help is-info">Ecrire l'URL</p>
-                            </div>
-                        </div>
-                        <div id="buttons">
-                            <span class="icon is-medium" id="btnNewVideo"><i class="far fa-plus-square" onclick="newVideo()"></i></span>
-                            <span class="icon is-medium" id="btnDelVideo"><i class="far fa-minus-square" onclick="removeField()"></i></span>
-                        </div>
-                    </div>
-
+                {{ form_label(form.video, "Lien(s) vidéo(s)") }}
+                <div data-prototype="{{ form_widget(form.video.vars.prototype,
+                    {'attr' : {'placeholder': 'https://'} })|e('html_attr') }}" data-index="{{ form.video|length }}"
+                     id="collection">
                 </div>
+
+                {{ form_widget(form.video) }}
+                {{ form_errors(form.video) }}
+
+                <div id="buttons">
+                    <button type="button" id="btnNewVideo"><i class="icon far fa-plus-square"></i></button>
+                    <button type="button" id="btnDelVideo"><i class="icon far fa-minus-square"></i></button>
+                </div>
+
+
 
             </section>
 

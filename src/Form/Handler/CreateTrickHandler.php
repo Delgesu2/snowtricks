@@ -103,7 +103,7 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
                 $videos[] = $this->videoFactory->create($video);
             }
 
-            $trick->addPhoto($pictures);  // addPhoto est dans Trick, pas dans $trick qui est ici le Factory
+            $trick->addPhoto($pictures);
             $trick->addVideo($videos);
 
             $constraints = $this->validator->validate($trick,[],['NewTrickDTO']);
@@ -116,7 +116,7 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
 
             $this->session->getFlashBag()->add('success', 'Trick enregistré');
 
-            return true;  // Pourquoi ça ramène à 'home' ?
+            return true;
         }
 
         return false;

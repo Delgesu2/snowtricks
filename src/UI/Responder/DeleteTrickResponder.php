@@ -2,23 +2,22 @@
 /**
  * Created by PhpStorm.
  * User: ronsard
- * Date: 05/09/18
- * Time: 14:48
+ * Date: 31/10/18
+ * Time: 18:46
  */
 
 namespace App\UI\Responder;
 
-
-use App\UI\Responder\Interfaces\DeleteUserResponderInterface;
+use App\UI\Responder\Interfaces\DeleteTrickResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Class DeleteUserResponder
+ * Class DeleteTrickResponder
  *
  * @package App\UI\Responder
  */
-final class DeleteUserResponder implements DeleteUserResponderInterface
+final class DeleteTrickResponder implements DeleteTrickResponderInterface
 {
     /**
      * @var UrlGeneratorInterface
@@ -38,6 +37,7 @@ final class DeleteUserResponder implements DeleteUserResponderInterface
      */
     public function __invoke()
     {
-        return new RedirectResponse($this->urlGenerator->generate('userlist'));
+        return new RedirectResponse($this->urlGenerator->generate('trickslist'));
     }
+
 }
