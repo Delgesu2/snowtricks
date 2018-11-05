@@ -45,6 +45,11 @@ interface TricksRepositoryInterface
     public function save(TrickInterface $trick);
 
     /**
+     * @return mixed
+     */
+    public function update();
+
+    /**
      * @param $trick
      *
      * @return mixed

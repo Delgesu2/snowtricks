@@ -56,7 +56,7 @@ class Trick implements TrickInterface
     private $photo;
 
     /**
-    * @var Video
+    * @var array
     */
     private $video;
 

@@ -43,6 +43,7 @@ security:
          - { path: ^/userlist$, roles: ROLE_ADMIN }
          - { path: ^/del_user, roles: ROLE_ADMIN }
          - { path: ^/userupdate, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/delcom, roles: ROLE_ADMIN }
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER

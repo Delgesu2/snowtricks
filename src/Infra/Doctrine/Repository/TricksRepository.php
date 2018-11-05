@@ -59,6 +59,14 @@ final class TricksRepository extends ServiceEntityRepository implements TricksRe
     /**
      * {@inheritdoc}
      */
+    public function update()
+    {
+        $this->_em->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function deleteTrick($trick)
     {
         $this->_em->remove($trick);

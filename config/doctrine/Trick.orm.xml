@@ -38,6 +38,7 @@
     </one-to-many>
 
     <many-to-one field="trick_user" target-entity="App\Domain\Entity\User" inversed-by="trick">
+        <!--<join-column name="trick_user" on-delete="SET NULL"/>-->
     </many-to-one>
 
     <field name="datecreate" type="integer" />

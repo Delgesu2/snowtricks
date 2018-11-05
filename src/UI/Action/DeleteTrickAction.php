@@ -17,7 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route(name="delete_trick",
- *      path="/delete/{slug}")
+ *      path="/delete/{slug}",
+ *      requirements={"slug"="[a-zA-Z0-9?;!.,'-]+"}
+ *      )
  */
 final class DeleteTrickAction implements DeleteTrickActionInterface
 {

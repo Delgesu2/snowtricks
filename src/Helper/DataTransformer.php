@@ -42,6 +42,6 @@ final class DataTransformer implements DataTransformerInterface
 
     public function reverseTransform($value)
     {
-        // TODO: Implement reverseTransform() method.
+        return $value;
     }
 }

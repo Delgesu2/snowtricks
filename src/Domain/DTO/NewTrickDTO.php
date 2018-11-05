@@ -39,11 +39,7 @@ final class NewTrickDTO implements NewTrickDTOInterface
     public $video;
 
     /**
-     * NewTrickDTO constructor.
-     * @param $trick_name
-     * @param $description
-     * @param array $photo
-     * @param array $video
+     * {@inheritdoc}
      */
     public function __construct(
         $trick_name,

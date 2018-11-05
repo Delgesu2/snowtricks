@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(name="delete_comment",
  *     path="/delcom/{slug}/{trick}",
- *     requirements={"slug"="[a-zA-Z0-9?;!'-]+"}
+ *     requirements={"slug"="[a-zA-Z0-9?;!.,'-]+"}
  *     )
  */
 final class DeleteCommentAction implements DeleteCommentActionInterface

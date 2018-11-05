@@ -79,10 +79,54 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if(count($trick->getVideo()->toArray()) !== count($form->getData()->video)) {
+
+                if (count($trick->getVideo()->toArray()) == 0 && count($form->getData()->video) !== 0) {
+
+                    foreach ($form->getData()->video as $video) {
+                        $videos[] = $this->videoFactory->create($video);
+                    }
+
+                    $trick->addVideo($videos);
+                }
+
+                if (count($form->getData()->video) > count($trick->getVideo()->toArray())) {
+
+                    foreach ( $trick->getVideo()->toArray() as $video) {
+
+                        $url[] = $video->getUrl();
+
+                    }
+
+                    $diff = array_diff($url, $form->getData()->video);
+
+                    foreach ($diff as $video) {
+                        $videos[] = $this->videoFactory->create($video);
+                    }
+
+                    $trick->addVideo($videos);
+
+                }
+
+            }
+
+            if (count($trick->getPhoto()->toArray()) !== count($form->getData()->photo)) {
+
+                if (count($trick->getPhoto()->toArray()) == 0 && count($form->getData()->photo !== 0)) {
+
+                    foreach ($form->getData()->photo as $photo) {
+                        $photos[] = $this->photoFactory->createFromfile($photo);
+                    }
+
+                    $trick->addPhoto($photos);
+                }
+            }
+
             $pictures = [];
             $videos = [];
 
-            foreach ($form->getData()->photo as $photo) {
+
+          /**  foreach ($form->getData()->photo as $photo) {
 
                 $newPhoto = $this->photoFactory->createFromfile($photo);
                 $this->fileUploaderHelper->upload($photo, $newPhoto, 'tricks');
@@ -90,9 +134,7 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
 
             }
 
-            foreach ($form->getData()->video as $video) {
-                $videos[] = $this->videoFactory->create($video);
-            }
+
 
             $trick->update(
                 $form->getData()->trick_name,
@@ -106,9 +148,9 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
 
             if (\count($constraints) > 0) {
                 return false;
-            }
+            }  **/
 
-            $this->trickRepository->save($trick);
+            $this->trickRepository->update();
 
             $this->session->getFlashBag()->add('success', 'Trick modifié avec succès');
 

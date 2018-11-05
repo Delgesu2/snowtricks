@@ -134,11 +134,15 @@ final class UserUpdateHandler implements UserUpdateHandlerInterface
             }
 
             if (!\is_null($form->getData()->photo)) {
+
                 $photo = $this->photoFactory->createFromfile($form->getData()->photo);
                 $this->fileUploaderHelper->upload($form->getData()->photo, $photo, 'users');
 
-
             }
+
+           /** if (\is_null($form->getData()->password)) {
+
+            }  **/
 
             $encoder = $this->encoderFactory->getEncoder(User::class);
 
