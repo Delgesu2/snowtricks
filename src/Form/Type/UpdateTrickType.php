@@ -51,7 +51,7 @@ final class UpdateTrickType extends AbstractType implements UpdateTrickTypeInter
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('trick_name', TextType::class, [
+            ->add('trickName', TextType::class, [
                 'label_attr'    => ['class' => 'label'],
                 'attr'          => ['class' => 'input']
             ])
@@ -83,18 +83,17 @@ final class UpdateTrickType extends AbstractType implements UpdateTrickTypeInter
             ])
 
             ->add('video', CollectionType::class, [
-                'entry_type'        => TextType::class,
+                'entry_type'        => VideoType::class,
                 'allow_add'         => true,
                 'allow_delete'      => true,
                 'prototype'         => true,
                 'required'          => false,
-                'invalid_message'   => 'Pas de lien vidéo'
+                'invalid_message'   => 'Pas de lien vidéo',
+                'by_reference'      => false
             ])
 
         ;
 
-        $builder->get('video')
-            ->addModelTransformer($this->transformer);
     }
 
     /**
@@ -103,16 +102,7 @@ final class UpdateTrickType extends AbstractType implements UpdateTrickTypeInter
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UpdateTrickDTOInterface::class,
-            'empty_data' => function(FormInterface $form) {
-            return new UpdateTrickDTO(
-                $form->get('trick_name')->getData(),
-                $form->get('description')->getData(),
-                $form->get('trick_group')->getData(),
-                $form->get('photo')->getData(),
-                $form->get('video')->getData()
-                );
-            },
+            'data_class' => Trick::class,
             'validation_groups' => ['UpdateTrickDTO']
         ]);
     }

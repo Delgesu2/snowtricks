@@ -88,21 +88,34 @@
                     </div>
                 </div>
 
-                {{ form_label(form.video, "Lien(s) vidéo(s)") }}
-                <div data-prototype="{{ form_widget(form.video.vars.prototype,
-                    {'attr' : {'placeholder': 'https://'} })|e('html_attr') }}" data-index="{{ form.video|length }}"
-                     id="collection">
+
+
+                        <!-- Videos -->
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        {{ form_label(form.video, "Lien(s) vidéo(s)") }}
+                    </div>
+
+                    <div class="field-body">
+                        <div class="control">
+
+                            <button type="button" id="btnNewVideo" data-rel="#collection">
+                                <i class="icon far fa-plus-square"></i>
+                            </button>
+
+                            <div data-prototype="{{ include("theme/remove.html.twig", { form: form.video.vars.prototype } )|e('html_attr') }}"
+                                 data-index="{{ form.video|length > 0 ? form.video|last.vars.name+1 : 0 }}" id="collection">
+                                {% for oneVideo in form.video %}
+                                    {{ include("theme/remove.html.twig", { form: oneVideo}) }}
+                                {% endfor %}
+                            </div>
+
+                            {{ form_errors(form.video) }}
+
+                        </div>
+                    </div>
+
                 </div>
-
-                {{ form_widget(form.video) }}
-                {{ form_errors(form.video) }}
-
-                <div id="buttons">
-                    <button type="button" id="btnNewVideo"><i class="icon far fa-plus-square"></i></button>
-                    <button type="button" id="btnDelVideo"><i class="icon far fa-minus-square"></i></button>
-                </div>
-
-
 
             </section>
 
@@ -112,7 +125,7 @@
 
         </div>
     </div>
-    {{ form_end(form) }}
+    {{ form_end(form, { 'render_rest': false }) }}
 
 {% endblock %}
 

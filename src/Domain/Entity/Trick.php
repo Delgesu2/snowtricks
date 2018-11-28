@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
 * Trick entity
 */
-class Trick implements TrickInterface
+class Trick
 {
     /**
     * @var \Ramsey\Uuid\UuidInterface
@@ -129,7 +129,7 @@ class Trick implements TrickInterface
     /**
     * {@inheritdoc}
     */
-    public function getTrick_name() :string
+    public function getTrickName() :string
     {
         return $this->trick_name;
     }
@@ -232,31 +232,72 @@ class Trick implements TrickInterface
      *
      * {@inheritdoc}
      */
-    public function addVideo(array $videos)
+    public function addVideo(Video $video)
     {
-        foreach ($videos as $video) {
-            if (\count($videos) <= 0) { break; }
+        $this->video->add($video);
+        $video->setTrickVideo($this);
+    }
 
-            $this->video[] = $video;
-            $video->setTrickVideo($this);
-        }
+    public function removeVideo(Video $video)
+    {
+        $this->video->removeElement($video);
+        $video->setTrickVideo(null);
+    }
+
+
+    /**
+     * @param CommentInterface[] $comment
+     */
+    public function setComment(array $comment): void
+    {
+        $this->comment = $comment;
     }
 
     /**
-     * {@inheritdoc}
+     * @param PhotoInterface $photo
      */
-    public function update(
-        $name,
-        $description,
-        $group,
-        $photo,
-        $video
-    )
+    public function setPhoto(PhotoInterface $photo): void
     {
-        $this->trick_name = $name;
-        $this->description = $description;
-        $this->group = $group;
         $this->photo = $photo;
+    }
+
+    /**
+     * @param string $trick_name
+     */
+    public function setTrickName(string $trick_name): void
+    {
+        $this->trick_name = $trick_name;
+    }
+
+    /**
+     * @param GroupInterface $trick_group
+     */
+    public function setTrickGroup(GroupInterface $trick_group): void
+    {
+        $this->trick_group = $trick_group;
+    }
+
+    /**
+     * @param array $video
+     */
+    public function setVideo(array $video): void
+    {
         $this->video = $video;
+    }
+
+    /**
+     * @param UserTrickInterface $trick_user
+     */
+    public function setTrickUser(UserTrickInterface $trick_user): void
+    {
+        $this->trick_user = $trick_user;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 }

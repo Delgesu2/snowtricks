@@ -79,6 +79,20 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
+            /**
+            foreach ($trick->getVideo()->toArray() as $item) {
+
+                $item->removeElement($item);
+            }
+
+            foreach ($form->getData()->video as $video) {
+                $videos[] = $this->videoFactory->create($video);
+            }
+
+            $trick->addVideo($videos);**/
+
+/**
+
             if(count($trick->getVideo()->toArray()) !== count($form->getData()->video)) {
 
                 if (count($trick->getVideo()->toArray()) == 0 && count($form->getData()->video) !== 0) {
@@ -90,6 +104,13 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
                     $trick->addVideo($videos);
                 }
 
+            }
+
+
+
+
+
+                /**
                 if (count($form->getData()->video) > count($trick->getVideo()->toArray())) {
 
                     foreach ( $trick->getVideo()->toArray() as $video) {
@@ -106,9 +127,14 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
 
                     $trick->addVideo($videos);
 
-                }
+                } **/
 
-            }
+
+
+
+
+
+/**
 
             if (count($trick->getPhoto()->toArray()) !== count($form->getData()->photo)) {
 
@@ -121,6 +147,7 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
                     $trick->addPhoto($photos);
                 }
             }
+ **/
 
             $pictures = [];
             $videos = [];

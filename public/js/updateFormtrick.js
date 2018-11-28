@@ -16,12 +16,9 @@ function showFiles() {
 
 
 /* Load more videos */
-
 // + and - icons
 let plusIcon = document.getElementById("btnNewVideo");
-let minusIcon = document.getElementById("btnDelVideo");
-
-let buttons = document.getElementById("buttons");
+// let minusIcon = document.getElementById("btnDelVideo");
 let index = document.querySelector('#collection').getAttribute('data-index');
 
 
@@ -29,18 +26,44 @@ let index = document.querySelector('#collection').getAttribute('data-index');
 plusIcon.addEventListener('click', function (e) {
     e.preventDefault();
 
-    console.log(document.querySelector('#collection').getAttribute('data-prototype'));
+   // console.log(document.querySelector('#collection').getAttribute('data-prototype'));
 
     //get data-prototype
     let prototype = document.querySelector('#collection').getAttribute('data-prototype');
+
+    // change name
     let newForm = prototype.replace(/__name__/g, index);
+
+    // Display the form
+    document.querySelector('#collection > div:last-child').insertAdjacentHTML('afterend', newForm);
+
+    document.querySelector('#collection > div:last-child .btnDelVideo').addEventListener('click', function (e) {
+        e.preventDefault();
+        console.log(this.dataset);
+
+        let target = this.dataset.target;
+
+        document.getElementById(target).remove();
+    } )
+
+    index++;
 
     document.querySelector('#collection').setAttribute('data-index', index);
 
-    // Display the form
-    plusIcon.insertAdjacentHTML('afterend', newForm);
-
-    index++;
 });
 
+// Remove video field
+let minusIcons = document.getElementsByClassName("btnDelVideo");
 
+for (var i = 0; i<minusIcons.length; i++) {
+
+    minusIcons[i].addEventListener('click', function (e) {
+        e.preventDefault();
+        console.log(this.dataset);
+
+        let target = this.dataset.target;
+
+        document.getElementById(target).remove();
+    } )
+
+}

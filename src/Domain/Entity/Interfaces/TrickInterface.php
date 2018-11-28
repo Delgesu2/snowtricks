@@ -85,24 +85,19 @@ interface TrickInterface
      *
      * @return mixed
      */
-    public function addVideo(array $videos);
+   // public function addVideo(array $videos);
+
+    //public function removeVideo(Video $video);
+
+    //public function setComment(array $comment): void;
+
+   // public function setPhoto(PhotoInterface $photo): void;
+
+    //public function setTrickName(string $trick_name): void;
 
 
-    /**
-     * @param $name
-     * @param $description
-     * @param $group
-     * @param $photo
-     * @param $video
-     *
-     * @return mixed
-     */
-    public function update(
-        $name,
-        $description,
-        $group,
-        $photo,
-        $video
-    );
+
+
+
 }
 

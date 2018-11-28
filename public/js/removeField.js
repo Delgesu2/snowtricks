@@ -1,22 +1,17 @@
  // Remove video field
 
- let minusIcon = document.getElementById("btnDelVideo");
- minusIcon.addEventListener('click', function (e) {
-    e.preventDefault();
+ let minusIcons = document.getElementsByClassName("btnDelVideo");
 
-    // get the div that holds the collection
-    var collectionHolder = document.getElementById('collection');
+for (var i = 0; i<minusIcons.length; i++) {
 
-    // field followed by buttons
-    var newLinkLi = document.getElementById('url-field').insertAdjacentHTML('afterend', buttons);
+    minusIcons[i].addEventListener('click', function (e) {
+        e.preventDefault();
+        console.log(this.dataset);
 
-    // add a 'delete' link to all of the existing form elements    N'IMPORTE QUOI !
-    // var elements = collectionHolder.querySelectorAll("li");
+        let target = this.dataset.target;
 
-    Array.prototype.forEach.call(elements, function () {
+        document.getElementById(target).remove();
+    } )
 
-    // remove the field
-    var newLinkLi.parentNode.removeChild(newLinkLi);
-    //});
-    });
- } )
+}
+

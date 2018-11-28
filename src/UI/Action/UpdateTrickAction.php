@@ -94,7 +94,7 @@ final class UpdateTrickAction implements UpdateTrickActionInterface
 
         $dto = $this->DTOBuilder->hydrateTrickDTO($trick);
 
-        $updateTrickType = $this->formFactory->create(UpdateTrickType::class, $dto)
+        $updateTrickType = $this->formFactory->create(UpdateTrickType::class, $trick)
                             ->handleRequest($request);
 
         if ($this->updateTrickHandler->handle($updateTrickType, $trick)){

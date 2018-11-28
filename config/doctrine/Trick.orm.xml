@@ -31,7 +31,7 @@
         </cascade>
     </one-to-many>
 
-    <one-to-many field="video" target-entity="App\Domain\Entity\Video" mapped-by="trick_video">
+    <one-to-many field="video" target-entity="App\Domain\Entity\Video" mapped-by="trick_video" orphan-removal="true">
         <cascade>
             <cascade-all />
         </cascade>

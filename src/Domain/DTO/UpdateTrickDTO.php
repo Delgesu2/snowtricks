@@ -53,4 +53,5 @@ final class UpdateTrickDTO implements UpdateTrickDTOInterface
         $this->photo = $photo;
         $this->video = $video;
     }
+
 }
