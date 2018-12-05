@@ -131,9 +131,6 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
 
 
 
-
-
-
 /**
 
             if (count($trick->getPhoto()->toArray()) !== count($form->getData()->photo)) {

@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
 * Trick entity
 */
-class Trick
+class Trick implements TrickInterface
 {
     /**
     * @var \Ramsey\Uuid\UuidInterface
@@ -129,7 +129,7 @@ class Trick
     /**
     * {@inheritdoc}
     */
-    public function getTrickName() :string
+    public function getTrick_name() :string
     {
         return $this->trick_name;
     }

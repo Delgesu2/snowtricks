@@ -85,7 +85,7 @@ final class EmailCheckHandler implements EmailCheckHandlerInterface
 
             $users = $this->repository->getAllUsers();
 
-            foreach ($users as $user)
+            foreach ($users as $user) {
 
                 if ( $user->getEmail() === $form->getData()->email ) {
 
@@ -101,9 +101,10 @@ final class EmailCheckHandler implements EmailCheckHandlerInterface
                     // saving token
                     $this->repository->saveUser($user);
 
+					// sending token
                     $this->mailer->emailCheckSend($form, $this->swift_Mailer, $user);
 
-
+					}
 
                 }
 
